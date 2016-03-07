@@ -1,0 +1,9 @@
+
+
+// 同步脚本;
+
+$("button[ng-click^='syncSy']").each( function(i){
+	$(this).delay(i*150).trigger("click");
+});
+
+ 

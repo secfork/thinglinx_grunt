@@ -1,0 +1,61 @@
+ 
+
+
+
+<div class="bg-light lter b-b wrapper-sm padder-md ng-scope">
+    <span class="m-n font-thin h4"> {{ system.name }}</span>
+
+     <i class=" m-l fa fa-circle  {{ system.online==1  ?'text-success' : 'text-danger'  }} "></i>
+      
+      <br/>
+ 
+
+    <a   href="{{from.url}}"   class="text-xs   " > 返回
+        <span class="text-info"> {{from.text}} </span> 
+    </a>
+
+    
+</div>
+
+
+
+<div class="wrapper-md ">
+    <ul class="nav  nav-tabs  m-t-xxs bg-normal">
+        <li ui-sref-active="active">
+            <a class="inline" ui-sref="app.s_system_prop.basic">
+                <i class="icon icon-info"></i>
+                <span> 系统概览 </span>
+            </a>
+        </li>
+        <li ui-sref-active="active">
+            <a class="inline" ui-sref="app.s_system_prop.current">
+                <i class="icon icon-graph"></i>
+                <span> 实时 </span>
+            </a>
+        </li>
+        <li ui-sref-active="active">
+            <a ui-sref="app.s_system_prop.history">
+                <i class="fa  fa-history"></i>
+                <span> 历史 </span>
+            </a>
+        </li>
+        <li ui-sref-active="active">
+            <a ui-sref="app.s_system_prop.alarm">
+                <i class="icon icon-fire"></i>
+                <span>  报警  </span>
+            </a>
+        </li>
+        <li ui-sref-active="active">
+            <a ui-sref="app.s_system_prop.map">
+                <i class="icon icon-pointer"></i>
+                地图
+            </a>
+        </li>
+        <li ui-sref-active="active"  ng-if="user.viewPanel">
+            <a ui-sref="app.s_system_prop.panel">
+                <i class="icon icon-flag"></i>
+                信息板 </a>
+        </li>
+    </ul>
+    <div ui-view> </div>
+</div>

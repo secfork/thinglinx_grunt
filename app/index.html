@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ThingLinx</title>
+ 
+    <META HTTP-EQUIV="Expires" CONTENT="0"> 
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+
+    
+    <meta name="description" content="thinglinx 设备管理 工业云 云 工控 力控 力控元通 三维力控 ">
+
+    <meta name="viewport" content="width=device-width , initial-scale=1, maximum-scale=1">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory    -->
+    <!-- <script    src="https://api.map.baidu.com/api?v=1.5&ak=M9b53slaoqAKQj8jX0CRz6xA&s=1"  ></script> -->
+    <script    src="http://api.map.baidu.com/api?v=1.5&ak=M9b53slaoqAKQj8jX0CRz6xA"  ></script>
+  
+    <script  src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+    <script  src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+    
+    
+  <!-- build:css(.tmp)  thing/navigation.css --> 
+
+        <link rel="stylesheet" href="styles/navigation.css" type="text/css" />    
+
+    <!-- endbuild --> 
+
+</head>
+
+
+<body   ng-app='thinglinx'  ng-controller="AppCtrl" scroll='no' >
+  
+   
+    <div class="app" id="app" ng-class="   {'app-header-fixed':app.settings.headerFixed,
+                        'app-aside-fixed':app.settings.asideFixed,
+                        'app-aside-folded':app.settings.asideFolded  } " ui-view >
+ 
+
+    </div>
+  
+
+    <div id="preload">
+        <div class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+    </div>
+     
+   
+
+</body>
+
+
+    <!-- build:css(.tmp) vender/main.css --> 
+        <link rel="stylesheet" href="styles/preload.css" type="text/css" />
+
+        <link rel="stylesheet" href="styles/bootstrap.css" type="text/css" />
+        <link rel="stylesheet" href="styles/animate.css" type="text/css" /> 
+        
+        <link rel="stylesheet" href="styles/font-awesome.min.css" type="text/css" />   
+        <link rel="stylesheet" href="styles/simple-line-icons.css" type="text/css" />
+        <link rel="stylesheet" href="styles/font.css" type="text/css" />
+        
+        
+
+    <!-- endbuild -->
+
+    <!-- build:css(.tmp)  thing/app.css --> 
+
+        <link rel="stylesheet" href="styles/navigation.css" type="text/css" />   
+        <link rel="stylesheet" href="styles/app.css" type="text/css" />
+
+    <!-- endbuild --> 
+ 
+
+  
+  
+    <!--build:js({.tmp,app})  vender/main.js --> 
+        <!-- bower:js -->
+        <script src="bower_components/jquery/jquery.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-messages/angular-messages.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="bower_components/ngstorage/ngStorage.js"></script>
+        <script src="bower_components/highcharts/highcharts.js"></script>
+        <script src="bower_components/highcharts/highcharts-more.js"></script>
+        <script src="bower_components/highcharts/modules/exporting.js"></script>
+        <script src="bower_components/clipboard/dist/clipboard.js"></script>
+        <!-- endbower -->
+
+        <script src="lib/datetime_picker/datetimepicker.js"></script>
+        <script src="lib/angular-translate.js"></script>
+           
+        <script src="lib/ui-jq.js"></script>
+        <script src="lib/ui-load.js"></script>
+        <script src="lib/ui-validate-1.1.js"></script>
+
+        <script src='lib/flot/jquery.flot.min.js' ></script>
+        <script src='lib/flot/jquery.flot.time.min.js'></script>
+        <script src='lib/flot/jquery.flot.tooltip.min.js'></script>
+
+        <script src="lib/support.js"></script>
+        
+    <!-- endbuild -->
+
+ 
+    <!-- build:js({.tmp,app})  thing/app.js --> 
+
+    
+    <script src="scripts/controllers/account.js"></script>
+    
+    <script src="scripts/controllers/basecontroller.js"></script>
+    <script src="scripts/controllers/model.device.js"></script>
+    <script src="scripts/controllers/model.system.js"></script>
+    <script src="scripts/controllers/project.js"></script>
+    <script src="scripts/controllers/show.proj.js"></script>
+    <script src="scripts/controllers/show.system.js"></script>
+    <script src="scripts/controllers/system.js"></script>
+    <script src="scripts/controllers/support.js"></script>
+    <script src="scripts/controllers/system.prop.js"></script>
+    
+    <script src="scripts/directive/directives.js"></script>
+    <script src="scripts/filter/filters.js"></script>
+    <script src="scripts/service/services.js"></script>
+    <script src="scripts/service/sysconfig.js"></script> 
+    <script src="scripts/service/utils.js"></script> 
+    
+
+    <script src="thinglinx.js"></script>  
+    
+     
+
+    <!-- endbuild -->
+    
+</html>

@@ -1,0 +1,38 @@
+<!-- 
+设备厂商：  诚意电气
+驱动ID：    PI_SHCYA
+驱动描述：   CSD-1跌落式熔断器
+
+
+
+-->
+
+
+
+<div  ng-init=" _config = $sys.point[ dm.driver_id] ">  </div>
+
+<input  tl-wrap   
+        label="公共地址"
+        required  
+        type="Number" 
+        max="65535"
+        min="0" 
+        ng-model= "point.params.app_address"    ></input>
+
+
+<select tl-wrap 
+	 label = "类型标识"
+	 ng-model = "point.params.type_id"
+	 ng-options = " o.v as o.k for  o  in _config.type_id"
+	 
+	>
+</select>
+
+
+<input  tl-wrap   
+        label="信息体地址"
+        required  
+        type="Number" 
+        max="65535"
+        min="0" 
+        ng-model= "point.params.infor_address"    ></input>

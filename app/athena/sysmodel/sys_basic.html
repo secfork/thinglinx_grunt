@@ -1,0 +1,78 @@
+<div class="panel panel-default b-t-none">
+    <!--jjw bg-white b-b b-l b-r text-base-->
+    <div class=" panel-body bg-light bg-white text-base">
+        <!--jjw m-t m-l-sm-->
+
+        <div class="col-md-6 no-padder">
+
+            <div class="list-group">
+            <span class="list-group-item no-border ">
+                ID <span class="pull-right ">{{ :: sysmodel.uuid   }}</span>
+            </span>
+
+            <span class="list-group-item no-border ">
+                模式 <span class="pull-right">{{ ::   $sys.sysModelMode.values[sysmodel.mode]  }}</span>
+            </span>
+
+            <span class="list-group-item no-border ">
+                通信类型 <span class="pull-right">{{  ::  sysmodel.comm_type == 1 ? "DAServer":"Gateway"   }}</span>
+            </span>
+
+            <span class="list-group-item no-border ">
+                变量数量 <span class="pull-right">{{ :: sysmodel.tag_count }}</span>
+            </span>
+
+            <span class="list-group-item no-border ">
+                配置项数量 <span class="pull-right">{{ profiles.length  }}</span>
+            </span>
+
+            <span class="list-group-item no-border ">
+                创建时间 <span class="pull-right">{{  ::   sysmodel.create_time | date:"yyyy-MM-dd HH:mm Z"   }}</span>
+            </span>
+
+            <span class="list-group-item no-border ">
+                最后更新时间  <span class="pull-right">{{  ::  sysmodel.create_time | date:"yyyy-MM-dd HH:mm Z"  }}</span>
+            </span>
+
+            <span class="list-group-item no-border">
+                备注  <div class="b-a alert m-t-sm" style="color: #a0a0a0;height:100px">  {{  :: sysmodel.desc }}
+
+            </div>
+            </span>
+
+                <!--     <span class="list-group-item no-border ">
+                                        <button class="btn btn-sm btn-primary" ng-click="editStation( this, station  )"> 修改信息 </button>
+                    </span>
+         -->
+
+
+            </div>
+
+
+
+
+        </div>
+        <!-- <div class="col-md-5  b-a m-l ">
+            <img src="img/generator_left_0.png">
+        </div> -->
+    </div>
+
+</div>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+ 

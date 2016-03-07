@@ -1,0 +1,158 @@
+
+<!--  modbus 类型 template 点 的  驱动参数 
+modbus_ex_cfg = " 类型 data_type,  扩展参数 data_type_ex 对应关系 "
+
+ -->
+ 
+
+<!--  areaCC 中 定义了  _dataType 对象; _accessType 对象;   -->
+
+<div class="hidden" 
+     ng-init=" _config = $sys.point[ dm.driver_id] ; 
+              _config.AreaCC( point , this  , true ) "  >
+ 
+</div>
+ 
+
+
+<!-- 
+ 
+tl-default 全权重 为80 , 必须要大于  ng-change 权重 , 必须低于 ngmodel ; 确保 trans 有值; ;  
+
+mgModel 的权重为100 ; 该指令 
+  ng-change =" point.params.data_type = '0' ;
+                     point.params.access_right = '0' ;
+                     point.params.data_type_ex = '0'
+                     "
+
+-->
+
+<select tl-wrap
+        label="数据区"
+        ng-model="point.params.area" 
+
+         ng-change ="   _config.AreaCC( point , this ) "
+        ng-options="  o.v as o.k for  o in  _config.area  "
+          
+
+        ></select>
+
+  
+<!-- 驱动参数 -->
+
+<input  tl-wrap   
+        label="偏移地址"
+        required  
+        type="Number" 
+        max="65535"
+        min="0" 
+        ng-model= "point.params.offset"    /> 
+
+
+<!--  类型变化后 出事 话  data_type_ex 的值; 
+ point.params.data_type_ex = undefined
+ ng-model="point.params.data_type"
+-->
+
+<!--   point.params.area == 0 || point.params.area == 1 ?  [{k:'Bool',v:0}]  :  -->
+
+  <select tl-wrap
+        label="数据类型"
+         
+        ng-model="point.params.type"
+
+        ng-change ="  _config.TypeCC( point  , this ) "
+        
+        ng-options=" o.v as o.k for o  in   _dataType "
+        >
+       <!--  <option value="">--请选择数据类型--</option> -->
+  </select>
+ 
+
+  <!--  类型 扩展  字段 ;   -->
+
+        <!-- 布尔（text） -->
+        <div  ng-if="  point.params.area  >1  && point.params.type == 0    ">
+              <input  tl-wrap
+                      required
+                      label="位偏移"
+                      type="number"
+                      max="15" min="0" 
+                      placeholder=" 0 - 15 "
+                      tl-default="0"
+                      ng-model="point.params.type_ex"
+              />
+          </div>
+
+
+        <!-- 有/无 符号字节(droplist) -->
+        <div  ng-if="  point.params.area  >1 && (point.params.type == 1 || point.params.type == 2)  ">
+            <select  tl-wrap
+                     
+                    label="字节偏移" 
+                    ng-model="point.params.type_ex"
+                    ng-options=" o.v as o.k for o  in  _config.hlbyte "
+                    >
+            </select>
+        </div>
+
+        <!-- \0结束ASCII字符串 -->
+        <div  ng-if="  point.params.area  >1  &&    point.params.type >= 12  ">
+            <input  tl-wrap
+                    required
+                    label="字节长度" 
+                    type="number"
+                    max="128"
+                    min="1" 
+                    placeholder="1 - 128 "
+                    ng-model="point.params.type_ex"
+                /> 
+        </div>
+
+
+        <!--  BCD数据扩展  -->
+
+        <div  ng-if = " point.params.area >1 && point.params.type == 8  ">
+              <input  tl-wrap
+                    required
+                    label="BCD码长度"
+
+                    type="number"
+                    max="63"
+                    min="1" 
+                    placeholder="1 - 63 "
+                    ng-model="point.params.type_ex"
+
+                >
+
+        </div>
+
+
+
+ <!-- 固定长度ASCII字符串  :  需求:删除ascII 码 ;-->
+   <!--     
+        <div  ng-if=" point.params.Type ==12   ">
+            <input  tl-wrap
+                    required
+                    label="固定ASCII字符长度" 
+                    type="number"  max="128" min="1"  placeholder="1 - 128"
+                    ng-model="point.params.TypeEx"
+                    >
+            </input>
+        </div>
+ -->
+
+
+
+<!--ng-model = "point.readwrite"-->
+
+ 
+  <select tl-wrap
+        label="访问方式"
+         
+        ng-model = "point.params.access" 
+        ng-options=" o.v as o.k for o in  _accerssType "
+
+        > 
+</select>
+  

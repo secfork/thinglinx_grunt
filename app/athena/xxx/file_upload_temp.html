@@ -1,0 +1,69 @@
+
+<div class="modal-header">
+    <h5 class="modal-title">文件上传!</h5>
+</div>
+
+<div class="modal-body">
+
+<!--    action="project/{{ proj.projid }}/fileupload"    enctype="multipart/form-data" -->
+
+    <form class="    bs-example form-horizontal  padding-10 "    >
+        <div class="form-group">
+            <label class="col-sm-2 control-label">名称</label>
+            <div class="col-sm-10">
+                <input   class="form-control input-sm"  ng-model = " file.filename " >
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">描述</label>
+            <div class="col-sm-10">
+                <input     class="form-control input-sm"   ng-model= "  file.filedesc"   >
+            </div>
+        </div>
+
+
+
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"> 文件</label>
+            <div class="col-sm-10">
+                 <!--    <input ui-jq="filestyle" type="file"  multiple     ng-model= " file.file "
+                       data-icon="false" data-classButton="btn btn-default"
+                       data-classInput="form-control inline v-middle input-s">
+                  -->       
+                       
+                <input ui-jq="filestyle" type="file" ng-model-instant  
+                  class="input-sm"
+                  onchange="angular.element(this).scope().setFiles(this)" />
+                       
+            </div>
+        </div>
+
+         <div ng-show="progress > 1 ">  
+             <progressbar class="progress-striped active m-b-sm" 
+               value="progress" 
+                     type="success">   {{progress}}%
+             </progressbar>  
+        </div>  
+         
+         <div  ng-show='showmsg '>
+                   文件超过 10M  , 无法上传!
+         </div>
+         
+           
+        <div class=" form-group text-center">
+            <div class="col-sm-12">
+                <button class="btn btn-primary btn-sm   "
+                 ng-click="uploadFile()"  
+                  ng-disabled = " ! rightfile "
+                  > 上传 </button>
+                <button class="btn btn-default btn-sm  "  ng-click = " cancel() " > 取消 </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+

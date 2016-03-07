@@ -1,0 +1,79 @@
+<!-- 添加  sysmodel  -->
+<div class="modal-header ">
+    <span ng-if="isAdd">添加系统设备</span>
+    <span ng-if="!isAdd">编辑系统设备</span>
+</div>
+<!--  isG 是否为 gateway 模式 -->
+<!--jjw m-t-n去掉        -->
+<div class="modal-body  " ng-init="stepx={  step: 0 } ;  ">
+    <!--jjw m-b m-t-n-xs-->
+    <progressbar value="(stepx.step +1 )* ( isG?34:50) " class="progress-xs m-t-n-xs m-b" type="success"></progressbar>
+    <div ng-show="stepx.step == 0">
+        <form name="step0" class=" form-validation form-horizontal   ">
+            <input tl-wrap required ng-model="D.name" label="设备名称">
+            <input tl-wrap ng-model="D.dev_cycle" type="number" label="采样周期" min='1' max="59" required>
+            <select tl-wrap ng-model="D.cycle_unit" label="采样周期单位" ng-options="o.v as o.k for o in $sys.device.timeUnit ">
+            </select>
+            <input tl-wrap ng-model="D.slow_cycle" type="number" label="慢速周期" min='1' max="59" required>
+            <select tl-wrap ng-model="D.slow_cycle_unit" label="慢速周期单位" ng-options="o.v as o.k for o in $sys.device.timeUnit ">
+            </select>
+
+            <input tl-wrap ng-model="D.dev_timeout" type="number" label="连接超时时间(秒)" 
+              max='60' min='8' required>
+
+            <input tl-wrap ng-model="D.dev_retry" type="number" label="连接重试次数" 
+             min="0" max="3" required>
+            <input tl-wrap ng-model="D.delay" type="number" label="命令延时(毫秒)" 
+              min="0" max="1000" required>
+
+            <textarea tl-wrap ng-model="D.desc" label="备注"> </textarea>
+        </form>
+    </div>
+    <form name="step1" ng-show="stepx.step == 1" class=" form-validation form-horizontal   ">
+        <select tl-wrap ng-model="D.device_model" ng-options="  k  as v.name for (k,v) in devModelKV" ng-change="changeModel()" ng-disabled=" !isAdd" label="设备模型">
+        </select>
+        <!-- 根据 选择的 设备模型  类型 加载 相应的配置  /_dev_[params , networdk]_{driver_type}.html   -->
+        <ng-include src=" 'athena/_device/'+ devModel.driver_id +'.html' "></ng-include>
+    </form>
+    <form name="step2" ng-show=" isG && stepx.step == 2 " class=" form-validation form-horizontal   ">
+        <!-- ( comm_type = 2 ) gateway 时 才用 配置 newwork;  -->
+        <ng-include src=" 'athena/_device/dev_network.html' "> </ng-include>
+    </form>
+</div>
+<!--
+   <ng-include src=" 'athena/debris/_modal_footer.html' "></ng-include>
+-->
+<div class="modal-footer  text-center">
+    <!--  step 0 -->
+    <div ng-show="stepx.step == 0">
+        <button   class="btn btn-default btn-sm btn-primary w-60"
+         ng-click="validForm('step0') ;stepx.step = 1 ; ">下一步</button>
+        <button class="btn btn-default btn-sm btn-primary w-60" ng-click="cancel()">取消</button>
+    </div>
+    <!--  gateway 第二步 -->
+    <div ng-show="stepx.step == 1 && isG ">
+        <button class="btn btn-primary btn-sm   w-60" ng-click="stepx.step = 0 ;   ">上一步</button>
+        <button  class="btn btn-primary btn-sm   w-60" ng-click=" validForm('step1') ; stepx.step = 2   ; ">下一步</button>
+        <button class="btn btn-default btn-sm btn-primary w-60" ng-click="cancel()">取消</button>
+    </div>
+    <!--  gateway 第三步 -->
+    <div ng-show="stepx.step == 2 && isG ">
+        <button class="btn btn-primary btn-sm   w-60" ng-click="stepx.step = 1 ;   ">上一步</button>
+        <button  class="btn btn-primary btn-sm   w-60" ng-click=" validForm('step2');done();" ng-show="isAdd">创建</button>
+        <button   ng-show="!isAdd" class="btn btn-primary btn-sm   w-60" ng-click=" validForm('step2');done();">更新</button>
+        <button class="btn btn-default btn-sm btn-primary w-60" ng-click="cancel()">取消</button>
+    </div>
+    <!--  非 gate way  第二步  -->
+    <div ng-show="stepx.step == 1 && !isG ">
+        <button class="btn btn-primary btn-sm   w-60" ng-click="stepx.step = 0 ;   ">上一步</button>
+        <button class="btn btn-primary btn-sm   w-60" ng-click=" validForm('step1');done();" ng-show="isAdd">创建</button>
+        <button ng-show="!isAdd" class="btn btn-primary btn-sm   w-60" ng-click=" validForm('step1');done();">更新</button>
+        <button class="btn btn-default btn-sm btn-primary w-60" ng-click="cancel()">取消</button>
+    </div>
+</div>  
+
+
+
+<!--@if append -->
+ D = {{D}}
+<!--@endif  -->

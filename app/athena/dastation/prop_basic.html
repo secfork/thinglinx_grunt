@@ -1,0 +1,130 @@
+ 
+ <div class="panel panel-default b-t-none">
+    <div class="panel-body">
+     
+  
+        <div class=" row ">
+ 
+            <div class="col-md-6 col-xs-12  ">
+                    <div class="list-group   ">
+                            <span class="list-group-item no-border ">
+                                系统Id <span class="pull-right ">{{ :: station.uuid  }}</span>
+                            </span> 
+
+                             <span class="list-group-item no-border ">
+                                所属区域
+                                <span class="pull-right">
+                                    <a class="text-info"  ui-sref="app.m_region_prop.system({id: station.region_id })"  >{{ station.region_name  }}</a> 
+                                </span>
+                            </span> 
+
+
+                            <span class="list-group-item no-border ">
+                                活跃状态  <span class="pull-right ">{{ station.state == 1 ? "激活":"未激活" }}</span>
+                            </span> 
+                           
+                            <span class="list-group-item no-border ">
+ 
+                                使用的模型  <span class="pull-right "> 
+                              <a ng-click=" goto( 'app.sysmodel_p.basic' , sysmodel , sysmodel  )" 
+                                             class=" text-info-dk  "> {{ sysmodel.name}}</a>
+
+
+                                </span> 
+ 
+                            </span> 
+
+                            <span class="list-group-item no-border ">
+ 
+                                通讯类型  <span class="pull-right ">{{ sysmodel.comm_type == 1 ? 'DaServer':'GateWay' }}</span>
+ 
+                            </span> 
+                           
+                           
+                            <span class="list-group-item no-border ">
+                                创建时间  <span class="pull-right ">{{ station.create_time | date:"yyyy-MM-dd HH:mm Z" }}</span>
+                            </span> 
+                           
+ 
+                            <span class="list-group-item no-border ">
+                                配置同步状态 
+                                 <span class="pull-right fa ">
+                                    {{ station.needsync ? "需要同步":"已同步" }}
+                                 </span> 
+                            </span> 
+                           
+ 
+                           
+                            <span class="list-group-item no-border ">
+                                位置  <span class="pull-right ">{{ station.map_address  }}</span>
+                            </span> 
+
+                           <span class="list-group-item no-border ">
+                                备注  <div class="b-a m-t-sm alert " style="color: #a0a0a0;height:100px" >  {{station.desc }} 
+
+                                </div> 
+                            </span> 
+
+                            <span class="list-group-item no-border ">
+                                <button class="btn btn-sm btn-primary" ng-click="editStation( this, station  )"> 修改信息 </button>  
+                            </span> 
+                    </div>
+            </div>   
+
+
+            <div class="col-md-6 col-xs-12">
+                <!--    width:500px; -->
+                <img   ng-src="{{ station.pic_url?( ossRoot + station.pic_url):'img/system_null.png'  }}" 
+                        class="pag-5 m-t-lg w-full b " style="  height:400px">
+                  
+
+
+                  <form class="hbox m-t"  >
+         
+                    <label class="col  w-xs  m-t-n  p-t-10  "> 上传系统图片 </label>
+
+                    <!--jjw col-md-7-->
+                    <div class="col" >
+                        
+                        <input ui-jq="filestyle" type="file" id="file_sys"
+                                 ng-model-instant class="input-sm"
+                                 onchange="angular.element(this).scope().setFiles(this)"
+
+                          />
+ 
+
+                        <div style="height:10px;">
+                            <progressbar class="progress-xs active m-b-sm m-t-xxs" 
+                              ng-show="progressVisible" value="progress" type="success"> {{progress}}%
+                            </progressbar>
+                        </div>
+
+                        <div class="text-muted">支持不超过500K的jpeg,png,jpg格式图片!</div>
+                        <div ng-show="!op.rightfile" class="text-danger "> 文件过大! </div>
+
+
+
+              
+
+                    </div>
+                    <div class="col w-xs">
+                        <button class="btn btn-info m-l w-70 "  
+                        ng-click="uploadFile()" ng-disabled=" ! op.rightfile "> 上传 </button>
+                    </div>
+
+ 
+                   
+
+                </form>
+
+
+            </div>    
+
+
+        </div>
+
+
+
+    </div>
+
+ </div>

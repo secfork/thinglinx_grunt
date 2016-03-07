@@ -1,0 +1,92 @@
+
+<div class="panel panel-default b-t-none">
+    
+
+<div class="panel-heading bg-white-only no-padder">
+    <form class="form-validation ng-pristine ng-valid" name="form">
+        <!--jjw 添加div.row-->
+        <div class="row padder">
+
+            <!--选点-->
+            <div class="form-group col-md-6 col-sm-6 col-xs-12 m-t-sm m-b-none">
+                <div class="w">
+                    <select ng-model="op.his_tag"
+                            class="height-30  inline col-xs-12 form-control input-sm"
+                            ng-options=" t as t.name  for t in tags  "
+                            required
+                            >
+                        <option value="">-请选择变量-</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group  col-md-6 col-sm-6 col-xs-12 m-t-sm m-b-none ">
+                <button class="btn btn-sm btn-default  pull-right" ng-click="queryData(6,$event)" data-name="6">1年</button>
+                <button class="btn btn-sm btn-default  pull-right" ng-click="queryData(5,$event)" data-name="5">6月</button>
+                <button class="btn btn-sm btn-default  pull-right" ng-click="queryData(4,$event)" data-name="4">3月</button>
+                <button class="btn btn-sm btn-default  pull-right" ng-click="queryData(3,$event)" data-name="3">1月</button>
+                <button class="btn btn-sm btn-default  pull-right" ng-click="queryData(2,$event)" data-name="2">7天</button>
+                <button class="btn btn-sm btn-default  pull-right" ng-click="queryData(1,$event)" data-name="1">1天</button>
+            </div>
+
+
+            <!--时间-->
+            <div class="form-group col-md-12 col-sm-12 col-xs-12 m-t-sm no-padder m-b-none ">
+                <div class="padder wrapper progress-bar-info r-2x" style="height: 48px">
+                    <span class="pull-left text-white glyphicon glyphicon-chevron-left" style="cursor: pointer" ng-click="leftTime()"></span>
+                    <!--jjw padding-0-->
+                    <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2 m-t-n-xs">
+                        <div class="w item bg-white" style="margin: 0 auto">
+                            <p class="padder b-a m-b-none" style="height: 30px;line-height: 30px">{{dateStr}}</p>
+                            <input style="display:none" type="text" class=" input input-sm form-control  float-left col-xs-12" datetime-picker date-format='yyyy-MM-dd HH:mm' nofocus data-readonly-input='false' ng-model="op.end" is-open='od.showS' />
+                            <span class=" float-left" style="position: absolute;top: 0px;right: 0px">
+                                <button type="button" class="btn btn-default btn-sm"
+                                        ng-click="openCalendar($event, 'od.showS=true');changeTemp=true">
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <span class="pull-right text-white glyphicon glyphicon-chevron-right" style="cursor: pointer" ng-click="rightTime()"></span>
+                </div>
+            </div>
+            <!--<div class="form-group  col-md-4 col-sm-6 col-xs-12 wrap-label-span-30 m-t-sm m-b-none">-->
+                <!--<label class="w-xxs no-padder m-t-xs text-right control-label  col-sm-3 m-b-none">-->
+                    <!--结束时间-->
+                <!--</label>-->
+                <!--<div class="col-sm-9">-->
+                    <!--<input type="text" class=" input input-sm float-left col-xs-12" datetime-picker date-format='yyyy-MM-dd HH:mm' nofocus ng-model="op.end" is-open='od.showE' />-->
+                    <!--<span class=" float-left" style="position: absolute;top: 0px;right: 10px">-->
+                          <!--<button type="button" class="btn btn-default btn-sm"-->
+                                  <!--ng-click="openCalendar($event, 'od.showE=true')">-->
+                              <!--<i class="fa fa-calendar"></i></button>-->
+                    <!--</span>-->
+                <!--</div>-->
+            <!--</div>-->
+
+
+            <!--<div class="form-group  col-md-4 col-sm-6 col-xs-12  m-t-sm m-b-none">-->
+                <!--<label class="w-xxs col-sm-3"></label>-->
+                <!--<div class="col-sm-9">-->
+
+                    <!--<button class="btn btn-info btn-sm w-46 m-l m-t-xs "-->
+                       <!--ng-click="queryHistory( $event )"-->
+                       <!--token=3000  >查询-->
+                    <!--</button>-->
+                <!--</div>-->
+
+            <!--</div>-->
+        </div>
+
+    </form>
+</div>
+<div class="panel-body ">
+
+    
+    <div class="col-lg-12 col-md-12" id="show_live_data" ng-init="initFlotChart()" style="height: 540px; padding: 0px; position: relative;" load-mask></div>
+
+
+
+
+</div>
+</div>

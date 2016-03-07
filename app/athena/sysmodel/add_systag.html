@@ -1,0 +1,72 @@
+<!--  添加  sysmodel  -->
+
+<div class="modal-header ">
+    <span ng-if="isAdd">添加变量</span>
+    <span ng-if="!isAdd">编辑变量</span>
+</div>
+
+<div class="modal-body  "  load-mask >
+    <form name="form_tag" class=" form-validation form-horizontal   ">
+    
+        <div ng-if="isManageMode ">
+ 
+            <select ng-options=" o as o.name  for  o in sysdevices   " 
+            tl-wrap ng-model=" op.dev " label="设备" 
+            ng-change=" loadPoint( op.dev ) " 
+             required>
+                <option value="">--请选择设备--</option> 
+ 
+            </select>
+
+            <!--jjw 注释-->
+            <!--&lt;!&ndash;@if append &ndash;&gt;-->
+            <!--op.point" ={{op.point}}-->
+            <!--&lt;!&ndash;@endif &ndash;&gt;-->
+
+            <select ui-jq="chosen" tl-wrap label="connect 点" ng-model="op.point"
+             ui-refresh="points" ng-change=" copyName() " 
+                id="7fa574fa44awe"
+                k="name" 
+                v="id&name" 
+                required
+             >
+                <option value="">--请选择点--</option>
+            </select> 
+        </div>
+        <!-- tag -->
+        <input tl-wrap ng-model="T.name" ng-disabled=" !isAdd" label="text.name" required >
+        <!--  <input tl-wrap   label="group"    ng-model="T.group"   >
+                ng-disabled = " true_conn "
+         -->
+ 
+        <select tl-wrap ng-model="T.type" 
+           ng-options="  k  for k in $sys.tag.type" 
+           label="text.type" 
+           required
+           ng-disabled="!isAdd"
+           >
+            <option value="">--选择点类型--</option>
+        </select> 
+        <textarea tl-wrap ng-model="T.desc" label="备注"> </textarea>
+    </form>
+ 
+
+    <!--   <div ng-show="L && hasProfile"  class="text-left b-b  m-b  "  style=" after:'14123' " >
+             <strang  class = "m-l-lg">  在配置项 {{profile.name}} 下配置点 </strang>
+        </div>
+    -->
+    <form name="form_log" class=" form-validation form-horizontal   ">
+       
+        <ng-include ng-if=" L && hasProfile" src="  'athena/sysmodel/_log_part.html'  "></ng-include>
+    </form>
+
+
+</div>
+<ng-include src=" 'athena/debris/_modal_footer.html' "></ng-include>
+
+
+<!--jjw 注释-->
+
+<!--@if append -->
+   T= {{T}}  
+<!--@endif -->

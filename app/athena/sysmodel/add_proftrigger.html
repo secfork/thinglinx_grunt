@@ -1,0 +1,228 @@
+
+<div class="modal-header ">
+    <span ng-if="isAdd">新建触发器</span>
+    <span ng-if="!isAdd">编辑触发器</span>
+</div>
+<!--jjw m-t-n去掉        -->
+<div class="modal-body" ng-init="stepx={ step:0}">
+    <!--jjw m-b-sm-->
+    <progressbar value="(stepx.step+1)*34" class="progress-xs  m-b m-t-n-xs " type="success"> </progressbar>
+    
+    <form name="step0" ng-show="stepx.step == 0" class=" form-validation form-horizontal " ng-init="_config = $sys.trigger ">
+
+        <input tl-wrap ng-model="T.name" label="text.name" required>
+
+        <select tl-wrap ng-options=" k as v for (k,v) in _config.type " ng-model="T.type" 
+        tl-default="_config.type_default" label="触发类型"></select>
+
+        <!--  托管 类型-->
+        <select tl-wrap ng-if="   sysmodel.mode == 1" 
+            ng-options="  k as v  for (k,v) in _config.origin" ng-model="T.origin" label="触发源" 
+            tl-default="_config.origin_default"></select>
+
+        <select tl-wrap ng-if="   sysmodel.mode == 2" 
+        ng-options="  k as v  for (k,v) in  { 0 :_config.origin['0'] } " ng-model="T.origin" 
+        
+        label="触发源" tl-default="0">
+
+        </select>
+
+        <textarea tl-wrap ng-model="T.desc" label="text.desc"></textarea>
+    </form>
+ 
+
+    <form name='step1' ng-show="stepx.step == 1" ng-init="_config = $sys.trigger " 
+        class=" form-validation   ">
+
+
+        <!--  ================================================================= -->
+            <!--   <div class="hbox">
+                  <div class="col w-50"> </div>
+                   <div class="col row form-inline"> 
+                       <div class="form-group">
+                        <label  >变量</label>
+                        <select  
+                                   ng-model=" l.args "
+                                   class="form-control  "
+                                   ui-validate="  '$value != r.args'   "
+                                   ui-validate-watch=" 'r.args' "
+
+                                    ui-jq="chosen"
+                                     source-arr="tags_arr"
+                                     k="name"
+                                      v="name"
+                                     required>
+                                  <option value=''> 请选择变量</option>
+                          </select>
+                      </div>
+
+                   </div>
+              </div>
+            -->
+        <!--  ================================================================= -->
+ 
+        <table class=" table    ">
+            <thead>
+                <tr>
+                    <th width="10%">条件1</th>
+                    <th width="10%">变量</th>
+                    <th width="20%"> 参数 </th>
+                    <th width="10%"> 运算符</th>
+                    <th width="10%">变量</th>
+                    <th width="20%"> 参数</th>
+                    <th width="10%"> </th>
+                </tr>
+            </thead>
+
+            <tbody class="text-left">
+                <tr ng-repeat=" c in  T.conditions " ng-init="  l = c.exp.left ;
+                                                                r = c.exp.right ;
+                                                                exp = c.exp ;
+                                                                ">
+
+
+                    <td>
+                        <select ng-options="  l for l in _config.verb " 
+                           class="form-control " ng-model="c.verb" ng-if="$index != 0 ">
+                        </select>
+                    </td>
+                    <td> 
+                        <input class="form-control" ng-model=" l.fn " readonly="">
+                    </td>
+
+                    <td> 
+                        <select
+                             ng-if=" l.fn  == 'PV' "
+                             ng-model=" l.args "
+                             class="form-control  "
+                             ui-validate="  '$value != r.args'   "
+                             ui-validate-watch=" 'r.args' "
+
+                             ui-jq="chosen"
+                             source-arr="tags_arr"
+                               k="name"
+                                v="name"
+                               required>
+                            <option value=''> 请选择变量</option>
+
+
+                            
+                        </select>
+
+                        <input ng-if=" l.fn  == null || l.fn == 'null' "
+                          ng-model="l.args" class="form-control  "
+                          type="{{ tags_nv[r.args].type }}"
+                          placeholder="{{ typer }}"
+                          ui-validate="  ' $value != r.args' "
+                           ui-validate-watch=" 'r.args' "
+
+                           required />
+                    </td>
+                    <td>
+                        <select ng-options=" o for o in _config.op" tl-default="_config.op_default" ng-model="exp.op" class="form-control">
+                        </select>
+                    </td>
+                    <td>
+                        <select ng-options=" v as k for (k,v) in _config.fn" ng-model="r.fn" ng-change=" r.args = null ;" class="form-control">
+                            <option value=''> 数值</option>
+                        </select>
+                    </td>
+                    <td  ng-if="  r.fn == 'PV' "  >
+                        <select
+                         ng-model="r.args"
+                         class="form-control  "
+                         ui-validate="  '$value != l.args' "
+                         ui-validate-watch=" 'l.args'  "
+
+                          ui-jq="chosen"
+                          source-arr="tags_arr"
+                          v ="name"
+                          k ="name"
+
+                          required>
+                            <option value=''>请选择变量</option>
+                        </select>
+                    </td>
+                    <td ng-if=" r.fn == null || r.fn == 'null' " >
+                        <input  ng-model=" r.args"
+                         class="form-control "
+                                placeholder='{{ typel }}'
+                                type="{{ tags_nv[l.args].type }}"
+                                ui-validate="  '$value!= l.args' "
+                                ui-validate-watch=" 'l.args' "
+                                required></input>
+                    </td>
+                    <td>
+                        <a class="fa  fa-minus-circle pull-right text-danger m-t-xs"
+                         ng-show=" $index != 0 " 
+                         ng-click="delVerb( $index )"></a>
+                    </td>
+                </tr>
+                <tr class="b-t">
+                    <td colspan=7 class="text-left">
+                        <span class="btn btn-primary btn-sm w-46 dropdown-toggle" ng-click="appendVerb()">添加</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+
+    <form name='step2' ng-show="stepx.step == 2" ng-init="_config = $sys.trigger " class=" form-validation form-horizontal">
+        <select tl-wrap ng-options=" k as v for (k,v) in _config.action " ng-model="T.action" tl-default="_config.action_default" label="行为"></select>
+       
+
+        <!--  Action == 报警 时 ;   -->
+        <div ng-if="T.action == _config.action_alarm ">
+
+            <select tl-wrap ng-options=" k as v for (k,v) in _config.severity " 
+                ng-model="T.params.severity" 
+                tl-default="_config.severity_default" label="严重性"></select>
+            <select tl-wrap ng-options=" k as v for (k,v) in $sys.trigger.class_id " 
+ 
+            ng-model="T.params.class_id" tl-default="_config.class_id_default" label="类别"></select>
+            <textarea tl-wrap ng-model="T.params.desc" 
+            ng-max=50 ng-maxlength='50' label="报警描述"
+            required
+            ></textarea>
+        </div>
+
+
+
+        <div ng-if="T.action == _config.action_event">
+            Event Event Event Event Input .....
+        </div>
+        <div ng-if="T.action == _config.action_task">
+            Task Task Task Task Task Input .....
+        </div>
+
+
+    </form>
+</div>
+<div class="modal-footer  text-center">
+
+    <!--  step 1 -->
+    <div ng-show="stepx.step == 0">
+        <button type="submit" class="btn btn-default btn-sm btn-primary w-60" ng-click="validForm('step0') ;stepx.step = 1 ; ">下一步</button>
+        <button type="submit" class="btn btn-default btn-sm btn-primary w-60" ng-click="cancel()">取消</button>
+    </div>
+    <!--  step 2 ng-disabled="step1.$invalid"  -->
+    <div ng-show="stepx.step == 1">
+        <button class="btn btn-primary btn-sm   w-60" ng-click="stepx.step = 0 ;   ">上一步</button>
+        <button class="btn btn-primary btn-sm   w-60" ng-disabled="form.$invalid" ng-click=" validForm('step1') ; stepx.step = 2   ; ">下一步</button>
+        <button class="btn btn-default btn-sm btn-primary w-60" ng-click="cancel()">取消</button>
+    </div>
+    <!--  step 3 -->
+    <div ng-show="stepx.step == 2">
+        <button class="btn btn-primary btn-sm   w-60" ng-click="stepx.step = 1 ;   ">上一步</button>
+        <button ng-disabled="step1.$invalid" class="btn btn-primary btn-sm   w-60" ng-click=" validForm('step2');done();" ng-show="isAdd">创建</button>
+        <button ng-disabled="step1.$invalid" ng-show="!isAdd" class="btn btn-primary btn-sm   w-60" ng-click=" validForm('step2');done();">更新</button>
+        <button class="btn btn-default btn-sm btn-primary w-60" ng-click="cancel()">取消</button>
+    </div>
+</div>
+ 
+
+<!--jjw 注释-->
+<!--&lt;!&ndash;@if append &ndash;&gt;-->
+<!--T = {{T}}-->
+<!--&lt;!&ndash;@endif &ndash;&gt;-->

@@ -1,0 +1,67 @@
+ 
+
+
+<!-- areaCC 中 创建了 _dataType 数组对象;  -->
+<div  
+ng-init="
+ _config = $sys.point[ dm.driver_id] ;  
+
+ _config.areaCC( this ,point , true) ; 
+
+">  
+</div>
+
+
+<select tl-wrap 
+	 label = "数据区 "
+	 ng-model = "point.params.area"
+	 ng-options = " o.v as o.k for  o  in _config.area"
+	 ng-change = " _config.areaCC( this, point  ) "
+
+	>
+</select>
+
+<input  tl-wrap   
+        label="偏移地址"
+        required  
+        type="Number" 
+        max="65535"
+        min="0" 
+        ng-model= "point.params.offset"    ></input>
+
+
+<div ng-if="point.params.area != 6  && point.params.area != 8 ">
+	<select tl-wrap 
+		 label = "数据类型 "
+		 ng-model= "point.params.type" 
+		 ng-options = "  o.v as o.k for  o  in _dataType"
+		 ng-change = "_config.typeCC( point )"
+		>
+	</select> 
+</div>
+
+
+<div ng-if = " point.params.type ==9 ">
+    <input  tl-wrap   
+        label="字符串长度"
+        required  
+        type="Number" 
+        max="127"
+        min="1" 
+        ng-model= "point.params.type_ex"    ></input>
+ 
+</div>
+
+
+<div ng-if = " point.params.type== 0 ">
+	<input  tl-wrap   
+        label="位偏移"
+        required  
+        type="Number" 
+        max="65535"
+        min="0" 
+        ng-model= "point.params.type_ex"    ></input>   
+</div>
+
+     
+ 

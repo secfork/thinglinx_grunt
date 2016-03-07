@@ -1,0 +1,80 @@
+<div class="  panel-heading  b-t  b-b"> 网络参数 </div>
+
+ 
+<div class="b-b m-b-lg">
+    <table class=" table table-striped m-b-none " ng-init=" initGateWay() ">
+        <thead class="flip-content ">
+            <tr>
+                <th width="10%"> 类型 </th>
+                <th width="10%"> 名称 </th>
+                <th width="10%"> 是否可用 </th>
+                <th width="10%"> 参数 </th>
+                <!--  <th   >组</th> -->
+                <th width="10%"> 操作 </th>
+            </tr>
+        </thead>
+        <tbody ng-repeat=" ($T,$d)  in gateway  ">
+            <tr ng-repeat="  ($t,$way)  in $d  " class="hover">
+                <td> {{$T}} </td>
+                <td> {{ $t }} </td>
+                <td> {{ $way.enable }} </td>
+                <td> {{ $way }}</td>
+                <td>
+                    <a class="text-info m-r-xs" ng-click="c_u_way ( $T , $t,  $way   )">编辑</a>
+                    <a class="text-info m-r-xs" translate="bu.bu4" ng-click="del_way ( $T , $t,  $way  )">移除</a>
+                </td>
+            </tr>
+
+
+        </tbody>
+
+
+        <tbody>
+            <tr>
+                <td colspan=5 class="text-left">
+                    <!--jjw m-l-lg-->
+                    <button class="btn btn-primary btn-sm w-94 m-l-lmg" ng-click=" c_u_way( ) ">
+                        添加网络参数
+                    </button>
+                    <span class="text-danger" ng-show=" needUpdate.gateway ">
+                                <button   
+                                         class=" btn btn-sm m-l w-94 btn-success "
+                                         ng-click = "  updateSystem( 'gateway' );  "
+                                      
+                                >
+                                 保存网络参数
+                                </button>
+                                <i class="fa  fa-exclamation-triangle  "></i> 
+                                 编辑完成后请保存网络参数
+                            </span>
+                    <span ng-show=" hasSave.gateway ">
+                               <strong  class= "text-info  m-lg"> 
+                                <i class="fa  fa-thumbs-o-up "></i> <span>保存成功!</span> </strong>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-left ">
+                    <div class="checkbox m-l m-t-none m-b-none">
+                        <label class="i-checks">
+                            <input type="checkbox" value="" ng-model="enbaleGPS" ng-change="enbaleGpsChange()">
+                            <i></i> GPS
+                        </label>
+                    </div>
+                </td>
+                <td ng-if="enbaleGPS " colspan=2>
+                    <span> Distance</span>
+                    <select ng-model="GateWay.GPS.distance" class="  input-sm w  inline" ng-options="  k for k  in $sys.gateway.gps_distance" ng-change=" cc() " label="Distance">
+                    </select>
+                </td>
+                <td ng-if="enbaleGPS " colspan=2>
+                    <span> 波特率</span>
+                    <select ng-model="GateWay.GPS.baud_rate" class="  input-sm w  inline" ng-change=" cc() " ng-options="  k for k  in $sys.gateway.gps_baud_rate">
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!--jjw-->
+<!--gateway ={{gateway}}-->

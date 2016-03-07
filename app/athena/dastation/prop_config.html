@@ -1,0 +1,149 @@
+<div class="panel panel-default b-t-none ">
+
+
+    <div class="   panel-body  no-padder  ">
+ 
+          
+          <div class="col-md-8 col-xs-12   text-left   m-b-sm m-t padder-md">
+              <label class="col-md-3   control-label m-t-xs color-4 ">配置项</label>
+              <div class="col-md-9">
+                  <select ng-model="profile" class=" form-control    " ng-options="   p as p.name for p in profiles  " ng-change="toUpdate('profile')" required>
+                  </select>
+                  <span class="help-block m-b-none  m-b-xs" ng-show=" profile.desc">
+                <i class="fa  fa-warning  text-success pos-rlt"></i>
+                {{profile.desc}}
+              </span>
+              </div>
+              <div class="col-md-9 col-md-offset-3 m-t-xs m-b">
+                  <span class="text-danger " ng-show=" needUpdate.profile ">
+                  <button class=" btn btn-sm  w-94 btn-success "
+                          ng-click="  updateSystem( 'profile' );  "
+                    >
+                    保存系统配置
+                  </button>
+              <i class="fa  fa-exclamation-triangle  "></i>
+              编辑完成后请保存系统配置
+              </span>
+                  <span ng-show=" hasSave.profile ">
+
+                  <strong class="text-info    ">
+                  <i class="fa  fa-thumbs-o-up "></i> <span>保存成功!</span> </strong>
+                  </span>
+              </div>
+              <!--  就 托管的 daServer 不用  box ticket-->
+              <div ng-if="  nT ">
+                  <label class="col-md-3   control-label m-t-xs color-4">SN</label>
+                  <div class="col-md-9  ">
+                      <div class="input-group">
+                          <input type="text" class="form-control" ng-model="t.sn" ng-disabled="t.ticket">
+                          <span class="input-group-btn" ng-show=" !t.ticket  " style="padding-left:10px"> 
+                            <button class="btn btn-info btn-default w-xs" type="button"
+                                    ng-click="createTicket()">注册
+                            </button>
+                          </span>
+
+                          <span class="input-group-btn" ng-show="t.ticket"  style="padding-left:10px">
+                            <button class="btn btn-info btn-default w-xs" type="button"
+                                    ng-click="unBindTicket()">解除绑定
+                            </button>
+                          </span>
+                      </div>
+                  </div>
+                  <label class="col-md-3 col-lg-offet-1 control-label m-t color-4">Ticket</label>
+                  <div class="col-md-9 m-t">
+                      <!--  {{ t.ticket || "无Ticket !" }} -->
+                      <textarea ng-model="  t.ticket " class="input w-full panel bg-light lter b" style="resize: none" readonly=""></textarea>
+                  </div>
+              </div>
+          </div>
+
+
+          <div class="line" ng-if="!nT"></div>
+
+
+          <!--   托管  daserver  模式   sysmodel.mode ==1 &&  sysmodel.comm_type == 1  -->
+        
+
+  
+ 
+        <ng-include  ng-if=" !nT " 
+                src="  'athena/dastation/_prop_daserver_network.html'  "
+            ></ng-include>
+ 
+
+        <!--
+
+          <div class="line b-b " ng-if=" sysmodel.comm_type == 1   "></div>
+
+          -->
+          <!--  <div class="panel-body table-responsive no-padder">
+          托管模式: ==>  daserver 类型;
+         -->
+ 
+        
+        <ng-include ng-if=" sysmodel.mode ==1 && sysmodel.comm_type ==2   " 
+
+             src=" 'athena/dastation/_prop_gateway_gateway.html'  "></ng-include>
+        
+ 
+
+        <ng-include ng-if=" sysmodel.devices.length && sysmodel.mode ==1 && sysmodel.comm_type ==2 " 
+            src="  'athena/dastation/_prop_gateway_device.html'  "></ng-include>
+      
+
+
+
+        <div class="line b-b"  ng-if="!nT"></div>
+        <div ng-if=" sysmodel.mode ==1 "  >
+            <div class="col-md-8 col-xs-12 text-left padder-md">
+                <div class="col-md-3  col-xs-6   text-left m-t-sm m-b-sm color-4">
+                    <span>上次配置更新</span>
+                </div>
+                <div class="col-md-9 col-xs-6 m-t-sm m-b-sm ">
+                    {{ station.last_modify_time| date:"yyyy-MM-dd HH:mm" }}
+                </div>
+            </div>
+            <div class="col-md-8 col-xs-12 text-left padder-md">
+                <div class="col-md-3  col-xs-6 text-left m-t-xs m-t-sm m-b-sm color-4">
+                    上次同步
+                </div>
+                <div class="col-md-9 col-xs-6 m-t-xs m-t-sm m-b-sm ">
+                    <span class=" ">  {{station.last_sync_time | date:"yyyy-MM-dd HH:mm" }} </span>
+                </div>
+            </div>
+            <div class="col-md-8 col-xs-12 text-left m-b padder-md">
+                <div class="col-xs-6 m-t-sm col-md-6 m-t-sm m-b-sm ">
+
+
+
+                     <button class=" btn btn-sm btn-info "  
+                          ng-click=" syncSystem( station , $event , this )" 
+                          token
+                          spinner
+                          >同步配置</button>
+ 
+                      
+                      <span class="text-info" ng-show="_show_sync_ok"> 同步成功</span>
+                      <span class="text-danger" ng-show="_show_sync_error"> 同步失败</span>
+
+                    <!--   <i class="fa fa-spin fa-spinner text-info" style="display:none"></i>
+ -->
+ 
+
+                </div>
+
+
+
+                <!--jjw md-9 xs-6  启动停止功能 不需要了, 只是为了测试   -->
+                              <!--
+                    <div class=" col-xs-6    m-t-xs col-md-9 m-t-sm m-b-sm ">
+
+                    <button class="btn btn-sm w-46 btn-success" ng-click="startSystem(  station )"> 启动 </button>
+
+                    <button class="btn btn-sm w-46 btn-danger" ng-click="d_stop()"> 停止 </button>
+                    </div>
+                -->
+            </div>
+        </div>
+    </div>
+</div>

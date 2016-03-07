@@ -1,0 +1,108 @@
+<ul class="nav">
+    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+        <span><h5 translate="nav.a">展1示</h5></span>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.s_region">
+            <i class="  icon icon-grid  text-info-dk"></i>
+            <span> 区域</span>
+        </a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.s_system">
+            <i class="icon icon-screen-desktop  text-info-dk"></i>
+            <span> 系统</span>
+        </a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.s_alarm">
+            <i class=" icon icon-fire  text-info-dk"></i>
+            <span> 报警</span>
+        </a>
+    </li>
+    <li class="line dk hidden-folded"></li>
+    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+        <h5 translate="nav.b"> 管理 </h5>
+    </li>
+    <li>
+        <a ui-sref="app.m_region">
+            <i class=" icon icon-grid  text-info-dk"></i>
+            <span>区域</span>
+        </a>
+    </li>
+    <li>
+        <a ui-sref="app.m_system">
+            <i class="  icon icon-screen-desktop text-info-dk"></i>
+            <span translate="nav.g">系统</span>
+        </a>
+    </li>
+    <li>
+        <a href class="auto">
+            <span class="pull-right text-muted">
+                <i class="fa fa-fw fa-angle-right text"></i>
+                <i class="fa fa-fw fa-angle-down text-active"></i>
+            </span>
+            <i class="icon  icon-puzzle text-info-dker"></i>
+            <span translate="nav.c">模型 , 配置项</span>
+        </a>
+        <ul class="nav nav-sub dk">
+            <li ui-sref-active="active">
+                <a ui-sref="app.sysmodel">
+                    <span translate="nav.c2"> 系统模型</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.devmodel">
+                    <span translate="nav.c1"> 设备模型</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li> 
+        <a href class="auto">
+            <span class="pull-right text-muted">
+                <i class="fa fa-fw fa-angle-right text"></i>
+                <i class="fa fa-fw fa-angle-down text-active"></i>
+              </span>
+            <i class=" icon icon-user text-info-dker"></i>
+            <span>用户</span>
+        </a>
+        <ul class="nav nav-sub dk">
+            <li ui-sref-active="active">
+                <a ui-sref="app.user">
+                    <span>用户管理</span>
+                </a>
+            </li> 
+            <li ui-sref-active="active">
+                <a ui-sref="app.role.region">
+                    <span>角色管理</span>
+                </a>
+            </li> 
+        </ul>
+    </li>
+
+    <li  ng-if="user.is_super_user" > 
+        <a href class="auto">
+            <span class="pull-right text-muted">
+                <i class="fa fa-fw fa-angle-right text"></i>
+                <i class="fa fa-fw fa-angle-down text-active"></i>
+              </span>
+            <i class=" icon  icon-notebook text-info-dker"></i>
+            <span>账户</span>
+        </a>
+        <ul class="nav nav-sub dk">
+            <li ui-sref-active="active">
+                <a  ui-sref="app.account_info" >
+                    <span>账户信息</span>
+                </a>
+            </li> 
+            <li ui-sref-active="active">
+                <a ui-sref="app.account_weichat">
+                    <span>微信绑定</span>
+                </a>
+            </li> 
+        </ul>
+    </li>
+
+ 
+</ul>

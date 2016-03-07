@@ -1,0 +1,54 @@
+<div class="modal-header ">
+    <h4>添加区域权限</h4>
+</div>
+<div class="modal-body  ">
+    <form name="form" class=" form-validation form-horizontal   ">
+ 
+ 
+        <select 
+            ng-if="filter_regions"
+             tl-wrap-l label="区域"
+             ng-model=" od.region "
+             class="form-control  " 
+
+              ui-jq="chosen"
+               source-arr="filter_regions"
+               k="name"
+                v="id&name"
+               required>
+            <option value=''>-请选择区域-</option>
+        </select>
+  
+
+
+         <select tl-wrap-l
+            ng-model="od.role"
+        	label="角色"
+            required
+        	ng-options = " r as r.name for r in  roles| filter:{'role_category': 1 } "
+        	>
+            <option value="">-请选角色-</option>
+        </select>
+ 
+
+        <div class="form-group">
+            <div class="col-sm-3 control-label ">
+                权限 
+            </div>
+             <div class="col-sm-8   ">
+
+                <a  class="badge bg-info"  ng-repeat="p in  od.role.privilege"  
+                    translate={{p}} >
+                     
+                </a> 
+ 
+
+            </div>
+        </div>
+
+ 
+
+
+    </form>
+</div>
+<ng-include src=" 'athena/debris/_modal_footer.html' "></ng-include>

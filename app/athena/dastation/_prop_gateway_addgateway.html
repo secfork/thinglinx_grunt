@@ -1,0 +1,53 @@
+<!--  添加  sysmodel  -->
+<div class="modal-header ">
+    <h4 ng-if="isAdd">添加网络配置</h4>
+    <h4 ng-if="!isAdd">编辑网络配置</h4>
+</div>
+<div ng-init="   _type =  ['ETHERNET' ,'GPRS' , 'WIFI' ]  "></div>
+<div class="modal-body  ">
+    <form name="form_gateway" class=" form-validation form-horizontal ">
+        <!--&lt;!&ndash;@if append &ndash;&gt;-->
+        <!--op = {{op }} <br/>-->
+        <!--isAdd ={{isAdd }}-->
+        <!--&lt;!&ndash;@endif  &ndash;&gt;-->
+        <select tl-wrap ng-if="isAdd" ng-model="op.T" ng-options=" t for t in  _type   " label="类型" ng-change="  op.t = undefined ; op.way = {} " required>
+        </select>
+
+        <div ng-if=" op.T == 'ETHERNET' " ng-init="  op.x =  op.x||'LAN' ">
+            <select tl-wrap ng-model="op.x" 
+                ng-options=" x as x  for x in ['LAN','WLAN'] " label="以太网类型">
+            </select>
+            <input tl-wrap label="名称" ng-model=" op.t " required>
+            <input tl-wrap label="ip" ng-model=" op.way.ip " required>
+            <input tl-wrap label="subnet" ng-model=" op.way.subnet " required>
+            <div ng-if=" op.x == 'WLAN'  ">
+                <input tl-wrap label="gateway" ng-model=" op.way.gateway " required>
+                <input tl-wrap label="dns" ng-model=" op.way.dns " required>
+            </div>
+        </div>
+
+ 
+
+
+        <div ng-if=" op.T == 'GPRS' ">
+            <input tl-wrap label="名称" ng-model=" op.t " required>
+            <input tl-wrap label="simid" ng-model=" op.way.simid " required>
+            <input tl-wrap label="apn" ng-model=" op.way.apn " required>
+            <input tl-wrap label="apn_user" ng-model=" op.way.apn_user " required>
+            <input tl-wrap label="apn_password" ng-model=" op.way.apn_password " required>
+        </div>
+        <div ng-if=" op.T == 'WIFI' ">
+            <input tl-wrap label="名称" ng-model=" op.t " required>
+            <input tl-wrap label="simid" ng-model=" op.way.router " required>
+            <input tl-wrap label="user" ng-model=" op.way.user " required>
+            <input tl-wrap label="password" ng-model=" op.way.password " required>
+        </div>
+    </form>
+</div>
+<ng-include src=" 'athena/debris/_modal_footer.html' "></ng-include>
+<!--jjw-->
+<!--&lt;!&ndash;@if append &ndash;&gt;-->
+<!--G={{G}}-->
+<!--<br> isadd={{ isAdd}}-->
+<!--<br> D= {{D }}-->
+<!--&lt;!&ndash;@endif  &ndash;&gt;-->

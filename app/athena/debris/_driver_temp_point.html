@@ -1,0 +1,16 @@
+
+  <!--
+  driver type  - template - point 三级联动!!
+-->
+ <select tl-wrap ng-model=" opt.D " label="驱动类型" required
+         ng-options="o.id as o.description  for o in drivers"
+         ng-change="driverTypeChange( this )"></select>
+
+ <select ng-options=" o.template_id as o.name  for  o in temps  "
+         tl-wrap ng-model=" opt.temp_id " label="模版" required></select>
+
+
+ <select ng-options=" o as o.name  for  o in temppoints   "
+         tl-wrap ng-model="opt.point " label="模版点" required></select>
+
+

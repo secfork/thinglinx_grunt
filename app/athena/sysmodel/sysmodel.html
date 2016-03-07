@@ -1,0 +1,90 @@
+<div class="bg-light lter b-b wrapper-md ng-scope">
+    <h2 class="m-n font-thin h4">系统模型</h2>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+ 
+        <div class="panel-heading " > 
+            <div class="input-group col-sm-4   ">
+                 
+                <input class="form-control  " type="text" ng-model="op.f_n">
+
+                <span class="input-group-btn">
+                    <button class="btn btn-default  " type="button">搜索</button>
+                  </span>
+
+            </div>
+        </div> 
+
+        <div load-mask class="panel-body table-responsive no-padder no-border">
+          
+            <table class=" table table-hover table-striped   b-t-none">
+                <thead class="flip-content">
+                    <tr class="background ">
+                        <th>
+                            <span  > 名称</span>
+                        </th>
+                        <th>
+                            <a  >模式   </a>
+                        </th>
+                        <th>
+                            <span  >通信类型</span>
+                        </th>
+                        <th>
+                            <a  >创建时间</a>
+                        </th>
+                        <th>
+                            <a  >最后更新时间</a>
+                        </th>
+                        <th > 设备个数 </th>
+                        <th > 配置项个数 </th>
+                        <th   width="20%"> 备注 </th>
+                        <th  > 删除 </th>
+                    </tr>
+                </thead>
+ 
+
+                <tbody   >
+                    <tr ng-repeat=" sm in page.data | filter:{ name: op.f_n } ">
+                        <td  class="text-left" >
+                           
+                            <a ng-click=" goto( 'app.sysmodel_p.basic' , sm , sm  )" 
+                            class=" text-info-dk  "> {{sm.name}} </a>
+
+                             <popwin ng-model="sm" 
+                                
+                                pk="uuid"
+                                prop="name"
+                                handler ="updateSysModel"   />
+
+                        </td>
+                        <td> {{ :: $sys.sysModelMode.values[sm.mode] }} </td>
+                        <td> {{ :: sm.comm_type==1?"DAServer":"Gateway" }} </td>
+                        <td> {{ :: sm.create_time | date:"yyyy-MM-dd HH:mm" }} </td>
+                        <td> {{ :: sm.last_modify_time | date:"yyyy-MM-dd HH:mm" }} </td>
+                        <td> {{ :: sm.device_count }} </td>
+                        <td> {{ :: sm.profile_count }} </td>
+                        
+                        <td> {{sm.desc }}
+                                <popwin ng-model="sm" 
+                                
+                                pk="uuid"
+                                prop="desc"
+                                handler ="updateSysModel"   />
+
+
+                        </td>
+                        <td  >
+                            <a   class="text-info-dk" ng-click="deleteSM( $index , sm  )"> 删除 </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
+        <div class="panel-footer  "> 
+            <button class="btn btn-primary btn-sm w-94  m-l-sm  " ng-click=" createSM() ">
+                新建系统模型
+            </button>
+        </div>
+    </div>
+</div>

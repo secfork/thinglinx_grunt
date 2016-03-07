@@ -1,0 +1,95 @@
+<div class="bg-light lter b-b wrapper-md ng-scope">
+    <h2 class="m-n font-thin h4">用户管理</h2>
+</div>
+<div class="wrapper-md">
+
+ 
+
+    <div class="panel panel-default">
+        <div class="panel-heading   ">
+             全部用户 
+        </div> 
+        <div class="panel-body   no-padder  no-border " load-mask > 
+            <div class="input-group-sm col-md-5 col-xs-12 wrapper">
+                
+                <div class="col-md-8 col-sm-6 col-xs-8 no-padder">
+                    <input style="border-radius: 2px" class="form-control input-sm" type="text"
+                     ng-model="op.f_name">
+                </div> 
+                <div class="col-md-4 col-sm-6 col-xs-4 text-base">
+                    <button class="btn btn-info btn-sm" ng-click=" loadPageData(1)">搜索</button>
+                </div>
+            </div> 
+
+            <div class=" table-responsive ">
+                
+            
+
+            <table class=" table table-hover table-condensed   table-striped  b-t    ">
+                <thead class="flip-content  ">
+                    <tr>
+                        <th style="text-align: left;padding-left: 30px" width="20%">名称</th>
+                        <th>昵称</th>
+                        <th> 验证</th>
+                
+                        <th> 上次登录时间 </th>
+
+                        <th> 上次登录IP </th> 
+                        <th>备注</th>
+                        <th> 操作 </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr ng-repeat=" u in page.data"   ng-if="!u.is_super_user"  >
+                        <td   >
+                            <a ui-sref="app.userdetail({id: u.id })" class="text-info"> {{ u.username }} </a>
+                             <popwin 
+                                ng-model="u"  
+                                prop="username"
+                                handler =" updateUser "   />
+
+                        </td>
+
+                        <td>{{ u.nickname }}
+                       
+                             <popwin 
+                                ng-model="u"  
+                                prop="nickname"
+                                handler =" updateUser "   />
+                       
+                        </td>
+                        <td>
+                            <i class="glyphicon  glyphicon-phone {{:: u.mobile_phone_verified?'text-success':'text-muted'}}" ></i>
+                            <i class="fa fa-envelope {{:: u.email_verified?'text-success':'text-muted'}}" ></i>
+                        </td>
+ 
+
+                        <td> {{u.last_login_time| date:'yyyy-MM-dd HH:mm:ss'}} </td>
+                        <td> {{ u.last_login_ip }}</td>
+                        <td>
+                                {{ u.desc }}
+                       
+                             <popwin 
+                                ng-model="u"  
+                                prop="desc"
+                                handler =" updateUser "   />
+
+                        </td>
+                        <td>
+                            <a href="" class="text-info" ng-click="delUser( page.data, u , $index)" translate="del">  删除用户</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel-footer  ">
+                <button class=" btn btn-primary btn-sm  pull-left " ng-click=" createUser() ">
+                    添加用户
+                </button>
+                <div class=" text-center  " ng-include src=" 'athena/debris/_pager.html'  "></div>
+        </div>
+    </div>
+</div>        

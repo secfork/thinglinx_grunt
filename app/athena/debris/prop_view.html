@@ -1,0 +1,26 @@
+<!-- 属性查看 模版;    -->
+
+<div class="modal-header  text-center ">
+    {{ title }}
+</div>
+
+<div  class="modal-body " >
+
+    <form class="    bs-example form-horizontal  padding-10 "    >
+
+        <div class=" form-group m-b-xxs "   ng-repeat = "  (k , v) in props "   >
+
+            <label class="col-sm-5 control-label">  {{ k }} </label>
+            <div class="col-sm-7 m-t-xs">
+
+                <!--<input  class="form-control height-30 "   ng-model= "g.gname"  value=" {{v}}"    > -->
+                {{ v }}
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+
+ <ng-include   src = " 'athena/debris/_modal_footer.html' " ></ng-include>

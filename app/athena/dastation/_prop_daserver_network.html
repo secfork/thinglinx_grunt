@@ -1,0 +1,91 @@
+<!-- 
+
+托管模式: ==>  daserver 类型;  
+
+ -->
+<div class="  panel-heading  b-t  b-b m-b-lg"> 设备网络参数 </div>
+<div>
+    <form name="form_daserver" class="form-horizontal form-validation m-b-md col-md-8 padder-md " ng-init="  initDaServer() ; loadSupportDtus();">
+        <!-- 只有  指定assign 过了 不可  不可编辑
+
+        激活的必定已经指定了 daserver ; 
+
+     -->
+     
+     <!--@if append-->
+       daserver =  {{daserver}}
+     <!--@endif -->
+
+
+        <!--jjw padder-->
+        <div ng-if=" daserver.type =='DTU' " class="wrap-text-l padder">
+            <select tl-wrap-l label="DTU驱动" required ng-disabled="  cmway_port  " ng-model="daserver.params.driverid" ng-change=" applyDtuData(daserver.params ) ;
+              " ng-options=" o.driver_id as o.name  for o  in dtuList ">
+                <option value="">--请选择DTU驱动--</option>
+            </select>
+            <!--     根据  dtu id 加载相应的配置界面; 
+                  <input  tl-wrap-l label="终端iD" required ng-model="network[type].simid"    > 
+                  readonly
+                -->
+            <div ng-if="daserver.params.driverid" ng-include="  'athena/_dtu/' +daserver.params.driverid + '.html' ">
+            </div>
+            <input readonly tl-wrap-l label="中心域名" ng-model="cmway_port.inet_ipv4">
+            <input readonly tl-wrap-l label="端口" ng-model="cmway_port.inet_port">
+            <!--jjw col-md-9 col-md-offset-3 padding-0-->
+            <div class="text-muted col-md-9 col-md-offset-3 padding-0">
+                <i class="fa  fa-warning   text-warning pos-rlt"></i> DSC地址和端口需要设置到指定的DTU设备中
+            </div>
+        </div>
+        <!-- 手机-->
+        <div ng-if="daserver.type =='TcpClient' ">
+            <input tl-wrap-l label="SIM卡手机" required ng-model="a" type="number">
+            <input tl-wrap-l label="APN" required ng-model="a" type="number">
+            <input tl-wrap-l label="APN用户名" ng-model="a">
+            <input tl-wrap-l label="APN密码" ng-model="a">
+        </div>
+        <!-- dtu -->
+        <!--vpn-->
+        <div ng-if="daserver.type =='TcpServer' ">
+            <div class=" col-sm-12    m-t-xs  m-b-sm   text-left" style="padding-left: 0px">
+                <div class="checkbox">
+                    <label class="i-checks">
+                        <input type="checkbox" ng-checked="true" ng-model="isvpn"><i></i> 是否使用VPN
+                    </label>
+                </div>
+            </div>
+            <div ng-if="true">
+                <input tl-wrap-l label="VPN服务器" ng-model="a" required type="number">
+                <input tl-wrap-l label="用户名" ng-model="a" required>
+                <input tl-wrap-l label="密码" ng-model="a" required type="password">
+            </div>
+        </div>
+        <!--  <div class="line   line-dashed b-b line-chart m-l-n-sm   "></div>
+            ng-show=" needUpdate.daserver "
+     -->
+        <div class="row">
+            <!--jjw col col-offset padding m-t m-t-lg-->
+            <div class="col-md-9 col-md-offset-3 padding m-t">
+                <span class="">
+
+                <!--jjw m-l-xs-->
+                <button   token= "5000" 
+                         class=" btn btn-sm m-l-xs w-94 btn-success "
+                         ng-click = "  updateSystem( 'daserver' ,this);  "
+                      
+                >
+                 保存网络参数
+                </button>
+            </span>
+                <span ng-show=" needUpdate.daserver " class="text-danger">
+                 <i class="fa  fa-exclamation-triangle  "></i> 
+                             编辑完成后请保存网络参数
+
+            </span>
+                <span ng-show=" hasSave.daserver ">
+                   <strong  class= "text-info  m-lg"> 
+                   <i class="fa  fa-thumbs-o-up "></i> <span>保存成功!</span> </strong>
+                </span>
+            </div>
+        </div>
+    </form>
+</div>

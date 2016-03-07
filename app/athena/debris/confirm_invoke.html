@@ -1,0 +1,29 @@
+
+
+<!--  操作确认 模版  -->
+<div class="modal-header">
+    <!--  标题 -->
+      {{ msg.title }} 
+</div>
+
+
+
+<div class="modal-body m-b">
+    <!-- 注释 -->
+    <div ng-if="msg.note" class="   m-l-lg">
+        <i class= "fa fa-warning  fa-2x text-warning"  ></i> {{ msg.note }}
+    </div>
+
+    <div ng-if="msg.warn " class=" m-l-lg  text-danger">
+        <i class="fa  fa-exclamation-triangle fa-2x  "></i> 
+        {{ msg.warn}}
+    </div>
+</div>
+<div class="modal-footer ">
+    <!--jjw w-60-->
+    <button class="btn btn-sm btn-primary  w-46 " ng-click=" done() " token 
+        translate="{{todo}}"> </button>
+    <button class="btn btn-sm  btn-default w-46 "  ng-click=" cancel() "
+        translate = "{{ undo }}"
+        >取消</button>
+</div>

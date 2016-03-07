@@ -1,0 +1,83 @@
+<tabset class="tab-container">
+
+    <tab>
+        <tab-heading>
+            <i class="glyphicon glyphicon-bell"></i> 所有用户
+        </tab-heading>
+
+        <table
+                            ui-jq="dataTable" ui-options="{
+                  sAjaxSource: 'datatable.json',
+                  aoColumns: [
+                    { mData: 'browser' },
+                    { mData: 'browser' },
+                    { mData: 'gps' },
+                    { mData: 'tb' },
+                    { mData: 'platform' }
+                  ]  }"
+                            class="table table-striped m-b-none    table-bordered    table-striped ">
+                  <thead>
+                        <tr>
+                            <th    >用户名</th>
+                            <th   > 全名</th>
+                            <th   > 有效手机</th>
+                            <th   >有效电子邮件</th>
+                            <th   >上次在线时间</th>
+                        </tr>
+                  </thead>
+
+                  <tbody>  </tbody>
+        </table>
+
+
+    </tab>
+
+    <tab>
+        <tab-heading>
+            <i class="glyphicon glyphicon-bell"></i> 按项目划分用户
+        </tab-heading>
+
+               <table
+                            ui-jq="dataTable" ui-options="{
+                  sAjaxSource: 'datatable.json',
+                  aoColumns: [
+                    { mData: 'engine' },
+                    { mData: 'browser' },
+                    { mData: 'platform' },
+                    { mData: 'version' },
+                    { mData: 'version' },
+                    { mData: 'gps' },
+                    { mData: 'tb' },
+                    { mData: 'grade' }
+                  ]  }"
+                            class="table table-striped m-b-none    table-bordered    table-striped ">
+                        <thead>
+                        <tr>
+                            <th    >全名</th>
+                            <th   >项目访问</th>
+                            <th   >读数据</th>
+                            <th   >些数据</th>
+                            <th   >确认警告</th>
+                            <th   >离线警告</th>
+                            <th   > gps警告</th>
+                            <th > 短信警告</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+               </table>
+    </tab>
+
+    <tab>
+        <tab-heading>
+            <i class="glyphicon glyphicon-bell"></i> 添加用户
+        </tab-heading>
+
+        <div ng-include=" 'athena/manage/pro_addproject.html'  " ></div>
+    </tab>
+
+
+
+
+
+</tabset>

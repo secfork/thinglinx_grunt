@@ -1,0 +1,93 @@
+<!--  添加  sysmodel  -->
+
+<div class="modal-header ">
+    <span ng-if="isAdd">添加串口配置</span>
+    <span ng-if="!isAdd">编辑串口配置</span>
+
+</div>
+
+<div class="modal-body  ">
+
+    <form name="form" class=" form-validation form-horizontal "
+    ng-init=" _config = $sys.gateway ;
+               filterType()
+            "
+         >
+
+<!--
+ ng-init=" _config = $sys.gateway ;
+                    types = filterType() ;
+                    isAdd && ( G.name = types[0] ) ;
+                    "
+
+                -->
+
+
+        <select  tl-wrap
+            ng-if = "isAdd"
+            ng-model="G.t"
+            ng-options = " t as t group by T for (t,T) in _$types   "
+            label="串口"
+            required
+        >
+           <!--  <option value=""> --请选择网关--</option> -->
+        </select>
+
+
+        <!-- D.baud_rate = null ;  -->
+            <select tl-wrap
+                ng-model= " D.baud_rate "
+                ng-options= "  k for k in _config.baud_rate"
+                label="波特率"
+                required
+            >
+               <!--  <option value=""> --请选择波特率--</option> -->
+            </select>
+
+
+            <select tl-wrap
+                    ng-model=" D.data_bits "
+                    ng-options = "  k for k  in _config.data_bits"
+                    label="数据位"
+                    required
+            >
+                <!--  <option value=""> --请选择数据位--</option> -->
+            </select>
+
+            <select tl-wrap
+                    ng-model=" D.stop_bits "
+                    ng-options = "  k for k  in _config.stop_bits"
+                    label="停止位"
+                    required
+            >
+                <!--  <option value=""> --请选择停止位--</option> -->
+            </select>
+
+
+            <select tl-wrap
+                    ng-model=" D.parity "
+                    ng-options = "  k  as v  for (k,v)  in _config.parity"
+                    label="校验"
+                    required
+            >
+               <!--   <option value=""> --请选择校验--</option> -->
+            </select>
+
+            <input type="number"  tl-wrap ng-model = "D.delay"  label="延迟(毫秒)" >
+
+    </form>
+</div>
+
+<ng-include src=" 'athena/debris/_modal_footer.html' "></ng-include>
+
+
+
+<!--jjw 注释-->
+<!--&lt;!&ndash;@if append &ndash;&gt;-->
+ <!--G={{G}} <br>-->
+ <!--isadd={{ isAdd}} <br>-->
+
+ <!--D= {{D }}-->
+<!--&lt;!&ndash;@endif &ndash;&gt;-->
+
+

@@ -1,0 +1,49 @@
+<!--  添加  sysmodel  -->
+<div class="modal-header ">
+    <span ng-if="isAdd">新建系统模型</span>
+    <span ng-if="!isAdd">编辑系统模型</span>
+</div>
+<div class="modal-body  ">
+    <form name="form" class=" form-validation form-horizontal   ">
+        <!-- <input type="submit" class="hidden">  -->
+        <input tl-wrap ng-model="sm.name" label="系统模型名称" required>
+        <select tl-wrap ng-model="sm.mode" ng-if="isAdd" ng-options=" k as v  for (k,v) in $sys.sysModelMode.values" ng-change=" sm.comm_type=sm.mode=='1'?'1':undefined " 
+        label="模式" required>
+        </select>
+        <div class="form-group " ng-if=" sm.mode == 1">
+            <label class="col-sm-3  control-label  ">
+                <span>通讯类型</span>
+            </label>
+            <div class=" col-sm-7">
+ 
+              <!--   <div class="radio inline ">
+                    <label class="i-checks">
+                        <input type="radio" value="2" ng-model="sm.comm_type">
+                        <i></i>
+                        <span>Gateway</span>
+                    </label>
+                </div> -->
+                
+                
+
+                <div class="radio inline m-l ">
+                    <label class="i-checks ">
+                        <input type="radio" value="1" ng-model="sm.comm_type">
+                        <i></i>
+                         DAServer 
+                    </label>
+                </div>
+            </div>
+        </div>
+        <textarea tl-wrap ng-model="sm.desc" label="备注"> </textarea>
+    </form>
+  
+</div>
+<ng-include src=" 'athena/debris/_modal_footer.html' "></ng-include>
+
+<!--jjw 注释-->
+<!--&lt;!&ndash;@if append &ndash;&gt;-->
+        <!--sm= {{sm}}-->
+        <!--<br> isAdd = {{isAdd}}-->
+<!--&lt;!&ndash;@endif &ndash;&gt;-->
+ 

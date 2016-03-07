@@ -1,0 +1,26 @@
+
+
+	<div class="form-group col-lg-12" style="margin-top  : 30px ;">
+		<label>信息板名称:</label>
+		<input type="text" ng-model="data.panel_name" class="form-control">
+	</div>
+
+	<div class="form-group col-lg-12">
+		 <label>访问级别:</label>
+		<select class="form-control" ng-model="data.access_level" ng-options=" k as v  for  (k,v) in types"></select>
+	</div>
+
+	<div class="form-group col-lg-12">
+		 <label>类型:</label>	
+		<!-- <button class="btn btn-sm btn-default " ng-click="">系统</button> -->
+		<button class="btn btn-sm w-46 btn-default " ng-click="">资料</button>
+	</div>
+
+	<div id="frofile" class="form-group col-lg-12">
+		 <label>资料:</label>
+		<select class="form-control" ng-model="obj" ng-options=" obj as obj.name  for obj in type_name "></select>
+	</div>
+
+	<div class="form-group col-lg-12">
+		<button class="btn m-b-xs w-60 btn-dark btn-success" ng-click="save()">保存</button>
+	</div>

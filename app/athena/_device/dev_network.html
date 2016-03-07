@@ -1,0 +1,65 @@
+ 
+
+<div     ng-init = "  _$types = [ 'ETHERNET','RS232','RS485','RS422'  ] ; 
+				   _proto  = ['tcp' , 'udp'] ;  ">  
+</div>
+ 
+ 
+
+<select  tl-wrap   
+	ng-options = " t for t in _$types"
+	ng-model=" D.network.type"
+	label=" 通信类型"
+	ng-init =   " filterChannel ( D.network.type , false ) "
+	ng-change = " filterChannel ( D.network.type , true  ) "
+>
+</select>
+ 
+
+<div   ng-if="  D.network.type == 'ETHERNET' "  
+    >
+	<input tl-wrap ng-model="D.network.params.channel"  
+	               label="network"  
+	               tl-default="LAN_1"
+	               readonly
+
+		>  
+
+    <select tl-wrap  
+         ng-model="D.network.params.proto"    
+         label="proto"  
+         ng-options = "  p for p in _proto"
+         tl-default="tcp"
+           
+         >  
+    </select>  
+
+
+   <input tl-wrap   ng-model="D.network.params.ip"    
+       label="ip"  
+       required 
+       > 
+       
+    <input tl-wrap   ng-model="D.network.params.port"    
+         label="port"  
+         required 
+         > 
+
+
+
+</div>
+
+
+<div  ng-if="  D.network.type != 'ETHERNET' "   >
+	<select tl-wrap   
+			ng-model = "D.network.params.channel"
+			ng-options = " k as k  for (k,v) in  _$channel " 
+			label="串口"
+			required
+	>
+		<option value="">请选择串口</option>
+	</select>
+
+</div>
+
+

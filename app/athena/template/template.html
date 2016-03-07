@@ -1,0 +1,97 @@
+<div class="bg-light lter b-b wrapper-md ng-scope">
+    <h2 class="m-n font-thin h4">设备模型</h2>
+</div>
+<div class="wrapper-md  ">
+     
+            <div class="input-group col-sm-4 m-b-xs  ">
+                 
+                <input class="form-control  " type="text" ng-model="op.f_n">
+
+                <span class="input-group-btn">
+                    <button class="btn btn-default  " type="button">搜索</button>
+                  </span>
+
+            </div>
+        
+ 
+        <div class=" panel-body  no-padder   " id="temp_context" load-mask>
+            
+            <div class="input-group  col-sm-6    col-md-4  " ng-show="deviceModels.length > 15">
+                <span class="input-group-btn">
+                 <span class="btn btn-default height-30 w-46  "
+                       translate="common.search"  >搜索</span>
+                </span>
+                <input class="form-control input-sm" type="text" ng-model="op.f_n">
+            </div>
+
+            
+            <div ng-repeat='dm in deviceModels | filter:{ name:op.f_n} ' class="panel panel-default m-b-xs">
+                <div class="panel-heading">
+                    
+                    <a ng-click=' loadPoints ( this , $event,  $index , dm  ) ; showp = !showp '> 
+                        <i ng-class="{'fa':true ,'fa-angle-down': showp, 'fa-angle-right': !showp}" ></i>
+                        {{dm.name }}
+                    </a>
+                    <ul class="nav nav-pills pull-right">
+                        <li><a ng-click='add_edit_t( this, dm )' class='text-info'>编辑</a></li>
+                        
+                        <li><a ng-click=' delTemp(   $index , dm )' class='text-info'>删除</a></li>
+                    </ul>
+                </div>
+
+                <div ng-show="showp " class="panel-body no-border table-responsive no-padder" load-mask>
+                    <table class="table table-hover table-striped b-b "
+                     ng-init="_$config =  $sys.point[dm.driver_id] ;  _$point = $sys.point ;">
+                        <thead>
+                            <tr>
+                                <td>名称</td>
+                                <td translate="params.poll"></td>
+                                <td translate="params.is_packet"></td>
+
+
+                                <td ng-repeat=" th in  _$config.th " translate="params.{{th}}"> </td>
+                                <td> 编辑 </td>
+                                <td> 删除 </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+ 
+
+                            <tr ng-repeat=' p in points ' ng-init="  pa =  fromJson(p.params); ">
+                                <td> {{ p.name }}</td>
+                                <td>   {{ _$point.pointPoll[ p.poll ].k }}</td>
+                                <td> {{ _$point.packet[p.is_packet].k }} </td>
+                                <td ng-repeat=" th in  _$config.th ">
+                                    {{ _$config[th][pa[th]].k || pa[th] }}
+                                </td>
+                                <td>
+                                    <a ng-click='addOrEditPoint( this ,p , $index  ,t  )' class='text-info'>编辑</a>&nbsp;
+                                    <a ng-click='add_f(p)' class='text-info' ng-if="false">   克隆</a>&nbsp;
+                                </td>
+                                <td>
+                                    <a ng-click='delPoint ( this ,$index , p  , dm.uuid  )' class='text-info'>删除</a>
+                                    
+                                </td>
+                            </tr>
+
+
+
+                        </tbody>
+                    </table>
+                    <div class='col-xs-12 m-t-sm m-b-sm  '>
+                        <button class='btn btn-sm w-70 m-l-sm w-xxm j_addp' ng-click='addOrEditPoint( this )'>添加点 </button>
+                    </div>
+                </div> 
+            </div>
+  
+            <button class='btn btn-sm w-94 btn-primary m-t-sm m-b-sm' ng-click='add_edit_t( this  )'>
+                添加设备模型
+            </button>
+            
+        </div> 
+</div>
+
+
+
+
+ 

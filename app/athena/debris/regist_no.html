@@ -1,0 +1,20 @@
+<div class="modal-body text-center ">
+
+    <i class="fa  fa-warning fa-2x text-warning pos-rlt"></i>
+
+    <!--  标题 -->
+    <span class="modal-title ">   输入注册码     {{ myform.k0.$valid   }}    ccccc </span>
+
+    <!-- 注释 -->
+    <form class="text-center "   >
+
+            <input id="regno_in_0"  type="text"     class="form-control  w-xxs"  ng-keyup=" keyUp( 0, $event ) "   ng-change="changeV( 0,  No[0] )"   ng-model=" No[0] "   > -
+            <input id="regno_in_1"  type="text"     class="form-control  w-xxs"  ng-keyup=" keyUp( 1,$event  ) "   ng-change="changeV( 1,  No[1] )"   ng-model="No[1]"   > -
+            <input id="regno_in_2"  type="text"    class="form-control  w-xxs"   ng-keyup=" keyUp( 2 ,$event   ) "  ng-change="changeV( 2,  No[2] )"   ng-model="No[2]"  > -
+            <input id="regno_in_3"  type="text"     class="form-control  w-xxs"  ng-keyup=" keyUp( 3 , $event  ) " ng-change="changeV( 3,  No[3] )"   ng-model="No[3]"  >
+
+    </form>
+
+</div>
+
+<ng-include   src = " 'athena/debris/_modal_footer.html' " ></ng-include>

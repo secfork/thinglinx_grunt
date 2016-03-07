@@ -1,0 +1,63 @@
+<!--jjw bg-white text-base-->
+<div class="panel-body  bg-light b-a b-t-none bg-white text-base ">
+    <!--jjw padder-md-->
+    <div class="col-md-6  m-b padder-md">
+        <div class="m-b hbox ">
+            <div class="col w-sm  "> 系统Id </div>
+            <div class="col text-right"> {{:: system.uuid }} </div>
+        </div>
+
+        <div class="m-b hbox ">
+            <div class="col w-sm  "> 所属区域 </div>
+            <div class="col text-right"> {{ :: system.region_name }} </div>
+        </div>
+
+        <div class="m-b hbox ">
+            <div class="col w-sm  "> 创建时间 </div>
+            <div class="col text-right"> {{ :: system.create_time | date:"yyyy-MM-dd HH:mm"}} </div>
+        </div>
+
+        <div class="m-b">
+            <div class="col w-sm  m-b-sm"> 备注 </div>
+            <div class="w-full wrapper-sm b-a" style="height: 100px;color: #a0a0a0"> {{ :: system.desc}} </div>
+        </div>
+
+        <div class="m-b col-xs-12 no-padder">
+            <div class="col-xs-4 no-padder">
+                <div class="panel padder-v item bg-primary text-center r-2x">
+                    <!--使用具体报警数量替换30-->
+                    <span class="text-white font-thin h1 block">{{ :: totalAlarm_act }}</span>
+                    <span class="text-xs" style="color: #d3cfea">活跃报警数</span>
+                </div>
+            </div>
+
+            <div class="col-xs-7 no-padder pull-right">
+                <div class="alert alert-danger r-2x">
+
+                   <span class="text-danger text-sm m-t-xs block" style="color: #a94442">
+                     最新报警：{{ :: lastAlarm.timestamp | date:"yyyy-MM-dd HH:mm" }}</span>
+                    <span class="text-danger text-sm block"  style="color: #a94442">
+                    具体报警: {{ :: lastAlarm.desc }}</span>  
+                    <span class="text-danger text-sm block"  style="color: #a94442"> 
+                    严重性 ：{{  lastAlarm.severity }}<a ui-sref="app.s_system_prop.alarm" class="pull-right"><span class="text-info-dk">查看报警</span></a></span>
+                </div>
+            </div>
+        </div>
+
+        
+
+    </div>
+    <!--jjw float-right no-padder-->
+    <div class="col-md-6 gap-5  pull-right no-padder" style="height: auto;">
+        <img ng-src="{{ system.pic_url?( ossRoot + system.pic_url):'img/system_null.png'}}"
+          style="width:100%;height: auto;max-width: 500px">
+    </div>
+</div>
+
+ 
+<!--jjw 注释-->
+<!--@if append-->
+<!--system = {{ system }}-->
+<!--<hr/> systemModel = {{systemModel}}-->
+<!--<hr/>-->
+<!--@endif -->

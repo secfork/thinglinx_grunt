@@ -1,0 +1,44 @@
+ 
+<div class="modal-header ">
+    
+      创建区域 
+</div>
+
+<div class="modal-body  "  load-mask  >
+
+  <form name="form"   class="form-horizontal form-validation  ">
+
+ 
+ 
+        <input tl-wrap label="区域名称" required ng-model=" proj.name "  >
+     
+      <!--   <input tl-wrap label="联系人" ng-model=" proj.contact_user ">
+        <input tl-wrap label="电话号码" ng-model=" proj.mobile_phone" ng-pattern="/^\d{8,12}$/">
+        <input tl-wrap label="电子邮件" ng-model=" proj.email " type="email">
+        <input tl-wrap label="地址" ng-model=" proj.address ">
+  --> 
+
+  
+      <!--   <div ng-if="more">
+            <input tl-wrap label="邮编" ng-model=" proj.postcode " ng-pattern="/^[0-9]*$/">
+            <input tl-wrap label="城市" ng-model=" proj.city ">
+            <input tl-wrap label="省/县" ng-model=" proj.province ">
+            <input tl-wrap label="国家" ng-model=" proj.country ">
+        </div>
+        -->
+
+        <textarea tl-wrap label="备注" ng-model=" proj.desc " style="resize: none" ng-maxlength='100' placeholder=" 不应超过100字符"></textarea>
+ 
+        
+    </form> 
+
+
+</div>
+
+<ng-include src=" 'athena/debris/_modal_footer.html' "></ng-include>
+
+
+
+ 
+  
+ 

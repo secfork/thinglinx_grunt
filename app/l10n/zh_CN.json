@@ -1,0 +1,457 @@
+{
+
+    "phone_pattern_err": "电话号码格式不正确",
+
+    "unknown": "未知错误",
+
+
+    "pass_err": "用户名或密码错误",
+    "sms_error": "短信发送失败",
+
+    "identify_err": "验证码无效",
+    "sms_verify_err": "短信验证码无效",
+
+    "send_repetition": "验证码已经发送", 
+
+    "rest_err":"当前请求失败，建议您刷新页面或稍后重试!", 
+    "rest_404":"当前请求无效，建议您刷新页面或稍后重试!", 
+
+    "no_account": "无此Account 帐号",
+
+    "send_maill_err":"邮件发送失败",
+    "page_expire":"页面失效",
+    "login_yet":"已经登录,无需重复登录",
+    "no_send_smg":"未发送验证码",
+
+
+    "ER_OLD_PASSWORD":"原始密码错误",
+    "ER_NO_AUTH": "未授权",
+
+    "ER_REGION_REF":"区域使用中",
+    "ER_REGION_EXIST": "区域已经存在",
+    "ER_REGION_NOT_EXIST": "区域不存在",
+    "ER_REGION_PERMISSION_NOT_EXIST":"无区域权限",
+
+    "ER_SYSTEM_EXISTS": "系统已经存在",
+    "ER_SYSTEM_NOT_EXISTS": "系统不存在",
+
+    "ER_CONTACT_EXISTS": "联系人已经存在",
+    "ER_CONTACT_NOT_EXIST": "联系人不存在",
+
+    "ER_CONTACT_NOT_EXISTS": "驱动不存在",
+
+    "ER_SYSTEM_MODEL_EXISTS": "系统模型已经存在",
+    "ER_SYSTEM_MODEL_NOT_EXISTS": "系统模型不存在",
+
+    "ER_DEVICE_EXISTS": "设备已经存在",
+    "ER_DEVICE_NOT_EXISTS": "设备不存在",
+
+    "ER_TAG_EXISTS": "变量名已被占用",
+    "ER_TAG_NOT_EXISTS": "变量不存在",
+
+    "ER_DEVICE_MODEL_EXISTS": "设备模型已经存在",
+    "ER_DEVICE_MODEL_NOT_EXISTS": "设备模型不存在",
+
+    "ER_POINT_EXISTS": "point已经存在",
+    "ER_POINT_NOT_EXISTS": "point不存在",
+
+    "ER_PROFILE_EXISTS": "配置项已经存在",
+    "ER_PROFILE_NOT_EXISTS": "配置项不存在",
+
+    "ER_TRIGGER_EXISTS": "触发器已经存在",
+    "ER_TRIGGER_NOT_EXISTS": "触发器不存在",
+
+    "ER_MESSAGE_EXISTS": "消息配置已经存在",
+    "ER_MESSAGE_NOT_EXISTS": "消息配置不存在",
+
+    "ER_DRIVER_EXISTS": "驱动已经存在",
+    "ER_DRIVER_NOT_EXISTS": "驱动不存在",
+
+    "ER_GROUP_EXIST": "用户组名已被占用 ",
+    "ER_USER_EXIST": "用户已存在",
+
+    "ER_USER_NOT_EXIST":"用户不存在",
+
+
+    "ER_DASERVER_EXISTS": "数据采集服务器已经存在",
+    "ER_DASERVER_NOT_EXIST": "数据采集服务器不存在",
+
+    "ER_SYSTEM_NOT_SAVE_LOG": "该点不保存历史",
+    "BAD_REQUEST": "请求参数错误",
+
+    "SPACE_NOT_EXIST": "报警空间不存在",
+    "ACK_MESSAGE_NOT_EXIST": "报警信息不存在", 
+    
+    "ER_INVALID_INVITATION_CODE": "邀请码无效",
+
+    "ER_MOBILE_PHONE_NOT_VERIFIED":"手机未验证",
+
+    "ER_SYSTEM_NO_LOG_DATA": "无历史数据",
+
+    "ER_DEVICE_MODEL_REF": "设备模型使用中",
+    "ER_SYSTEM_MODEL_REF": "系统模版使用中",
+
+    "ER_SYSTEM_ACTIVE": "系统处于激活状态, 无法删除",
+    "ER_SYSTEM_NOT_ACTIVE": "系统尚未激活",
+
+    "ER_DASERVER_HAS_NOT_ASSIGNED": "系统尚未指定数据采集服务器",
+    
+    "ER_INVALID_USER_OR_PASSWORD":"无效的用户名或密码",
+    "ER_INVALID_USER_OR_ACCOUNT":"无效的账户名或用户名",
+
+
+
+    "ER_PROFILE_REF": "配置项使用中",
+    "Er_ACCOUNT_EXIST": "该Account名已被占用",
+    "ER_INVALID_ACCOUNT_NAME":"该Account名已被占用",
+    "ER_DELETE_SUPER_USER": "管理员账户不可删除",
+
+    "ER_MODIFY_DEFAULT_ROLE":"默认角色不可更改",
+
+    "ALARM_ALLREADY_ACKED": "报警已经确认,无需再次确认",
+
+    "ER_ACCOUNT_NOT_EXIST":"Account用户不存在",
+    "ER_DUP_ENIRY": "_ ER_DUP_ENIRY _",
+    "ER_AUTH_FAILURE":"您无权限执行此项操作",
+    "ER_SYSTEM_REF":"当前区域下存在系统，不能被删除",
+
+
+   
+    "ER_SENDMESSAGE_ERROR": "_作废_控制命令发送失败,原因可能为超时或者设备收到数据处理错误",
+    "ER_TIME_OUT":"发送消息超时",
+    "ER_HTTP_OFFLINE":"网络繁忙",
+    "ER_DA_SVR_STOP":"DAServer停止",
+    "ER_DEV_NOT_EXIST":"设备不存在",
+    "ER_DEV_STOP":"设备停止",
+    "ER_DEV_OFFLINE":"设备离线",
+    "ER_TAG_NOT_EXIST":"点不存在",
+    "ER_TAG_READONLY":"点只读",
+    "ER_TAG_TYPE_ERR":"数据类型错误",
+    "ER_PARA_ERR":"参数错误",
+    "ER_WRITE_QUEUE_FULL":"下置队列满",
+    "ER_DEV_INACTIVE":"设备未激活",
+    "ER_DEV_COMM_TYPE_ERR":"设备通讯类型错误",
+    "ER_DEV_COUNT_ZERO":"设备数为空",
+    "ER_TAG_COUNT_ZERO":"设备点数为空",
+    "ER_LINK_COUNT_ZERO":"设备连接项为空",
+    "ER_DEV_NET_CFG_ERR":"设备网络参数错误",
+    "ER_DEV_SIMID_USED":"设备SIMID号被占用",
+
+    "ER_PARSE_ERROR":"未知错误",
+    "ER_CODE_EXCEPTION":"未知错误", 
+    "ER_JSON_PARSE_ERR":"未知错误",
+    "ER_CMD_TYPE_ERR":"未知错误",
+    "ER_UNKNOWN_ERROR":"未知错误　",
+
+    "ER_SERVICE_UNAVAILABLE":"命令发送失败",
+
+
+
+    "ER_SUBSCRIBE_EXIST":"订阅已经存在",
+    "ER_EMAIL_NOT_VERIFIED":"邮箱未通过验证",
+    "ER_MOBILE_PHONE_NOT_VERIFIED":"手机未通过验证",
+    "ER_SYSTEM_HAS_BOUND":"系统已经绑定Ticket",
+
+    "ER_ROLE_REF":"角色使用中,无法删除!",
+    "ER_ROLE_EXISTS":"角色已经存在",
+    "ER_MODIFY_ROLE_PERMISSION":"无权限修改角色",
+    "ER_MODIFY_PERMISSION":"无权限",
+
+
+
+    "del": "删除",
+    "update": "更新",
+    "do": "确定",
+    "cancel": "取消",
+    "edit": "编辑",
+
+
+
+    "desc": "账户权限,低16位表示,未占用的位空缺",
+    "REGION_MANAGE": "区域管理",
+    "MODEL_MANAGE": "模型管理",
+    "GROUP_MANAGE": "用户组管理",
+    "USER_MANAGE": "用户管理",
+    "ROLE_MANAGE": "角色管理",
+    "desc": "区域权限,高16位表示,未占用的位空缺",
+    "READ_DATA": "读数据",
+    "WRITE_DATA": "写数据",
+    "ALARM_VIEW": "报警查看",
+    "ACK_ALARM": "报警确认",
+    "SYSTEM_MANAGE": "系统管理",
+    "TICKET_MANAGE": "ticket管理",
+    "REGION_USER_MANAGE": "区域用户管理",
+    "SYSTEM_CONTROL": "系统控制",
+    "SYN_CONFIG": "系统配置",
+
+
+
+
+    "alarm_active": {
+        "0": "已清除",
+        "1": "活跃",
+        "-1": "关闭"
+    },
+
+
+
+
+    "desc": "",
+    "common": {
+        "search": "搜索"
+    },
+
+    "desc": " 模版点 , 设备配置 参数!",  
+    "params": {
+        "driver_type": {
+            "0": "modbus",
+            "1": "dtu",
+            "2": "ccc"
+        },
+
+        "station_type": {
+            "t0": "DTU Server",
+            "t1": "网关",
+            "t2": "TCP Client"
+        },
+
+        "poll": "轮询方式",
+        "is_packet": "独立分包",
+
+        "desc": "point 参数名称",
+        "area": "区域",
+        "offset": "偏移地址",
+        "type": "类型",
+        "type_ex":"扩展参数",
+        "access": "读写属性",
+
+        "app_address":"公共地址",
+        "type_id":"类型标识",
+        "infor_address":"信息体地址",
+
+
+        "int_order": "Int字节排序",
+        "float_order": "Float字节排序",
+        "double_order": "Double字节排序",
+        "crc_order": "CRC校验字节排序",
+        "protocol": "协议",
+
+        "data_type": "数据类型",
+        "xxxxx": "  template point 点;   0代表 modubs  ",
+        "data_type_ex0": {
+            "0": "位偏移",
+            "1": "x"
+        },
+
+
+        "desc": "备注",
+        "deviation": "偏差",
+        "log_cycle": "日志保存间隔",
+        "log_type": "日志类型",
+        "name": "名称",
+        "save_log": "是否保存日志",
+        "scale": "缩放",
+        "address": "地址"
+    },
+
+
+    "sta_prop": {
+        "basic": "状态",
+        "config": "配置",
+        "panel": "系统信息面板",
+        "history": "历史数据",
+        "hardware": "硬件",
+        "wcdma": "手机网络",
+        "prop": "属性",
+        "timezone": "时区",
+        "modbusgrid": "串行modbus总线通讯统计",
+        "log": "日志记录",
+        "devpoint": "设备点",
+        "visual": "可视化",
+        "alarm": "警告点",
+        "dev_alarm": "报警",
+        "device": "设备",
+
+
+        "device": "有效响应",
+        "device": "串行超时",
+        "device": "异常",
+        "device": "CRC错误 ",
+        "device": "框架错误 ",
+        "updata": "上次配置更新",
+        "updata": "上次同步 ",
+        "updata": "流量已发送 ",
+        "updata": "流量已接收 ",
+        "updata": "网关配置同步状态:",
+        "updata": "更多远程网关信息",
+        "updata": "产品名称 ",
+        "updata": "版本",
+        "updata": "版本",
+        "device": "设备",
+        "dev_dev": "设备",
+        "dev_dev": "设备类型",
+        "dev_dev": "设置",
+        "dev_dev": "模板",
+        "dev_dev": "活动",
+        "dev_dev": "",
+        "gateway": "网关设置"
+    },
+
+    "valid": {
+        "required": "该字段不能为空!",
+        "min": "该数值必须不小于X",
+        "minlength": "该字段至少为X个字符!",
+        "maxlength": "该字段不能不超过X个字符!",
+        "max": "该数值必须小于X",
+        "email": "Email 格式不正确!",
+        "number": "该数值必须为数字格式!",
+        "Number": "该数值必须为数字格式!"
+
+
+    },
+
+
+    "bu": {
+        "bu1": "替换",
+        "bu2": "失效",
+        "bu3": "编辑",
+        "bu4": "移除",
+
+        "bu5": "可视化",
+        "bu6": "同步",
+
+        "bu7": "地图",
+        "bu8": "列表",
+
+        "bu9": "新建配置",
+        "buxxx": ""
+    },
+
+    "text": {
+        "name": "名称",
+        "mode": "模式",
+        "profile": "配置项",
+        "scale": "比例缩放",
+        "unit": "单位",
+        "desc": "备注",
+        "type": "类型",
+
+        "name": "名称"
+    },
+
+    "th": {
+
+        "desc": "project 表格",
+        "th1": "在线状态",
+        "th2": "名称",
+        "th3": "创建时间",
+        "th4": "已激活采集站",
+        "th5": "未激活采集站",
+
+        "desc": "station表格",
+        "th6": "状态",
+        "th7": "系统名称",
+        "th8": "区域",
+        "th9": "定位",
+        "th10": "是否需要同步",
+        "th11": "同步配置",
+
+        "desc": "profile 表格",
+        "th12": "配置项名称",
+        "th13": "创建时间",
+        "th14": "备注",
+
+        "desc": "用户表格",
+        "th15": "用户名",
+        "th16": "角色",
+        "th17": "手机有效",
+        "th18": "电子邮件有效",
+        "th19": "上次登录IP",
+        "th20": "上次登录时间",
+
+        "desc": " sysmodel 表格",
+        "th21": "名称",
+        "th22": "通信类型",
+        "th23": "模式",
+        "th24": "创建时间",
+        "th25": "最后更新时间",
+        "th26": "设备个数",
+        "th27": "配置项个数",
+        "th28": "备注",
+        "th29": "配置项",
+
+        "desc": "sysmodel tag 表格; ",
+
+        "desc": ""
+
+
+    },
+
+    "tab": {
+        "desc": "project 的属性 tabs",
+        "t1": "采集站",
+        "t2": "属性",
+        "t3": "添加采集站",
+
+        "desc": "采集站属性 tabs",
+        "t4": "设备",
+        "t5": "设备点",
+        "t6": "报警",
+
+        "desc": "用户 tabs ",
+        "t7": "所有用户",
+        "t8": "版项目划分用户",
+        "t9": "添加用户",
+
+
+        "t10": "设备",
+        "t11": "变量",
+        "t12": "系统配置",
+        "t13": "触发器",
+        "t14": "通知",
+        "t15": "网关",
+        "t16": "模型信息",
+
+        "t13xx": ""
+    },
+
+    "nav": {
+        "a": "展示",
+        "b": "管理",
+
+        "c": "模型",
+        "c1": "设备模型",
+        "c2": "系统模型",
+        "c3": "系统配置资料",
+
+        "d": "账户管理",
+        "d1": "信息",
+        "d2": "许可",
+        "d3": "用户",
+        "d4": "权限",
+
+        "e": "系统",
+        "e1": "区域",
+        "e2": "所有系统",
+
+        "f": "报警",
+        "f1": "实时报警",
+        "f2": "历史报警",
+
+        "g": "系统",
+        "g1": "区域",
+        "g2": "已激活系统",
+        "g3": "未激活系统",
+        "g4": "添加系统",
+        "g5": "添加区域",
+
+        "u": "账户",
+        "u1": "信息",
+        "u2": "许可",
+        "u3": "管理",
+        "u4": "权限",
+
+        "desc": ""
+    }
+
+}

@@ -1,0 +1,21 @@
+<div class="modal-header text-center">
+    编辑系统
+</div>
+<div class="modal-body">
+    <form name="form" class=" form-validation form-horizontal  padding-10 ">
+        <!--jjw-->
+        <!--&lt;!&ndash;@if append &ndash;&gt;-->
+        <!--form.$valid = {{form.$valid}}-->
+        <!--<br> das = {{das}}-->
+        <!--&lt;!&ndash;@endif &ndash;&gt;-->
+        <input tl-wrap label="系统名称" required ng-model="das.name " ng-change=" ch( 'name' , das.name )">
+ 
+        <select tl-wrap label="区域" ng-model="op._proj" 
+        ng-options="p as p.name  for p in projs " required>
+            <option value="">--请选择区域--</option>
+        </select>
+ 
+            <textarea ng-model=" das.desc " style="resize: none" label="备注" tl-wrap ng-change=" ch( 'desc' , das.desc )"></textarea>
+    </form>
+</div>
+<ng-include src=" 'athena/debris/_modal_footer.html' "></ng-include>

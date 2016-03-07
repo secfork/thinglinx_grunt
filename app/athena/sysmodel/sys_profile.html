@@ -1,0 +1,66 @@
+<div class="panel panel-default b-t-none ">
+    
+
+ 
+<div class="panel-body table-responsive no-padder  "   >
+    
+
+    <table class=" table table-hover table-striped  ">
+ 
+        <thead class="flip-content">
+            <tr class="background ">
+                <th> 名称 </th>
+                <th> ID </th>  
+                <th> 触发器数目</th>
+                <th> <a translate="th.th3">创建时间  </a> </th>
+                <th> <a> 最后更新时间 </a></th>
+                <th>
+                    备注
+                </th>
+                <th> 删除 </th>
+            </tr>
+        </thead>
+        <tbody >
+ 
+            <tr ng-repeat="  prof  in profiles  "  >
+               
+                <td  > 
+                    {{ prof.name }}
+                    <popwin ng-model="prof" 
+                        
+                        pk="uuid"
+                        prop="name"
+                        handler ="updateSysProfile "   />
+                 </td>
+                
+                 <td> {{ ::   prof.uuid }} </td>  
+
+
+                <td> {{  ::  prof.trigger_count || 0 }} </td>
+                <!--  | date:"yyyy-MM-dd HH:mm" -->
+                <td class="numeric "> {{ ::  prof.create_time | date:"yyyy-MM-dd HH:mm  Z"}} </td>
+                <td class="numeric "> {{ ::  prof.last_modify_time| date:"yyyy-MM-dd HH:mm  Z" }} </td>
+                <td class="numeric "> {{ prof.desc }}
+                     <popwin ng-model="prof" 
+                        
+                        pk="uuid"
+                        prop="desc"
+                        handler ="updateSysProfile "  />
+                </td>
+                <td>
+                    <a class="text-info"  
+                     ng-click="deleteSysProfile( this, $index, prof)"> 删除 </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+ 
+<div class="panel-footer  ">
+    
+    <button class="btn btn-primary btn-sm   " ng-click=" addSysProfile() ">
+        添加系统配置
+    </button>
+</div>
+
+ </div>

@@ -1,0 +1,24 @@
+
+<!--  配备编辑 模版;
+采集站苏醒,  配置,  设备配置用到 ( 各个种类的 设备通用这个模版;   )
+-->
+
+
+<div class="modal-header  text-center ">
+    参数编辑
+</div>
+
+
+<div  class="modal-body "   ng-init=" isedit = true " >
+     <form class="    bs-example form-horizontal  padding-10 "     >
+         <ng-include  src=" 'athena/debris/_device_base.html' " ></ng-include>
+
+         <ng-include  src=" 'athena/debris/_device_' +  devtype  + '.html' "  ></ng-include>
+
+        <!-- <ng-include  src=" 'athena/debris/device_modbus.html' "  ></ng-include>-->
+
+     </form>
+</div>
+
+
+<ng-include   src = " 'athena/debris/_modal_footer.html' " ></ng-include>

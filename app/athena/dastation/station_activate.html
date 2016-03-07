@@ -1,0 +1,38 @@
+<!--   激活采集站  窗口 ;  在   dastation controller 中 引用;  -->
+<div class="modal-header text-center">
+    <h4>  激活系统: {{ station.name }}  ? </h4>
+</div>
+<div class="modal-body">
+    <form name="form" class="form-validation form-horizontal  padding-10 ">
+        <!--jjw-->
+        <!--&lt;!&ndash;@if append &ndash;&gt;-->
+        <!--form.$valid = {{form.$valid}}-->
+        <!--&lt;!&ndash;@endif &ndash;&gt;-->
+        <input type="submit" class="hidden">
+        <!-- jjw 采集站->系统 -->
+        <input tl-wrap label="系统名称" ng-model=" station.name " disabled>
+        <div class="line line-dashed b-b "></div>
+        Select primary usage for this system This can be changed later.
+        <div class="radio">
+            <label class="i-checks">
+                <input type="radio" value="option1" name="a">
+                <i></i> Use system for View & Control (Remote management)
+                <br>
+                <div class="text-muted">
+                    Primary usage will be logging, viewing live values and alarm management of the devices connected to the EC product.
+                </div>
+            </label>
+        </div>
+        <div class="radio">
+            <label class="i-checks">
+                <input type="radio" checked="" value="option2" name="a">
+                <i></i> Use system for Remote Access
+                <br/>
+                <div class="text-muted">
+                    Primary usage will be remote access and use of the EC product for access to connected devices via own software tools.
+                </div>
+            </label>
+        </div>
+    </form>
+</div>
+<ng-include src=" 'athena/debris/_modal_footer.html' "></ng-include>

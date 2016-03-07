@@ -1,0 +1,61 @@
+ <div class="panel panel-default b-t-none">
+<!--jjw bg-white b-b b-l b-r text-base-->
+<div class=" panel-body bg-light bg-white text-base">
+
+    <div class="col-md-6  m-b padder-md">
+        <div class="m-b hbox ">
+            <div class="col w-sm  "> 信息板 </div>
+            <div class="col text-right"> {{ project.name}} </div>
+        </div>
+
+        <div class="m-b hbox ">
+            <div class="col w-sm  "> 创建时间 </div>
+            <div class="col text-right"> {{ project.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+        </div>
+
+        <div class="m-b hbox ">
+            <div class="col w-sm  "> 上次修改时间 </div>
+            <div class="col text-right"> {{ project.modifyTime | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+        </div>
+
+        <div class="m-b">
+            <div class="col w-sm  m-b-sm"> 备注 </div>
+            <div class="b-a m-t-sm alert  ng-binding" style="color: #a0a0a0;height:100px;">{{project.description}}</div>
+        </div>
+
+        <div class="col-xs-12 no-padder">
+             <button class="btn btn-primary btn-sm m-b-sm pull-left "
+             style="margin-right:20px;"
+                  ng-disabled="project.name"
+                 ng-click="createProject()">
+                 创建信息板
+             </button>
+
+             <button class="btn btn-primary btn-sm m-b-sm pull-left "
+                 style="margin-right:20px;"
+                 ng-disabled="!project.name"
+                 ng-click="openDyaliasSystem()">
+                 配置
+             </button>
+
+             <button class="btn btn-primary btn-sm m-b-sm pull-left "
+                  style="margin-right:20px;"
+                  ng-disabled="!project.name"
+                 ng-click="deleteProject()">
+                 移除
+             </button>
+
+             <button class="btn btn-primary btn-sm m-b-sm pull-left "
+                  style="margin-right:20px;"
+                  ng-disabled="!project.name"
+                 ng-click="modifyProjectMessage()">
+                 修改信息
+             </button>
+        </div>
+    </div>
+    <!-- <div class="col-md-5  b-a m-l ">
+        <img src="img/generator_left_0.png">
+    </div> -->
+</div>
+
+ </div> 

@@ -1,0 +1,119 @@
+<div class="panel panel-default b-t-none">
+    <div class="panel-heading  bg-white-only" style="padding-top:0px">
+        <!--jjw padding-10-->
+        <form class=" form-validation ng-pristine ng-valid padding-10" name="form">
+            <div class="row">
+                <!--jjw j-radio-outer-->
+                    <!--<div class="radio m-l float-right">-->
+                        <!--<label class="i-checks  ">-->
+                            <!--<input type="radio" ng-model="op.ala" value="b">-->
+                            <!--<i></i> 全部报警-->
+                        <!--</label>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;jjw j-radio&ndash;&gt;-->
+                    <!--<div class="radio float-right">-->
+                        <!--<label class="i-checks">-->
+                            <!--<input type="radio" ng-model="op.ala" value="a" checked="true">-->
+                            <!--<i></i> 活跃报警-->
+                        <!--</label>-->
+                    <!--</div>-->
+
+                    <div class="radio  pull-right m-r">
+                        <label class="i-checks">
+                            <input type="radio" ng-model="op.ala" value="b">
+                            <i></i>
+                            全部报警
+                        </label>
+                    </div>
+                    <div class="radio   pull-right m-r m-t ">
+                        <label class="i-checks">
+                            <input type="radio" ng-model="op.ala" value="a" checked="true">
+                            <i></i>
+                            活跃报警
+                        </label>
+                    </div>
+
+                <div ng-if=" op.ala == 'b' " class="inline col-md-8 col-sm-8 col-xs-12">
+                    <div class="col-md-5 col-sm-6 m-t-sm">
+                        <label class=" w-xxs text-right control-label m-t-xs col-sm-3 no-padder"> 起始时间 </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control input input-sm col-xs-12" datetime-picker date-format='yyyy-MM-dd HH:mm' nofocus data-readonly-input='false' ng-model="op.start" is-open='od.showS' />
+                            <span class=" float-left" style="position: absolute;top: 0px;right:0px">
+                              <button type="button" class="btn btn-default btn-sm"
+                                      ng-click="openCalendar($event, 'od.showS=true')">
+                                  <i class="fa fa-calendar"></i></button>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-6 m-t-sm">
+                        <label class=" w-xxs text-right control-label m-t-xs col-sm-3 no-padder"> 结束时间 </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control input input-sm col-xs-12" datetime-picker date-format='yyyy-MM-dd HH:mm' nofocus ng-model="op.end" is-open='od.showE' />
+                            <span class=" float-left" style="position: absolute;top: 0px;right:0px;">
+                              <button type="button" class="btn btn-default btn-sm"
+                                      ng-click="openCalendar($event, 'od.showE=true')">
+                                  <i class="fa fa-calendar"></i></button>
+                        </span>
+                        </div>
+                    </div>
+                    <div ng-if="false">
+                        <label class=" w-30 text-right" for="exampleInputPassword2">条数</label>
+                        <select ng-model="op.num" class="form-control w-xs inline m-t-xs" ng-options=" n for n in [50,100,200,300,400,500] " required>
+                        </select>
+                    </div>
+                    <div class="col-md-2 col-sm-6 float-right">
+                        <!--jjw m-t-sm-->
+                        <span ng-if=" op.ala !='a' " class="btn btn-info btn-sm w-46 m-l m-t-sm float-right pos-rlt" ng-click="loadPageData(1 , $event  )" token> 
+
+                        查询
+                        <i class="fa fa-spin fa-spinner hide  float-right pos-abt" style="right: -20px;top:5px;color: #333"></i>
+                    </span>
+                    </div>
+                </div>
+                <!--jjw m-l-lg去掉-->
+                <div ng-if=" op.ala=='a' " class="inline  p-t">
+                    <!--jjw m-l m-t-sm-->
+                    <span class="btn btn-info btn-sm w-46 m-l-sm m-t-sm pos-rlt" ng-click="loadPageData(1 , $event )" token> 
+                刷新
+                <i class="fa fa-spin fa-spinner hide  pull-right pos-abt" style="right: -20px;color: #333;top: 5px"></i>    
+            </span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="panel-body table-responsive no-padder" load-mask ng-init=" _$A = $sys.trigger.op">
+        <!--jjw j_table table-striped-->
+        <table class="  table j_table table-striped b-t-none b-b-none" ng-init="_config = $sys.trigger.severity">
+            <thead class="flip-content">
+                <tr class="background ">
+                    <th> 报警ID </th>
+                    <th> 报警时间</th>
+                    <th> 报警描述 </th>
+                    <th> 重要性 </th>
+                    <th> 类别 </th>
+                    <th> 活跃状态 </th>
+                    <th class="w-xs" style="padding-right: 20px"> 操作 </th>
+                </tr>
+            </thead>
+            <tbody class="text-left ">
+                <tr ng-repeat="  a  in  page.data  ">
+                    <td> {{ :: a.id }} </td>
+                    <td> {{ :: a.timestamp | date:"yyyy-MM-dd HH:mm:ss" }}</td>
+                    <td> {{ :: a.desc }}</td>
+                    <td> {{ :: _config[a.severity] }} </td>
+                    <td> {{ :: a.class_id }} </td>
+                    
+                    <td translate="alarm_active.{{ a.active}}"> </td>
+                    <td style="padding-right: 20px">
+                        <a class="text-info" ng-if=" a.active!=1 " ng-click="showAlarmMsg(a , system.uuid)">详细信息</a>
+                        <a ng-if=" a.active == 1 " class="text-info" ng-click="conformAlarm( page, a , $index , system.uuid , op.ala )">确认报警</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer ">
+        <!--jjw m-t-sm m-b-sm-->
+        <div class=" text-center  " ng-include src=" 'athena/debris/_pager.html'  "></div>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+<div class="panel b-a gap-5">
+
+        <div class="panel-heading b-b b-light">
+
+          <div class="input-group col-md-6 col-lg-4">
+                <span class="input-group-btn">
+                   <span class="btn btn-default height-30 disabled"     translate="common.search"  ></span>
+                </span>
+                <input class="form-control input-sm" type="text"     ng-model="f_projname" >
+          </div>
+        </div>
+
+        <ul class="list-group list-group-lg no-bg auto">
+
+          <li class="list-group-item clearfix">
+            <span class="pull-left thumb-sm   m-r">
+              <img src="../../img/a4.jpg" alt="...">
+              <i class="on b-white bottom"></i>
+            </span>
+            <span class="clear">
+                 <a href="">发噶尔啊发噶尔啊发噶尔啊发噶尔啊发噶尔啊发噶尔啊发放</a>
+              <div class="pull-right  text-muted text-sm">
+              	  一个月前
+              </div>
+
+              <small class="text-muted clear text-ellipsis">方法为噶尔啊</small>
+
+              <small class="text-muted clear text-ellipsis">方法为噶尔啊</small>
+            </span>
+
+          </li>
+
+          <li class="list-group-item clearfix">
+            <span class="pull-left thumb-sm   m-r">
+              <img src="../../img/a5.jpg" alt="...">
+              <i class="on b-white bottom"></i>
+            </span>
+            <span class="clear">
+              <span>
+              	<i class="glyphicon glyphicon-bell text-info"></i>
+              	<a ui-sref="app.tech_detail" class="h5">
+              	</a>
+                   <div class="pull-right  text-muted text-sm">
+                   11:30  <span class="badge bg-warning pull-right m-l-xs">10</span>
+               </div>
+              <small class="text-muted clear ">
+              		user_1 user_1 user_1
+              </small>
+
+              <small class="text-muted clear ">
+              	Come online and we need talk about the plans that we have discussed
+              	Come online and we need talk about the plans that we have discussed
+              	Come online and we need talk about the plans that we have discussed
+              	Come online and we need talk about the plans that
+              </small>
+            </span>
+          </li>
+
+        </ul>
+
+        <div class="clearfix panel-footer">
+        	 <ng-include  src=" 'athena/debris/_pager.html'  "></ng-include>
+
+		       <button class="btn btn-success btn-sm w-70 m-l  "
+		              ng-if=" !isShowModul"
+		              ng-click="  goto( 'app.proj.addproj' ) " >
+		              添加区域
+		       </button>
+
+        </div>
+      </div>
+
+

@@ -1,0 +1,4 @@
+<div class="form-group col-lg-12" ng-repeat="panel  in panelList" style="margin-top :  10px ;">
+    <a ng-click="panel_edit(panel)" class="text-info col-sm-8"> {{ panel.panel_name }}</a>
+    <a class="fa fa-times col-sm-4" ng-click="panel_del( panel , panelList , $index)"></a>
+</div>

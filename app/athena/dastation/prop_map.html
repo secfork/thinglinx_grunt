@@ -1,0 +1,48 @@
+<div class="panel panel-default b-t-none">
+    <!--    <div class="form-group col-md-3 col-sm-6 col-xs-12 m-t-sm m-b-sm">
+                <label class="w-50 text-center">搜索</label>
+                <input type="email" class="form-control"  id="suggestId"  >
+                <div id="searchResultPanel" style="border:1px solid #C0C0C0 ;height:auto; display:none;">
+                </div>
+            </div>
+
+            <div class="form-group col-md-3 col-sm-6 col-xs-12 m-t-sm m-b-sm">
+                <label  class="w-50 text-center"  >  经度 </label>
+                <input class="form-control"  ng-model=" station.latitude "   >
+            </div>
+
+            <div class="form-group col-md-3 col-sm-6 col-xs-12 m-t-sm m-b-sm">
+                <label  class="w-50 text-center"  >  纬度 </label>
+                <input class="form-control"  ng-model=" station.longitude "   >
+            </div>
+
+            <div class="form-group col-md-3 col-sm-6 col-xs-12">
+                <button class="btn btn-info m-t-sm m-b-sm m-l-sm" ng-click=" locatedStation()" token > 
+                定位 </button>
+                <button class="btn btn-info m-t-sm m-b-sm m-l-sm" ng-click=" removePostion()" token >删除定位 </button>
+            </div>
+
+        </div> -->
+
+        
+    <div class="panel-body  no-padder  ">
+        <div class="row m-l-xs m-r-xs  ">
+            <div class="form-group m-b-none">
+                <label class="col-md-1 m-t">搜索</label>
+                <div class="col-md-4 m-t">
+                    <input class="form-control input-sm" id="suggestId">
+                    <div id="searchResultPanel" style="border:1px solid #C0C0C0 ;height:auto; display:none;">
+                    </div>
+                </div>
+            </div> 
+
+            <div class="form-group m-l m-b">
+                <button class="btn btn-sm btn-info m-t  " ng-click="markLocation()">标记位置</button>
+                <button class="btn btn-sm btn-info m-t  " ng-click="delMarker()">删除位置</button>
+            </div>
+        </div>
+        <div id="station_map" class="m-t-xs" ng-init="createMap()"></div>
+    </div>
+</div>
+
+ 

@@ -1,0 +1,63 @@
+<!--  station 属性 导航 tab
+ 状态     配置     信息版    地图   历史数据   固件    手机网络    属性  -->
+<!--jjw bg text-base-->
+
+
+<div class="bg-light lter b-b wrapper-xs padder-md  ">
+    <span class="m-n font-thin h4" >  {{station.name}}     </span> 
+   
+    <i class=" m-l fa fa-circle  {{ station.online==1  ?'text-success' : 'text-danger'  }} "></i>
+                  
+    <button class="btn btn-sm btn-info m-l-lg " ng-if="station.state != 1"    
+            ng-click="activateStation(  null , station )" > 激活</button>
+    <button class="btn btn-sm btn-danger m-l"   ng-if="station.state  ==1"   
+             ng-click="effStation( null , station )">失效</button>
+    <br/>
+ 
+    <a  ng-if="from" class="text-xs" href="{{ from.url }}" > 返回
+        <span class="text-info" > {{ from.text}} </span> 
+    </a> 
+
+    
+</div>
+ 
+
+<div class="wrapper-md">
+    
+
+
+ <ul class=" nav  nav-tabs m-t-xxs bg-normal text-base" ng-if=" !isShowModul ">
+    <li ui-sref-active="active">
+        <a ui-sref="app.m_system_prop._basic">
+            <i class="icon icon-info "></i> 状态 </a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.m_system_prop._config">
+            <i class="icon icon-wrench "></i> 配置
+        </a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.m_system_prop.tag"> <i class="icon icon-bar-chart"></i> 变量</a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.m_system_prop.trigger">
+            <i class="icon icon-rocket"></i> 触发器
+        </a>
+    </li>
+ 
+    <li ui-sref-active="active">
+        <a ui-sref="app.m_system_prop._map">
+            <i class="icon  icon-pointer "></i> 位置 </a>
+    </li>
+
+
+
+
+</ul>
+<div ui-view  > </div>
+
+ </div>
+
+
+ <!-- ============================== -->
+

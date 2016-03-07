@@ -1,0 +1,102 @@
+ <!--
+ 0 =  D  modbus 类型;
+ -->
+ 
+ <!--   $sys.D_modbus[version].protocol -->
+
+<div class="hide" 
+ ng-init="   _config =  $sys.device[devModel.driver_id] ;  "></div>
+
+ 
+ <input tl-wrap
+        label="设备地址"
+        ng-model="D.params.address" 
+        type="number" 
+        max="254"  
+        min="1" 
+        placeholder=" 1 - 254 "
+        required   ></input>
+
+<select  tl-wrap
+           ng-model = "D.params.protocol_type"
+           label="协议类型" 
+           ng-options=" o.v as o.k for  o in _config.protocol "
+          ></select>
+
+<select tl-wrap 
+      ng-model=" D.params.offset_format"
+      label="偏移格式"
+       ng-options = " o.v as o.k for o in _config.offsetformat"
+    > 
+</select>
+
+<!-- <select tl-wrap 
+      ng-model=" D.params.register_length"
+      label="寄存器长度"
+      ng-options = " o.v as o.k for o in _config.reglength"
+    > 
+</select>
+ -->
+<input  tl-wrap 
+    ng-model = " D.params.max_packet_length"
+    label="最大包长度"
+    min="1"
+    max="100" 
+    type="number"
+    required
+
+></input>
+
+<input  tl-wrap 
+    ng-model = " D.params.packet_offset"
+    label="包偏移间隔"
+    min="1"
+    max="20"
+    type="number"
+    required
+
+></input>
+ 
+ <select tl-wrap
+         label="整数字节排序"
+         ng-model = "D.params.int_order" 
+         ng-options=" o.v as o.k for  o in _config.order_a "
+         ></select>
+
+ <select tl-wrap
+         label="浮点数字节排序"
+         ng-model = "D.params.float_order" 
+         ng-options=" o.v as o.k for  o in _config.order_a "
+         ></select>
+
+ <select tl-wrap
+         label="双精度字节排序"
+         ng-model="D.params.double_order" 
+         ng-options=" o.v as o.k for  o in _config.order_b "
+
+         ></select>
+
+<select tl-wrap
+         label="64位整数字节排序"
+         ng-model="D.params.int64_order"
+         ng-options=" o.v as o.k for  o in _config.order_b "
+         ></select>
+
+<select tl-wrap
+         label="校验字节排序"
+         ng-model="D.params.crc_order"
+         ng-options=" o.v as o.k for  o in _config.order_c "
+  ></select>
+
+
+
+<!-- 
+  <select tl-wrap
+         label="寄存器字节排序"
+         ng-model="D.params.register_order"
+         ng-options=" o.v as o.k for  o in _config.order_c"
+  ></select>
+
+ -->
+
+

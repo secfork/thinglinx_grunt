@@ -1,0 +1,78 @@
+<!--  添加  sysmodel  -->
+<div class="modal-header ">
+    <span ng-if="isAdd">添加通知</span>
+    <span ng-if="!isAdd">编辑通知</span>
+</div>
+<div class="modal-body  ">
+    <form name="form" class=" form-validation form-horizontal   " ng-init="_config = $sys.message ">
+        <input tl-wrap ng-model="M.name" label="text.name" required>
+        <select tl-wrap ng-model="M.trigger_id" ng-options=" t.id as t.name for t in   triggers" label="触发器" required>
+            <option value=""> 选择触发器</option>
+        </select>
+        <!--  <input tl-wrap   label="group"    ng-model="T.group"   > -->
+        <!--    <select tl-wrap
+                ng-model="M.user_category"
+                ng-options = "  k as v for (k,v) in _config.category"
+                tl-default='{{M.user_category}}'
+                label=" User Catetory "
+        >
+        </select> -->
+        <div class="form-group  ng-scope">
+            <label class="col-sm-3 col-sm-offset-1 control-label ">
+                <span> 接收用户</span>
+            </label>
+            <div class=" col-sm-7">
+                <!--   <div class="checkbox inline">
+                  <label class="i-checks">
+                    <input type="checkbox" ng-model="op.pt " checked=""
+                        ui-validata=""
+                        ui-validata-watch=""
+                        ng-change="op.xx =true "
+                    ><i></i>
+                    <span> 平台用户</span>
+                  </label>
+                </div>
+
+                <div class="checkbox inline m-l ">
+                  <label class="i-checks">
+                    <input type="checkbox"   ng-model=" op.lxr " checked=""
+                          ng-change="op.xx =true "
+                    ><i></i>
+                    <span> 联系人用户</span>
+                  </label>
+                </div>
+                 -->
+                <div class="radio inline">
+                    <label class="i-checks">
+                        <input type="radio" ng-model="M.user_category " value="1"><i></i>
+                        <span> 平台用户</span>
+                    </label>
+                </div>
+                <div class="radio inline m-l ">
+                    <label class="i-checks">
+                        <input type="radio" ng-model=" M.user_category " value="0"><i></i>
+                        <span> 联系人用户</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!--    <select  tl-wrap
+                ng-model = "M.user_id"
+                ng-options = "  u.id as u.name for u in  users "
+                label = "被通知用户"
+                required
+                >
+                <option value = ""> 请选择用户</option>
+            </select> 
+
+        -->
+        <textarea tl-wrap ng-model="M.message_params" label="消息体"> </textarea>
+    </form>
+</div>
+<ng-include src=" 'athena/debris/_modal_footer.html' "></ng-include>
+
+<!--jjw 注释-->
+<!--&lt;!&ndash;@if  append &ndash;&gt;-->
+    <!--M= {{M}}-->
+<!--&lt;!&ndash;@endif  &ndash;&gt;-->
+ 

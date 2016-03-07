@@ -1,0 +1,88 @@
+<div class="bg-light lter b-b wrapper-md ng-scope">
+    <h2 class="m-n font-thin h4"> {{user.account }} </h2>
+</div>
+<div class="wrapper-md   ">
+    <div class="row">
+        <div class="col-md-4  col-sm-12  ">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    账户信息
+                </div>
+                <div class="list-group no-radius alt" style="color: #1f2427">
+                    <span class="list-group-item">
+                                <span class="pull-right " style="color: #333333">{{account.create_time | date:"yyyy-MM-dd HH:mm Z" }}</span> 创建时间
+                    </span>
+                    <span class="list-group-item">
+                                <span class="badge bg-info"> {{regionNum}}</span> 区域数量
+                    </span>
+                    <span class="list-group-item">
+                                <span class="badge bg-info"> {{userNum }}</span> 用户数量
+                    </span>
+                    <span class="list-group-item">
+					    <span class="pull-right " style="color: #333333"> {{user.username}}</span> 管理员
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4  col-sm-6  col-xs-12">
+            <div class="panel panel-default" ng-if=" initChart_sys "  >
+                <div class="panel-heading">
+                    系统数量
+                </div>
+                <div class="panel-body text-center"   >
+                    
+                    <h4 style="color: #333333">{{ totalSys }}</h4>
+                    <small class="text-muted block"> 系统数量</small>
+ 
+                    <div class="inline"  >
+                        <div ui-jq="easyPieChart" ui-options="{
+                      percent: {{ totalSys_act*100 /  totalSys }},
+                      lineWidth: 10,
+                      trackColor: '#e8eff0',
+                      barColor: '#7266ba',
+                      scaleColor: '#e8eff0',
+                      size: 188,
+                      lineCap: 'butt'
+
+                    }" class="easyPieChart" style="width: 188px; height: 188px; line-height: 188px;">
+                            <div  style="color: #333333">
+                                <span class="h2 m-l-sm step"> {{ totalSys_act }}  </span>个
+                                <div class="text text-sm">已激活</div>
+                            </div>
+                            <canvas width="188" height="188"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
+        <div class="col-md-4  col-sm-6 col-xs-12 " >
+            <div class="panel panel-default"  ng-if=" initChart_alarm " >
+                <div class="panel-heading">
+                    报警数量
+                </div>
+                <div class="panel-body text-center"   >
+                    <h4 style="color: #333333">  {{totalAlarm }} </h4>
+                    <small class="text-muted block"> 本周报警 </small>
+                    <div class="inline">
+                        <div ui-jq="easyPieChart" ui-options="{
+                      percent:  {{ totalAlarm_act*100 / totalAlarm }},
+                      lineWidth: 10,
+                      trackColor: '#e8eff0',
+                      barColor: 'red',
+                      scaleColor: '#e8eff0',
+                      size: 188,
+                      lineCap: 'butt'
+                    }" class="easyPieChart" style="width: 188px; height: 188px; line-height: 188px;">
+                            <div  style="color: #333333">
+                                <span class="h2 m-l-sm step"> {{totalAlarm_act  }} </span>个
+                                <div class="text text-sm"> 未处理</div>
+                            </div>
+                            <canvas width="188" height="188"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

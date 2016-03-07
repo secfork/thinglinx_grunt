@@ -1,0 +1,83 @@
+
+
+<div class="panel panel-default b-t-none">
+    
+
+
+<div class="panel-body table-responsive no-padder b-t-none b-b-none"  load-mask >
+
+    <!--jjw j_table b-t-none-->
+    <table class="  table  table-hover table-striped  j_table b-t-none">
+        <thead class="flip-content">
+            <tr class="background ">
+                <th width="15%">
+                    名称
+                </th>
+                <th width="15%">
+                    系统模型
+                </th>
+                <th width="15%">
+                    设备模型
+                </th width="10%">
+                <th width="20%">配置参数</th>
+                <th width="20%"> 网络参数</th>
+                <th width="20%">  备注</th>
+                <th width="1%"  > 编辑 </th>
+                <th width="1%"  > 删除 </th>
+            </tr>
+        </thead>
+        <tbody   >
+ 
+            <tr ng-repeat="  sysd  in sysdevices  "  >
+ 
+                <td> {{sysd.name}} </td>
+                <td> {{sysmodel.name}} </td>
+                <td> {{ devModelKV[ sysd.device_model ] . name }} </td>
+                <td>
+                    <i class="fa fa-android  text-info-dker " 
+                           popover-trigger="mouseenter"
+                           popover=" {{ jsonString2Text ( sysd.params ) }}" 
+                           popover-placement="top" 
+                        ></i>
+                </td>
+                <td>
+                    <i  class="fa fa-android  text-info-dker " 
+                           popover-trigger="mouseenter"
+                           popover=" {{ jsonString2Text ( sysd.networ ) }}" 
+                           popover-placement="top" 
+                        ></i>
+                </td>
+                <td>{{sysd.desc}}</td>
+                <td >
+                    <a class="text-info" ng-click="addOrEditDevice( sysdevices , $index , sysd )" translate="bu.bu3"></a>
+                </td>
+                <td>
+                    <a class="text-info" ng-click="deleteSysD( this , $index , sysd )" translate="bu.bu4"></a>
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!--jjw b-b b-l b-r-->
+<div class="panel-footer   ">
+    <!--  <ng-include  src=" 'athena/debris/_pager.html'  "></ng-include> -->
+    <!--jjw m-t-sm m-b-sm m-l-xs-->
+    <button class="btn btn-primary btn-sm w-70    m-l-xs" ng-click=" addOrEditDevice() " token >
+        添加设备
+    </button>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- @if append  --> 
+  sysdevices ={{sysdevices}} 
+<!--@endif  -->

@@ -1,0 +1,61 @@
+
+<div class="modal-header text-center">
+    <h4 >更换系统  {{ station.name }}</h4>
+</div>
+
+<div class="modal-body">
+
+    <!--    action="project/{{ proj.projid }}/fileupload"    enctype="multipart/form-data" -->
+   <div class="text-muted ">
+    更换系统将在两个系统间交换所有信息.<br>
+    更换后，新系统要采用旧系统相同的日志参数和警告设置进行配置.<br>
+    一般来讲，系统更换是本地化地将配置备份恢复到该系统.
+   </div>
+    <div class="line line-dashed b-b"></div>
+    <form class="form-horizontal form-validation "  name="form"  >
+
+         <input type="submit"  class="hidden">
+
+         <span  tl-wrap  label="已更换的系统"   >{{ station.name  }} </span>
+
+         <input tl-wrap  label="已更换系统激活码"     ng-model="xxx">
+
+        <div class="line line-dashed b-b"></div>
+        <div class="  text-muted ">
+            在待定列表中没有相同类型的系统。如需更换一个系统，首先添加一个新的活跃系统.
+        </div>
+
+        <input  tl-wrap  label="更换系统激活码" required ng-model="xxx1">
+
+    </form>
+
+</div>
+
+  <ng-include  src=" 'athena/debris/_modal_footer.html' "></ng-include>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

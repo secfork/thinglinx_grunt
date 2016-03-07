@@ -1,0 +1,23 @@
+
+<!-- 
+
+无线模块驱动：
+     厂商：诚意电气
+     驱动ID：DTU_SHCYA
+     驱动描述：CSD-1跌落式熔断器监测终端
+     私有：       北京力控元通科技有限
+
+
+     端口：    20001   123.57.76.211
+
+ -->
+
+<input  tl-wrap-l 
+		label="终端ID" 
+		required 
+		ng-model="daserver.params.simid"
+		ng-change=" toUpdate('daserver') "  
+		ng-maxlength=14
+		ng-minlength=14
+
+		>

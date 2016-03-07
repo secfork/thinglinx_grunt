@@ -1,0 +1,15 @@
+node_modules/
+bower_connode_modules/
+bower_components/
+config
+src/l10n
+
+coverage/
+.sass-cache/
+.idea/
+.tmp/
+dist
+
+ca.crt
+server.crt
+server.key

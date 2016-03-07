@@ -1,0 +1,20 @@
+
+<!--  删除 模版  分组, 文件  用用模版 -->
+
+<div class="modal-header">
+    {{title}}
+</div>
+
+<div  class="modal-body  " >
+
+    请确认您是否要删除参数? <br/>
+
+    * {{ T.name }} 被 x个设备资料引用, 是否要删除!
+</div>
+<div class="modal-footer m-t-n-sm ">
+    <div class="text-center">
+        <!--jjw w-60-->
+        <button class="btn btn-sm btn-primary w-60 "   ng-click=" done() " >是</button>
+        <button class="btn btn-sm btn-default  w-60 "  ng-click=" cancel() " >否</button>
+    </div>
+</div>

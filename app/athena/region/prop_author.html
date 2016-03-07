@@ -1,0 +1,29 @@
+<div class="panel panel-default b-t-none  ">
+    <div class="panel-body no-border table-responsive   no-padder">
+        <table class=" table table-striped j_table b-t-none">
+            <thead class="flip-content">
+                <tr>
+                    <th> 用户 </th>
+                    <th> 角色 </th>
+                    <th> 权限 </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="u in page.data " ng-init=" getUser( u , $last )" ng-if="!u.is_super_user">
+                    <td>
+                    <!-- #/app/userdetail/232 -->
+                        <a  id="user_{{u.user_id}}" 
+                                ui-sref="app.userdetail({id: u.user_id })" class="text-info "> 
+                               
+                        </a>
+                    </td>
+                    <td> {{ :: u.role_name}}</td>
+                    <td> {{ :: privilge2Text ( u.privilege ) }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer ">
+        <div class="text-center " ng-include src=" 'athena/debris/_pager.html'  "></div>
+    </div>
+</div>

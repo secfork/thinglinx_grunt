@@ -1,0 +1,217 @@
+<!-- project  添加 和 属性展示 模版  -->
+<div class="panel-body table-responsive no-padder no-border bg-light " id="ccc">
+    <h4 class="text-center m-t-l  "> </h4>
+    <form name="form"  class="form-horizontal form-validation col-md-7 col-md-offset-3 col-sm-10 col-sm-offset-1  col-xs-12 m-t ccc">
+        <!-- <span   wrap >12313</span> -->
+        <!--   <input  tl-wrap-l  label="公司"    ng-model=" proj.proj_company " >-->
+        <!--<input tl-wrap-l label="姓" ng-model=" C.first_name " required>-->
+
+        <div class="form-group col-md-6">
+            <label class="col-sm-12  control-label">
+                <span translate="姓">姓</span>
+            </label>
+            <div class="col-sm-12">
+                <input label="姓" ng-model=" C.first_name " class="form-control" required>
+            </div>
+        </div>
+
+        <!--<input tl-wrap-l label="名字" ng-model=" C.last_name " required>-->
+
+        <div class="form-group col-md-6">
+            <label class="col-sm-12  control-label">
+                <span translate="名字">名字</span>
+            </label>
+            <div class="col-sm-12">
+                <input label="名字" ng-model=" C.last_name " class="form-control" required>
+            </div>
+        </div>
+
+        <!--<input tl-wrap-l label="邮箱" ng-model=" C.email " type="email" required>-->
+
+        <div class="form-group col-md-6">
+            <label class="col-sm-12  control-label">
+                <span translate="邮箱">邮箱</span>
+            </label>
+            <div class="col-sm-12">
+                <input label="邮箱" ng-model=" C.email " type="email" class="form-control" required>
+            </div>
+        </div>
+
+        <!--<input tl-wrap-l label="固定电话" ng-model=" C.tel " ng-pattern="/^\d{4}-\d{7,8}$/" placeholder="xxxx-xxxxxxxx">-->
+
+        <div class="form-group col-md-6">
+            <label class="col-sm-12  control-label">
+                <span translate="固定电话">固定电话</span>
+            </label>
+            <div class="col-sm-12">
+                <input label="固定电话" ng-model=" C.tel " class="form-control" ng-pattern="/^\d{4}-\d{7,8}$/" placeholder="xxxx-xxxxxxxx">
+            </div>
+        </div>
+
+        <!-- 
+        <input tl-wrap-l label="手机号码" ng-model=" C.mobile_phone " ng-pattern="/^\d{11}$/" required>
+
+        <input tl-wrap-l  label="验证码" ng-model="xxx"  class="w" >
+
+        -->
+
+        <!--  更改手机号码?-->
+
+         <div class="form-group col-md-6 "  ng-if="!isAdd">
+            <label class="col-sm-12 control-label  ">
+                <span> 更改联系人号码 </span>
+            </label>
+            <div class=" col-sm-9">
+                <div class="checkbox inline">
+                    <label class="i-checks">
+                        <input type="checkbox" ng-model="op.cc_phone "
+                             checked=""  ><i></i>
+
+                    </label>
+                </div> 
+            </div>
+        </div>
+
+
+        <div class="form-group col-md-6  "  ng-if=" isAdd ||  op.cc_phone " >
+            <label class="col-sm-12  control-label  ">
+                <span translate="手机号码" class="ng-scope">手机号码</span>
+                <mark/>
+            </label>
+            <div class=" col-sm-12">
+                <div class="input-group">
+                    <input name="mobile_phone" ng-model=" C.mobile_phone " class=" form-control" ng-pattern="/^1\d{10}$/" required>
+                    <span class="input-group-btn" ng-show="!op.send">
+                    <button class="btn btn-default" type="button"
+                        ng-disabled = "!form.mobile_phone.$valid"
+                        ng-click="sendVer()"
+                     >发送验证码</button>
+                  </span>
+                    <span class="input-group-btn" ng-show="op.send">
+                    <button class="btn btn-default" type="button"
+                        ng-disabled = "true"
+                     > 重新发送({{op.second}})</button>
+                  </span>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="form-group col-md-6  "  ng-if=" isAdd || op.cc_phone " >
+            <label class="col-sm-12  control-label  ">
+                <span translate="验证码" class="ng-scope">验证码</span>
+                <mark/>
+            </label>
+            <div class=" col-sm-12">
+                <input ng-model=" C.code " 
+                class=" form-control inline"
+                ui-validate=" 'validVer($value)' ">
+              <!--   <i class="fa  fa-check-circle text-success "></i> -->
+            </div>
+        </div>
+
+
+
+        <!--   
+            C.varify_code ; 
+         ui-validate = "{bar : 'validVer($value)' }"
+         ng-pattern="/^\d{6}$/" 
+        -->
+        <!--<input tl-wrap-l label="国家" ng-model=" C.country ">-->
+        <div class="form-group col-md-6">
+            <label class="col-sm-12  control-label">
+                <span translate="国家">国家</span>
+            </label>
+            <div class="col-sm-12">
+                <input label="国家" class="form-control" ng-model=" C.country ">
+            </div>
+        </div>
+
+        <!--<input tl-wrap-l label="省" ng-model=" C.province ">-->
+        <div class="form-group col-md-6">
+            <label class="col-sm-12  control-label">
+                <span translate="省">省</span>
+            </label>
+            <div class="col-sm-12">
+                <input label="省" class="form-control" ng-model=" C.province ">
+            </div>
+        </div>
+
+        <!--<input tl-wrap-l label="城市" ng-model=" C.city ">-->
+
+        <div class="form-group col-md-6">
+            <label class="col-sm-12  control-label">
+                <span translate="城市">城市</span>
+            </label>
+            <div class="col-sm-12">
+                <input label="城市" class="form-control" ng-model=" C.city ">
+            </div>
+        </div>
+
+        <!--<input tl-wrap-l label="邮政编码" ng-model=" C.zip_code ">-->
+
+        <div class="form-group col-md-6">
+            <label class="col-sm-12  control-label">
+                <span translate="邮政编码">邮政编码</span>
+            </label>
+            <div class="col-sm-12">
+                <input label="邮政编码" class="form-control" ng-model=" C.zip_code ">
+            </div>
+        </div>
+
+        <!--<input tl-wrap-l label="详细地址" ng-model=" C.address ">-->
+        <div class="form-group col-md-12">
+            <label class="col-sm-12  control-label">
+                <span translate="详细地址">详细地址</span>
+            </label>
+            <div class="col-sm-12" style="padding-right: 40px">
+                <input label="详细地址" class="form-control" ng-model=" C.address ">
+            </div>
+        </div>
+
+        <div class="form-group col-md-12 ">
+            <label class="col-sm-6 control-label">
+                <span>通知形式</span>
+            </label>
+            <!--jjw padding-->
+            <div class=" col-sm-6" style="padding-right: 40px">
+                <!--jjw float m-l-->
+                <div class="checkbox inline float-right m-l">
+                    <label class="i-checks">
+                        <input type="checkbox" ng-model=" C.mail_notice " checked="" ng-true-value="1" ng-false-value="0"><i></i>
+                        <span> 邮件通知</span>
+                    </label>
+                </div>
+                <!--jjw float m-l-->
+                <div class="checkbox inline float-right m-l ">
+                    <label class="i-checks">
+                        <input type="checkbox" ng-model=" C.sms_notice " checked="" ng-true-value='1' ng-false-value='0'><i></i>
+                        <span> 短信通知</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!--jjw line-->
+        <!--<li class="line b-b"></li>-->
+    </form>
+    <!--   <div class="form-group  " ng-if=" !isShowModul ">
+            <label class="col-sm-3 control-label">
+                <span type="submit" class="btn  btn-info  btn-block-middle  w-xs "
+                 ng-click=" commit()">     保存     </span>
+            </label>
+    </div> -->
+    <div class="text-right col-md-7 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12" ng-if=" !isShowModul ">
+        <!--jjw m-b margin-right m-t-->
+        <button style="margin-right: 65px"   class="btn  btn-success  btn-block-middle w-46 m-b m-t "
+            ng-click="commit()" token> 保存 </button>
+    </div>
+</div>
+<!--&lt;!&ndash;@if append &ndash;&gt;-->
+<!--C = {{C}}-->
+<!--<br/>-->
+<!--op={{op}}-->
+<!--<br/>-->
+<!--isAdd ={{isAdd}}-->
+<!--&lt;!&ndash;@endif &ndash;&gt;-->

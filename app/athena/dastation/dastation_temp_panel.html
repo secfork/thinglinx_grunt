@@ -1,0 +1,179 @@
+<div class="panel panel-default   " ng-class=" {'b-t-none':  $state.includes('app.m_region_prop')}" ng-init=" lm = 'list' " >
+   
+
+    <div class="panel-heading" ng-if="!$state.includes('app.m_region_prop')">
+        系统列表
+        
+    </div>
+
+    <div class="panel-body    no-padder  " ng-switch on="lm" load-mask  >
+         
+ 
+        <div class="row m-l-xs m-r-xs m-t">
+
+            <div class="form-group col-lg-2-4 col-sm-6">
+                <label>名称</label>
+                <input class="form-control" ng-model="od.name" />
+            </div>
+ 
+            <div class="form-group col-lg-2-4 col-sm-6">
+                <label>ID</label>
+                <input class="form-control" ng-model="od.uuid">
+            </div>
+
+
+            <div class="form-group col-lg-2-4 col-sm-6" ng-if="_$showRegionTH" >
+                <label>区域</label>
+                <select class="form-control" ng-model="od.region_id" ng-options="  r.id as r.name for r in  regions">
+                    <option value="">-所有区域-</option>
+                </select>
+            </div>
+            <div class="form-group col-lg-2-4 col-sm-6">
+                <label>模型</label>
+                <select class="form-control" ng-model="od.model" ng-options=" s.uuid as s.name for s in  sysModels">
+                    <option value="">-所有模型-</option>
+                </select>
+            </div>
+            <div class="form-group col-lg-2-4 col-sm-6" ng-if="!isShowModul">
+                <label>活跃状态</label>
+                <select class="form-control" label="活跃状态" ng-model="od.state" ng-options=" v as k for (k,v) in  $sys.sysState">
+                    <option value="">-全部-</option>
+                </select>
+            </div>
+            <div class="col-xs-12  "   >
+                <button class="btn btn-sm btn-info float-right w-46" ng-click=" loadPageData(1)" token>搜索</button>
+                <button class="btn btn-sm btn-info m-l float-right w-46" ng-click="  reset();  ">复位</button>
+                <div class="radio  pull-right m-r">
+                    <label class="i-checks">
+                        <input type="radio" value="map" checked="" ng-model=" lm "> <i></i> 地图
+                    </label>
+                </div>
+                <div class="radio   pull-right m-r m-t ">
+                    <label class="i-checks">
+                        <input type="radio" value="list" ng-model="lm"> <i></i> 列表
+                    </label>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="table-responsive "> 
+      
+            <table ng-switch-when="list" class=" table table-striped table-hover b-t ">
+                <thead class="flip-content">
+                    <tr>
+                        <th width="5%">状态</th>
+                        <th width="10%">系统名称</th>
+                        <th width="10%">ID</th>
+                        <th width="10%" ng-if="_$showRegionTH">区域</th>
+                        <th width="10%" ng-if="!isShowModul" >活跃状态</th>
+                        <th width="20%">备注</th>
+                        <th width="1%" ng-if=" !isShowModul  ">激活</th>
+                        <th width="1%" ng-if=" !isShowModul  ">同步</th>
+                        <th width="1%" ng-if=" !isShowModul  ">删除</th>
+                    </tr>
+                </thead>
+                <!--  未设置:灰,  在线 :绿 ,, 离线:红,  故障:橙色
+                     unset,online=1,offline=0,comm_failure
+
+                       ng-class="{
+                                'text-danger':  das.online =='' ,
+                                'text-success': das.online ==1,
+                                'text-warning': das.online ==2
+                             }"
+                   -->
+                <tbody>
+                    <tr ng-repeat="  das  in page.data " class=" ">
+                        <td class="">
+                            <i class="fa fa-circle  {{ das.online==1  ?'text-success' : 'text-danger'  }} "></i>
+                        </td>
+                        <td>
+                            <a class="text-info-dk" ng-click="goto( _$stationState , das , das )">{{ das.name }}</a>
+                            <popwin
+                             ng-if=" !isShowModul" 
+                             ng-model="das"
+                             pk="uuid"
+                             prop="name" 
+                             handler="updateSystem " />
+                        </td>
+
+                        <td>{{ :: das.uuid }}</td>
+                        <td  ng-if="_$showRegionTH" >
+                        <!-- 
+                            <a class="text-info-dk"  
+
+                             ng-click=" goto( _$projState , 
+                             rg_k_v[ das.region_id] ,
+                              rg_k_v[ das.region_id] ) ">
+                             {{ :: rg_k_v[ das.region_id].name }}</a>
+                        -->
+
+
+                            <a class="text-info-dk"  
+
+                             ng-click=" goto( _$projState ,   rg_k_v[ das.region_id] ,  rg_k_v[ das.region_id] ) ">
+                             {{ :: das.region_name }} </a>
+
+
+                        </td>
+                        <td ng-if="!isShowModul" > {{ das.state ==1?"激活":"未激活" }}</td>
+
+                        <td>{{das.desc}}
+                            <popwin ng-model="das" ng-if=" !isShowModul" pk="uuid" prop="desc" handler=" updateSystem  " />
+                        </td>
+                        <td ng-if=" !isShowModul  ">
+
+                            <a class="text-info-dk m-r-xs" ng-if="das.state ==1 " 
+                                ng-click=" effStation(page.data , das  ,$index  ) ">失效</a>
+
+
+                            <a class="text-info-dk m-r-xs" ng-if=" das.state ==0 " 
+                                ng-click=" activateStation( null,das,$index ,false ) ">激活</a>
+
+
+
+                        </td>
+                        <td ng-if=" !isShowModul   ">
+                            <!--  ng-if=" das.needsync   text-muted' " -->
+                            <a class="  text-info" ng-if=" das.state==1 && das.needsync " 
+                                ng-click=" syncSystem( das , $event , this )"
+                                token="5000"
+                                >同步</a>
+
+                            <span class="text-muted" ng-if=" das.state !=1  ">同步</span>
+
+                            <i ng-if=" das.state ==1 && !das.needsync "
+                                class="fa fa-check text-success"></i>
+
+                            <i class="fa fa-spin fa-spinner text-info" style="display:none"></i>
+                        </td>
+                        <td ng-if=" !isShowModul ">
+                            <!--  
+                            <a class="text-info-dk m-r-xs" ng-if="das.state ==1 " translate="bu.bu2" ng-click=" effStation(page.data , das  ,$index , active2del  ) ">失</a>
+                            <a class="text-info-dk m-r-xs" ng-if=" das.state ==0 " ng-click=" activateStation( this, page.data , das , $index  ,  true  ) ">激活</a>
+                            <a class="text-info-dk m-r-xs" ng-if="das.state ==2 " ng-click=" startSystem( das , page.data , $index ) ">启动</a>
+                            <a class="text-info-dk m-r-xs" ranslate="bu.bu3" ng-click=" editStation( this , das , $index  ) ">编辑</a>
+                             -->
+                            <a class="text-info " ng-if="das.state != 1 " ng-click=" delStation( page.data  ,das , $index  ) ">删除</a>
+                            <span ng-if="das.state == 1" class="text-muted ">删除</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div ng-switch-when="map" id="bdmap" ng-init=" initMap( ); " db-maxp=''   >
+            <div>12111</div>
+        </div>
+    </div>
+
+    
+    <div class="panel-footer  " ng-if="lm=='list'">
+        <button ng-if=" !isShowModul " class="btn btn-info    btn-sm    m-l-sm  pull-left " 
+        ng-click=" createSystem() ">添加系统</button>
+
+        <div class=" text-center  " ng-include src=" 'athena/debris/_pager.html'  "></div>
+    </div>
+</div>
+
+<div id="xxxxx"></div>

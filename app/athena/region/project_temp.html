@@ -1,0 +1,81 @@
+<div class="bg-light lter b-b wrapper-md ng-scope">
+    <h2 class="m-n font-thin h4"> {{::isShowModul?"区域":"区域管理" }}</h2>
+ 
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            区域列表
+        </div>
+        <!--jjw no-border-->
+        <div class="panel-body no-border table-responsive no-padder" load-mask>
+            <div class="col-md-4 m-t m-b">
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="f_projname">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click=" loadPageData(1)" >搜索</button>
+                      </span>
+                </div>
+            </div>
+            <div class="table-responsive "> 
+            <table class=" table table-hover table-striped  b-t ">
+                <thead class="flip-content">
+                    <tr class="background ">
+                        <!--   <th>
+                        <span translate="th.th1">在线</span>
+                    </th> -->
+                        <th width="20%">
+                            <a translate="th.th2">名称</a>
+                        </th>
+                        <th width="30%">
+                            <a translate="th.th3">创建时间
+                        </a>
+                        </th>
+                        <th width="10%">已激活系统</th>
+                        <th width="10%" ng-if=" ! isShowModul ">未激活系统</th>
+                        <th width="30%">备注</th>
+                        <th width="10%" ng-if=" ! isShowModul ">删除</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="  proj  in page.data  " ng-init=" collectRegionId( proj , $last )">
+                        <!--  <td></td> -->
+                        <td>
+                            <a class="text-info-dk  " ng-click="  goto ( _$nextState ,  proj  , proj ); ">
+                            {{ proj.name }}
+
+                        </a>
+                            <popwin ng-model="proj" ng-if=" !isShowModul" prop="name" handler=" updateRegion  " />
+                        </td>
+                        <td> {{ :: proj.create_time | date:"yyyy-MM-dd HH:mm Z" }}</td>
+                        <td class="numeric " id="act_{{proj.id}}">
+                            0
+                        </td>
+                        <td class="numeric " ng-if=" ! isShowModul " id="unact_{{proj.id}}">
+                            0
+                        </td>
+                        <td>{{ proj.desc}}
+                            <popwin ng-model="proj" ng-if=" !isShowModul" prop="desc" handler=" updateRegion  " />
+                        </td>
+                        <td class="numeric" ng-if=" ! isShowModul ">
+                            <a class="text-info-dk m-r-xs" ng-disabled="true" ng-click="delProject( proj  , $index   )">删除</a>
+                            <!--@if append -->
+                            <!--jjw 注释“可视化”-->
+                            <!--<a class="text-info-dk"-->
+                            <!--ng-href="../syalias/trunk/{{ isShowModul?'syalias':'dyalias'}}.html?account=thinglinx&project=2#/page/Demo"-->
+                            <!--target="_blank">可视化</a>-->
+                            <!-- @endif -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <div class="panel-footer ">
+            <button class="btn btn-primary btn-sm  pull-left  m-l-sm" ng-if=" !isShowModul" ng-click="  addProj() ">
+                添加区域
+            </button>
+            <div class="text-center " ng-include src=" 'athena/debris/_pager.html'  "></div>
+        </div>
+    </div>
+</div>

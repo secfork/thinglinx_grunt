@@ -1,0 +1,104 @@
+<!--@if append -->
+ 
+
+<!--@endif -->
+
+
+
+
+
+<!-- navbar header -->
+<!-- 小屏幕时  右上角 图标 -->
+<div class="navbar-header {{app.settings.navbarHeaderColor}}"  >
+
+    <button class="pull-right visible-xs dk" ui-toggle-class="show" data-target=".navbar-collapse" >
+        <!-- <i class="glyphicon glyphicon-cog">1</i> -->
+        <i class="icon-map"></i>
+    </button>
+
+    <button class="pull-right visible-xs" ui-toggle-class="off-screen" data-target=".app-aside" ui-scroll="app">
+        <!--  <i class="icon-bag glyphicon glyphicon-align-justify">2</i> -->
+        <i class=" fa fa-bars"></i>
+    </button>
+    <span class="navbar-brand"> 
+        <i class="fa  fa-cloud   fa-fw "  
+            ng-class=" {hide : !app.settings.asideFolded  }"></i>
+
+        <img  class="hidden-folded" src="img/logo_3.png"  
+               style="width: 150px"   >
+       
+    </span>
+
+</div>
+<!--     navbar collapse -->
+<div class="collapse navbar-collapse box-shadow {{app.settings.navbarCollapseColor}}">
+    <!-- 控制左边 导航折叠    -->
+    <div class=" nav navbar-nav m-l-sm hidden-xs  ">
+        <a href class="btn no-shadow navbar-btn" ng-click="app.settings.asideFolded = !app.settings.asideFolded">
+            <i class="fa {{app.settings.asideFolded ? 'fa-indent' : 'fa-dedent'}} fa-fw"></i>
+        </a>
+    </div>
+
+
+    <!--  导航!!  style=" position:fixed; margin-left:50px "   -->
+<!--     <div class=" nav navbar-nav  hidden-sm   ">
+        <ul class="breadcrumb  b-a" style="background: transparent; border: none; margin:5px;padding-left: 0px">
+            <li class="inline" ng-repeat=" n in navs" ng-if=" $first || n.state">
+                <i class="fa fa-home" ng-if="$first"> </i>
+                <a ng-click="navGo(n)"> {{n.title}} </a>
+            </li>
+        </ul> 
+    </div>
+
+ -->
+
+    <!-- nabar right   靠右 -->
+    <ul class="nav navbar-nav navbar-right">
+
+    
+
+
+        <li class="dropdown"  dropdown >
+
+            <a href class="dropdown-toggle clear" dropdown-toggle   >
+                <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
+                    <img src="img/a0.jpg" alt="...">
+                    <i class="on md b-white bottom"></i>
+                  </span>
+                <span>{{user.username}}</span>
+                <b class="caret"></b>
+            </a>
+          
+ 
+            <ul class=" dropdown-menu w-lg  ">
+                <li class="b-b   bg-light m-t-n-xs">
+               
+                    <p class="text-base m-b-none  wrapper   ">上次登录时间:
+ 
+                        <span class=""> 
+                                {{user.last_login_time |date :"yyyy-MM-dd HH:mm"}} 
+                        </span>
+ 
+                    </p>
+                </li>
+             
+
+                <li class="  b-b " > 
+                    <a  ui-sref=" app.my_detail " style="padding: 10px 15px">用户设置</a>
+                </li>
+                <li class="text-center  ">
+                    <a ng-click="logout()" style="padding: 10px 15px">注销</a>
+                </li>
+            </ul>
+           
+        </li>
+    </ul> 
+
+
+
+
+
+
+
+
+</div>

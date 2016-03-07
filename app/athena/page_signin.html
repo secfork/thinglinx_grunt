@@ -1,0 +1,64 @@
+<!-- jjw style去掉 -->
+<div class=" container w-xxl w-auto-xs   " style="">
+
+    <div class=" text-center m-t-lg m-b-lg">
+        <!--  {{app.name}}   style="width: 150px;"   -->
+        <img src="img/logo_2.png" class="logo">
+    </div>
+    <div ng-show="op.b" class="pos-abt " style="z-index:999;top:30%; left:49%;">
+        <i class="fa fa-spin fa-3x  text-info fa-spinner"></i>
+    </div>
+ 
+    <form name="form" class="form-validation m-t-lg ">
+        <div class="list-group list-group-sm">
+
+            <div class="list-group-item">
+                <input placeholder="账户名称" class=" form-control no-border" 
+                    name="accountname" id="accountname"
+                    required ng-model="user.account"
+                    ng-keydown="showErr = false">
+            </div>
+
+            <div class="list-group-item">
+                <input placeholder="用户名" class=" form-control no-border" 
+                 name="username" id="username"  ng-keydown="showErr = false" ng-model="user.username" required>
+            </div>
+
+            <div class="list-group-item">
+                <input onfocus="this.type='password'" autocomplete="off"
+                    placeholder="密码" class=" form-control no-border" 
+                    ng-keydown="showErr =false "
+                    id='password'
+                    name="password" ng-model="user.password" required >
+            </div>
+            
+            <div class="list-group-item" ng-if="op.need_idenfity ">
+                <input name="password" ng-model="user.verifi" class="form-control inline   m-t-xs" style="width:50%" placeholder="请输入验证码" required>
+                <!-- <i class="fa w-30  fa-refresh"></i>   -->
+                <img    id="login_identify" ng-src="node/common/identify/login?t={{op.t||123}}" 
+                        class="inline  m-l " style="width: 80px;height: 30px;">
+                <a class="fa fa-refresh text-info  " ng-click=" op.t = op.t+1"></a>
+            </div>
+ 
+
+        </div>
+        <!-- ng-disabled='form.$invalid'-->
+        <div class="text-danger wrapper text-center" ng-show=" resp.err=='pass_error' ">
+            帐号或密码不正确!
+        </div>
+        <div class="text-danger wrapper text-center" ng-show=" resp.err=='verifi_error' ">
+            验证码不正确!
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="login()"
+             ng-disabled="op.b"> 登录
+        </button>
+        <div class="text-center m-t m-b">
+            <a ui-sref="access.forgotpwd" class=" text-primary font-normal">忘记管理员密码?</a></div>
+        <div class="line line-dashed"></div>
+        <!-- <p class="text-center"><small>Do not have an account?</small></p>-->
+        <a ui-sref="access.signup" class="btn btn-lg btn-default btn-block">企业注册</a>
+    </form>
+    <!-- jjw m-t -->
+    <div class="text-center m-t" ng-include=" 'athena/page_footer.html' "></div>
+   
+</div>

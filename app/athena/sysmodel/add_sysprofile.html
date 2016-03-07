@@ -1,0 +1,26 @@
+<!--  添加  sysmodel  -->
+
+<div class="modal-header ">
+    <span ng-if="isAdd">添加系统配置</span>
+    <span ng-if="!isAdd">编辑系统配置</span>
+
+</div>
+
+<div class="modal-body ">
+
+    <form name="form" class=" form-validation form-horizontal   ">
+
+        <input type="submit" class="hidden">
+        <input tl-wrap required ng-model="P.name" name="input" label="系统配置名称">
+        <textarea tl-wrap  ng-model="P.desc" label="备注" >  </textarea>
+    </form>
+</div>
+
+<ng-include src=" 'athena/debris/_modal_footer.html' "></ng-include>
+
+<!--jjw 注释-->
+<!--&lt;!&ndash;@if append &ndash;&gt;-->
+   <!--p = {{P}} <br>-->
+    <!--isAdd = {{isAdd}}-->
+<!--&lt;!&ndash;@endif &ndash;&gt;-->
+ 

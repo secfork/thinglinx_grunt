@@ -1,0 +1,67 @@
+<div class="panel-body no-padder bg-light bg-white card ">
+
+    <!--jjw h4提出-->
+    <h4 class="center">账户信息</h4>
+    <!--jjw col-lg-offset-3-->
+    <div class=" col-md-8 col-md-offset-2   col-lg-6 col-lg-offset-3 m-b-lg  m-t-l text-base">
+        <div class="b-b line-dashed jbox">
+            <span>账户名称</span>
+            <span class="float-right color-5">{{account.name}}</span></div>
+        <div class="b-b line-dashed jbox">
+            <span>注册时间</span>
+            <span class="float-right color-5">{{account.create_time | date:"yyyy-MM-dd HH:mm Z" }}</span>
+        </div>
+        <div class="b-b line-dashed jbox">
+            <span>系统数量</span>
+            <span class="float-right color-5">{{system.group_id}}</span>
+        </div>
+        <div class="b-b line-dashed jbox">
+            <span>用户数量</span>
+            <span class="float-right color-5">{{ $sys.sysModelMode.values[systemModel.mode] }} </span>
+        </div>
+        <div class="b-b line-dashed jbox">
+            <span>用户组数量</span>
+            <span class="float-right color-5">{{ systemModel.comm_type }}</span>
+        </div>
+        <div class="b-b line-dashed jbox">
+            <span>购买系统数量</span>
+            <span class="float-right color-5">{{ system.network.daserver.network.type}}</span>
+        </div>
+        <div class="jbox">
+            <div class="inline">存储空间占用</div>
+            <!--jjw float-right m-t-->
+            <div class="inline w-xl float-right m-t">
+ 
+				<!--  <progressbar animate="true" value="59" type="success" 
+				        class=" progress-sm m-b-none">
+				     <b> 59%</b> 
+				 </progressbar>
+            -->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+ <!--&lt;!&ndash;@if append &ndash;&gt;-->
+ <!--account = {{account}}-->
+ <!--&lt;!&ndash;@endif  &ndash;&gt;-->
+
+
+<!-- <strong>基本信息:</strong>
+
+<p class="m-l-lg">
+    项目数量  {{accMsg.proj_total }} <br>
+    采集站数量 {{ accMsg.station_total | number:0  }},活跃数量{{ accMsg.sation_act_total | number:0  }}<br>
+    
+    用户数量 {{ accMsg.user_total }} <br>
+</p>
+ -->
+<!--  <div class=" col-md-4 col-xs-6  ">
+<strong>登录信息:</strong>
+<p class="m-l-lg">
+
+    登录帐号&nbsp;&nbsp;:xxxxxxxxx <br>
+    登录时间&nbsp;&nbsp;:&lt;!&ndash; {{ new Date()  }}&ndash;&gt; <br>
+</p>
+</div>-->

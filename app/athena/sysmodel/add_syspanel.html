@@ -1,0 +1,16 @@
+<!--  添加  sysmodel  -->
+
+<div class="modal-header ">
+    添加系统信息板
+</div>
+
+<div class="modal-body ">
+
+    <form name="form" class=" form-validation form-horizontal   ">
+        <input type="submit" class="hidden">
+        <input tl-wrap required ng-model="project.name" name="input" label="名称">
+        <textarea tl-wrap  ng-model="project.description" label="备注" >  </textarea>
+    </form>
+</div>
+
+<ng-include src=" 'athena/debris/_modal_footer.html' "></ng-include>

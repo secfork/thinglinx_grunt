@@ -1,0 +1,82 @@
+<div class="panel panel-default b-t-none">
+
+    <div class="panel-heading  bg-white-only  w-full  " ng-if="isModelState">
+      
+        <div class="form-group   m-l-xs m-b-none">
+            <span style="margin-right: 30px"> 配置项 </span>
+            <select ng-model="odp.puuid" class=" input input-sm w form-control inline" ng-options="   p.uuid as p.name for p in profiles  " ng-change="loadSysTag( odp.puuid  )"></select>
+        </div>
+    </div>
+  
+    <div load-mask class="panel-body    table-responsive no-padder   b-b-none">
+        <!--jjw j_table-->
+        <table class=" table   table-hover table-striped   b-t-none">
+            <thead class="flip-content">
+                <tr class="background ">
+                    <th> 变量名称 </th>
+                    <th> 设备 </th>
+                    <th> 类型 </th>
+                    <th> 缩放 </th>
+                    <th> 偏差 </th>
+                    <th> 单位 </th>
+                    <th> 保存日志 </th>
+                    <th> 日志类型 </th>
+                    <th> 日志间隔(秒) </th>
+                    <th width="15%"> 备注 </th>
+
+                    <th ng-if="isModelState" width="1%"> 编辑 </th>
+                    <th ng-if="isModelState" width="1%" >  配置 </th>
+                    <th ng-if="isModelState" width="1%" >  删除</th>
+                </tr>
+            </thead>
+            <tbody   ng-init="_$type = $sys.log_type.values">
+                <tr ng-repeat="  tag  in systags  " ng-init="getDevName(tag , this )">
+                    <td> {{tag.name}}</td>
+                    <!-- 
+                getDevname (); 1:看是否有连接; 若没有 则 type 设置为null ; 2:设置是否真的连接了设备; 3: 是否真的 连接了模版点;
+               -->
+                   
+                    <td> {{ dev_name }} </td>
+                    <td> {{ tag.type }}</td>
+
+                    <td> <span ng-show=" tag.type == 'Analog' "> {{tag.scale}} </span> </td>
+                    <td> <span ng-show=" tag.type == 'Analog' "> {{tag.deviation}} </span></td>
+                    <td> {{tag.unit}}</td>
+                    <td>
+                        <i ng-if="tag.save_log" class="glyphicon glyphicon-ok text-success"></i>
+                    </td>
+                    <td>
+                        <span ng-show="tag.save_log"> 
+                    {{ _$type[tag.log_type]   }} 
+                     </span>
+                    </td>
+                    <td>
+                        <span ng-show="tag.save_log">
+                        {{ tag.log_type=="RAW" ? tag.log_cycle : undefined }} 
+                     </span>
+                    </td>
+                    <td> {{ tag.desc||"" }} </td>
+                    <td ng-if="isModelState">
+                        <a class="text-info m-r-xs" ng-click="updateTag(  $index  , tag , this  )">编辑</a>
+                    </td>
+                     <td ng-if="isModelState">
+                        <a class="text-info m-r-xs" ng-click="editLogPart(  $index  , tag   )"> 配置</a>
+                     </td>
+                     <td ng-if="isModelState">
+                        <a class="text-info m-r-xs" translate="bu.bu4" ng-click="deleteTag(  $index  , tag   )">移除</a>
+                     </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer   b-b b-l b-r">
+         
+        <button class="btn btn-primary btn-sm w-70  " ng-if="isModelState" ng-click=" addTag('add') ">
+            添加变量
+        </button>
+    </div>
+</div>
+<!--@if append -->
+ systags ={{systags}}
+<!--@endif -->

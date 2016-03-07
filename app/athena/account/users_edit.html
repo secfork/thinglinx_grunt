@@ -1,0 +1,17 @@
+  <div class="modal-header ">
+    <h4 ng-if="isAdd">添加用户</h4>
+    <h4 ng-if="!isAdd">编辑用户</h4>
+</div>
+<div class="modal-body" style="padding:10px 12% 0;">
+    <form name="form"   class="form-horizontal form-validation no-border   ">
+        <ng-include src=" 'athena/account/_user_form.html' "></ng-include>
+    </form>
+</div>
+<ng-include src=" 'athena/debris/_modal_footer.html' "></ng-include>
+
+<!--jjw-->
+<!--&lt;!&ndash; @if append &ndash;&gt;-->
+  <!--user = {{user}}-->
+<!--&lt;!&ndash;@endif &ndash;&gt;-->
+
+

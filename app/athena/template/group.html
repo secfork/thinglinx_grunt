@@ -1,0 +1,22 @@
+
+<div  class="modal-body  " >
+    <div class="text-center  font ">
+        <h4> 编辑分组 </h4>
+        <h4 translate="{{ titl }}" >  </h4>
+    </div>
+
+    <form class="    bs-example form-horizontal  padding-10 "    >
+        <div class=" form-group">
+            <label class="col-sm-3 control-label">名称 Name * </label>
+            <div class="col-sm-9">
+                <input  class="form-control"   ng-model= "g.name"      >
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer m-t-n-sm ">
+    <div class="text-center">
+        <button class="btn btn-sm btn-info w-60"  ng-click=" done() " >保存</button>
+        <button class="btn btn-sm btn-info w-60"  ng-click=" cancel() " >取消</button>
+    </div>
+</div>

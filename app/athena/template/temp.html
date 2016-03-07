@@ -1,0 +1,41 @@
+<div class="modal-header ">
+    <span ng-if="isAdd">添加设备模型</span>
+    <span ng-if="!isAdd">编辑设备模型</span>
+
+</div>
+
+<div class="modal-body  ">
+
+    <form name="form" class=" form-validation form-horizontal   ">
+
+        <input type="submit" class="hidden">
+
+        <!-- ng-disabled="!isAdd"   +' -- '+ o.version -->
+        <select tl-wrap
+                label="模型类型"
+                required
+                ng-model=" T.driver_id "
+
+                ng-if="isAdd"
+                ng-options=" o.driver_id  as o.name   for o in drivers  "
+                ></select>
+
+        <input tl-wrap required ng-model="T.name" label="模型名称">
+
+        <textarea tl-wrap  ng-model="T.desc"  label="text.desc">
+        </textarea>
+
+
+
+    </form>
+</div>
+
+<ng-include src=" 'athena/debris/_modal_footer.html' "></ng-include>
+
+<!--jjw 注释-->
+<!--&lt;!&ndash; @if append &ndash;&gt;-->
+  <!--T= {{T}} <br>-->
+  <!--isAdd = {{isAdd}}-->
+<!--&lt;!&ndash; @endif &ndash;&gt;-->
+ 
+ 

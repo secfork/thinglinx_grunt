@@ -1,0 +1,45 @@
+<!--  添加  sysmodel  -->
+<div class="modal-header ">
+    <h4 ng-if="isAdd">添加Gateway Device </h4>
+    <h4 ng-if="!isAdd">编辑Gateway Device</h4>
+</div>
+<div class="hiden" ng-init="
+_type  =  [ 'ETHERNET' , 'RS232' , 'RS485' , 'RS422' ] ;
+_proto =  ['tcp' , 'udp'] ;
+
+"></div>
+<div class="modal-body  ">
+    <!--
+   <h4 class="text-info text-center" ng-show=" ! _$devs.length "> 无可添加的设备!!</h4>
+ -->
+    <form name="form" class=" form-validation form-horizontal ">
+        <div class="text-center text-danger m-b" ng-show=" iaAdd && ! _$devs.length">
+            <i class="fa  fa-exclamation-triangle  "></i> 无可添加设备!
+        </div>
+        <select tl-wrap ng-if="isAdd" ng-init="  filterDev()" ng-model="dev.id" ng-options=" d.id as d.name for d in _$devs " label="设备" required>
+            <option value="">--请选择设备--</option>
+        </select>
+        <select tl-wrap ng-model="dev.type" label="type" ng-options=" t for t in _type" tl-default="ETHERNET" when-change=" filterChannel( true ) " required>
+        </select>
+        <select tl-wrap ng-model=" dev.params.channel " ng-options="  k as k  for  (k,v)  in  _$channel ||  filterChannel( false )   " label="channel" tl-default="LAN_1" when-change=" op._$$edit = true ; " required>
+        </select>
+        <!-- LAN_1 配置  -->
+        <div ng-if=" dev.params.channel == 'LAN_1'   " ng-init="op._$$edit  &&  ( dev.params = { channel: dev.params.channel , type:'static'} ) ">
+            <input tl-wrap ng-model="dev.params.ip" label="ip" required>
+            <input tl-wrap ng-model="dev.params.port" label="port" required>
+            <select tl-wrap ng-model="dev.params.proto" label="proto" ng-options="  p for p in _proto" tl-default="tcp" required>
+            </select>
+        </div>
+        <!-- WLAN_1 配置  -->
+        <div ng-if=" dev.params.channel == 'WLAN_1'   " ng-init=" op._$$edit  && ( dev.params = { channel: dev.params.channel , type:'static'} ) ">
+            <input tl-wrap ng-model="dev.params.ip" label="ip" required>
+            <input tl-wrap ng-model="dev.params.subnet" label="subnet" required>
+            <input tl-wrap ng-model="dev.params.gateway" label="gateway" required>
+            <input tl-wrap ng-model="dev.params.dns" label="dns" required>
+        </div>
+    </form>
+    <!--&lt;!&ndash; @if append &ndash;&gt;-->
+    <!--dev = {{dev}}-->
+    <!--&lt;!&ndash; @endif  &ndash;&gt;-->
+</div>
+<ng-include src=" 'athena/debris/_modal_footer.html' "></ng-include>

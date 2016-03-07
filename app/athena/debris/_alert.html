@@ -1,0 +1,27 @@
+
+ <!--  操作确认 模版  
+ title : '标题' , note:  注释 , warn: 警告
+  -->
+ 
+ <div class="modal-body   text-center     ">
+
+
+ 
+
+        <h4>{{msg.title}} </h4>   
+        <div class="small text-muted">
+            {{msg.note}}   
+        </div>  
+        <div class="small text-danger">
+            {{msg.warn }}   
+        </div> 
+ 
+
+ </div>
+
+ <div class="modal-footer ">
+      
+     <button class="btn btn-sm btn-primary  w-46"  ng-click=" done() " 
+      token   >确定</button>
+    
+ </div>

@@ -1,0 +1,97 @@
+<div class="panel panel-default  ">
+    <div class="panel-heading " style="padding-top:0px">
+        <form class="form-inline  form-validation ng-pristine ng-valid" name="form">
+            <div class="form-group  m-t-xs">
+                <label class="i-checks m-t-xs" style="padding-left:0">
+                    活跃报警
+                    <input type="checkbox" ng-model="xxx">
+                    <i style="margin-left:0"></i>
+                </label>
+            </div>
+            <div class="form-group  m-t-xs">
+                <label>区域</label>
+                <select class="input input-sm" ng-model="od.orgin" ng-options="p.id as p.name  for p in  projs">
+                    <option value="">所有区域</option>
+                </select>
+                <label>系统</label>
+                <select class="input input-sm">
+                    <option value="">所有系统</option>
+                </select>
+            </div>
+            <div class="form-group m-t-xs">
+                <label>严重性</label>
+                <select class="input input-sm" ng-model="od.severity" ng-options=" k as v for (k,v) in $sys.trigger.severity">
+                    <option value="">全部</option>
+                </select>
+                <label>类别</label>
+                <select class="input input-sm" ng-model="od.class" ng-options=" v for v in [1,2,3,4,5,6,7,8,9,0]">
+                    <option value=""> </option>
+                </select>
+            </div>
+
+
+            <div class="form-group m-t-xs">
+                <label class=" w-xxs text-right control-label float-left m-t-xs">
+                起始时间:</label>
+                <input type="text" class=" input input-sm  float-left" 
+                datetime-picker date-format='yyyy-MM-dd HH:mm'
+                 nofocus data-readonly-input='false' ng-model="od.start" 
+                 is-open='op.showS' />
+                 
+                <span class=" float-left">
+                      <button type="button" class="btn btn-default btn-sm" 
+                      ng-click="openCalendar($event, 'op.showS=true')">
+                      <i class="fa fa-calendar"></i></button>
+                </span>
+
+
+
+                <label class=" w-xxs text-right control-label float-left  m-t-xs">结束时间:</label>
+                <input type="text" class=" input input-sm float-left" datetime-picker date-format='yyyy-MM-dd HH:mm' nofocus ng-model="od.end" is-open='op.showE' />
+                <span class=" float-left">
+                      <button type="button" class="btn btn-default btn-sm" 
+                      ng-click="openCalendar($event, 'op.showE=true')">
+                      <i class="fa fa-calendar"></i></button>
+                  </span>
+            </div>
+
+
+
+            <div class="form-group m-t-xs">
+                <span ng-if=" op.ala !='a' " class="btn btn-info btn-sm w-46 m-l  " ng-click="queryAlarm()" token='5000'>
+                     查询
+                </span>
+            </div>
+        </form>
+        <div ng-if="$debug">
+            od = {{od}}
+            <br/> op ={{op}}
+        </div>
+    </div>
+    <div class="panel-body table-responsive no-padder" ng-init=" _$A = $sys.trigger.op">
+        <table class=" table   table-bordered " ng-init="_config = $sys.trigger.severity">
+            <thead class="flip-content">
+                <tr class="background ">
+                    <th> 报警ID </th>
+                    <th> 报警时间</th>
+                    <th> 报警描述 </th>
+                    <th> 重要性 </th>
+                    <th> 类别 </th>
+                    <th> 活跃状态 </th>
+                    <th class="w-xs"> </th>
+                </tr>
+            </thead>
+            <tbody class="text-center ">
+                <tr ng-repeat="  a  in alarms  " class="hover">
+                    <td> {{ a.id }} </td>
+                    <td> {{ a.timestamp | date:"yyyy-MM-dd HH:mm:ss" }}</td>
+                    <td> {{ a.desc }}</td>
+                    <td> {{ _config[a.severity] }} </td>
+                    <td> {{ a.class_id }} </td>
+                    <td> {{ a.active?"活跃":"关闭" }} </td>
+                    <td> <a class="text-link" ng-click="alarmMsg(a)">详细信息</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+<!-- <div class="panel-body bg-light   table-responsive no-padder no-border gap-5"> -->
+<div class="panel-body table-responsive  no-padder  no-border b-t" load-mask  >
+   
+
+     <table class=" table  table-hover table-striped b-t-none " >
+            <thead class="flip-content  ">
+                <tr>
+                    <th width="15%">名称</th>
+                    <th width="75%" >权限</th>
+                    <th width="5%" > 修改 </th>
+                    <th width="5%"> 删除</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="  role in  roles">
+                    <td> {{role.name}}</td>
+                    <td class="text-left"> {{  toText (role.privilege) }} </td>
+                    <td> <a class="text-info"  ng-click="addRole( role , $index)"> 修改</a></td>
+                    <td> <a class="text-info" 
+                        ng-click="delRole( role, $index )"> 
+                    删除</a></td>
+                    
+                </tr>
+            </tbody>
+    </table>
+
+
+
+
+</div>
+
+<div class="panel-footer">
+&nbsp;
+
+    <button class="btn btn-primary btn-sm w-70        m-l-sm" 
+             ng-click="  addRole(  page.data ) ">
+            添加角色
+        </button>
+        &nbsp;
+    <!--jjw m-t m-b-->
+     <div  ng-if='false' class="text-center m-t-sm m-b-sm height-30" ng-include src=" 'athena/debris/_pager.html'  "></div>
+</div>
+
+ 

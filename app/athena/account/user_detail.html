@@ -1,0 +1,229 @@
+<div class="bg-light lter b-b wrapper-sm padder-md">
+    <h2 class="m-n font-thin h4"> {{ user.username }}</h2>
+    <a ng-if="from" href="{{from.url}}" class="text-xs"> 返回
+        <span class="text-info" > {{from.text}} </span> 
+    </a>
+</div>
+<div class="col-md-4  col-xs-12  m-t">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <button  ng-if="userself" class="btn btn-sm btn-default  pull-right m-t" ng-click="reSetPW()">修改密码</button>
+            <button  ng-if="!userself" class="btn btn-sm btn-default  pull-right m-t" ng-click="editUser( user )">修改用户</button>
+           
+
+            <p class="m-t">
+                <span class="thumb text-muted">用户名</span>
+                <span>{{user.username}}</span></p>
+            <p> 
+                <span class="thumb text-muted">昵称</span>
+                <span> {{user.nickname}} </span>
+
+                <popwin   ng-if="userself"
+                    ng-model="user"  
+                    prop="nickname"
+                    handler =" updateUser "   />
+            </p>
+            
+            <p class="text-xs m-t-xxl"> 
+                <span class='thumb-lg text-muted'>上次登录时间</span> <span> {{:: user.last_login_ip }}</span>
+            </p>
+            <p class="text-xs"> 
+                <span class='thumb-lg text-muted'>上次登录ip</span> <span> {{:: user.last_login_time |  date:"yyyy-MM-dd HH:mm Z" }}</span>
+            </p> 
+
+        </div>
+        <div class="panel-body   ">
+           
+            <div class="bg-light lter   m-l-n m-r-n wrapper" style="background-color: #fff;">
+                <p class="m-b-n-xs text-muted "> <i class="glyphicon  glyphicon-phone m-r-xs"></i>
+                    <span class="text-xs">电话</span> 
+                </p>
+                <p>{{user.mobile_phone}}&nbsp;
+
+                    <span  ng-if="user.mobile_phone_verified" class="label bg-light text-success-lt inline m-t-sm" style="background:#dff0d8">已验证</span>
+                    <span ng-if="!user.mobile_phone_verified" class="label bg-light dker inline m-t-sm">未验证</span>
+
+                    <a ng-if="userself" class="pull-right text-muted   fa fa-pencil m-t-xm" ng-click="validPhone()"></a>
+                </p>
+
+                <p class="m-b-n-xs text-muted "> <i class="fa fa-envelope m-r-xs"></i>
+                    <span class="text-xs">邮箱</span> 
+                </p>
+                <p> {{user.email }}&nbsp;
+                    <span ng-if="user.email_verified" class=" label bg-light text-success-lt inline m-t-sm" style="background:#dff0d8">已验证</span>
+                    <span ng-if="!user.email_verified" class="  label bg-light dker  inline m-t-sm">未验证</span>
+
+                    <a  ng-if="userself" class="pull-right text-muted   fa fa-pencil m-t-xm" ng-click="validEmail()"></a>
+                </p>
+
+                <p class="m-b-n-xs text-muted "> <i class="fa fa-map-marker m-r-xs"></i>
+                    <span class="text-xs">地址</span>
+                </p>
+                <p class="m-t-xs"> {{user.address}}&nbsp;
+                    
+                    <popwin  ng-if="userself"
+                        classfor ="pull-right"
+                        ng-model="user"  
+                        prop="address"
+                        handler =" updateUser "   />
+                </p>
+
+                <p class="m-b-n-xs text-muted "> <i class="fa fa-bookmark m-r-xs"></i>
+                    <span class="text-xs">备注</span>
+                </p>
+                <p  class="m-t-xs"> {{user.desc }} &nbsp;
+
+                    <popwin ng-if="userself"
+                        classfor ="pull-right"
+                        ng-model="user"  
+                        prop="desc"
+                        handler =" updateUser "   />
+                </p>
+
+ 
+                <p  ng-if="userself"  class="m-t-lg"> 接收短信报警
+                    <label class="i-switch bg-info  pull-right ">
+                        <input type="checkbox" ng-model="user.sms_notice" ng-change=" acceptAlarm('sms_notice')" class="ng-pristine ng-valid">
+                        <i></i>
+                    </label>
+                </p>
+                <p ng-if="userself"   class="m-t">
+                    接收邮件报警
+                    <label class="i-switch bg-info  pull-right ">
+                        <input type="checkbox" ng-model="user.mail_notice" ng-change=" acceptAlarm('mail_notice')" class="ng-pristine ng-valid">
+                        <i></i>
+                    </label>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-8 col-xs-12 m-t" load-mask >
+    <div class="panel panel-default    ">
+
+        <div class="panel-heading">
+            账户设置
+        </div>
+        <div class="panel-body no-padder">
+             
+            <div class="m-l m-t text-lg"> 账户权限</div>
+            <div class="row m-t-sm">
+                <label class="col-sm-2 control-label m-t-xs m-l">角色</label>
+                <div class="col-sm-8  ">
+                    <form name="form">
+                        <!-- <span class="block m-t-xs" ng-if="userself"> {{ user.accountRol.name }}</span> -->
+                        <select class="form-control w " name="accountRol" 
+                        ng-model=" user.accountRol.id " ng-disabled="userself" 
+                        ng-change="addAccountRole()"
+                        ng-options=" obj.id as obj.name for obj  in roles | filter: {  role_category: 0 } ">
+                            <option value="" >--无--</option>
+                        </select>
+                    </form>
+                </div> 
+ 
+
+                <p class="col-sm-offset-2 col-sm-8">
+                    <span class="text-muted text-xs m-l"> 权限包括: {{ user.accountRol.prText }}   
+                    </span>
+                </p>
+             </div>
+
+
+
+            <div class="m-l m-t text-lg"> 区域权限</div>
+            
+            <div class="table-responsive ">
+                            
+                <table   class="table table-condensed table-hover table-striped ">
+                    <thead class="flip-content  ">
+                        <tr>
+                            <th  width="25%"  >区域 </th>
+                            <th  width="25%"  ng-if="! user.is_super_user">角色</th>
+                            <th   ng-if=" !user.is_super_user">权限</th>
+                            <th  width="5%" ng-if="userself">接收报警</th>
+                            <th  class= "w-50" ng-if="!userself">移除</th>
+                        </tr>
+                    </thead>
+
+                    <tbody ng-if=" page.data && roles ">
+                        <tr ng-repeat="  rr in  page.data " 
+                            ng-init=" privilge2Text( rr  , this ) ">
+                            <td> {{:: rr.region_name  || rr.name }}</td>
+                            <td ng-class="{'no-padder': !userself }" ng-if="! user.is_super_user">
+                                <span ng-if="userself"> {{:: rr.role_name }}  </span>
+
+                                <select ng-if="!userself" 
+                                ng-model="rr.role_id" 
+                                class="form-control" 
+                                ng-change="ccRegionRole( rr , this )" 
+                                ng-options=" r.id as r.name for r  in roles | filter:{'role_category': 1 } ">
+                                   <!--  <option value="">-无角色-</option> -->
+                                </select> 
+                            </td>
+ 
+                            <td ng-if="! user.is_super_user" class="text-xs no-padder">
+                                <div 
+                                    style="margin:0px;white-space:normal;word-wrap:break-word;word-break:break-all;line-height:1.4;" class="padder">
+                                    {{ rr.prText }}
+                                </div>
+                            </td>
+                            <td ng-if="userself">
+                                <label class="checkbox i-checks m-t-none m-b-none  ">
+                                    <input type="checkbox" ng-model=" rr.acceptAlarm " 
+                                        ng-change="acceptRegionAlarm( rr )">
+                                    <i></i>
+                                </label>
+                            </td>
+                            <td ng-if="!userself">
+                                <a href="" class="text-info" ng-click="delRegionAuthor( rr , $index )">移除</a>
+                            </td>
+                        <tr> 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="panel-footer  b-t "  style="min-height: 40px;" >
+           
+            <button ng-if=" !userself " class="btn btn-info   m-t-n-xs btn-sm   m-l-sm  pull-left " 
+                ng-click="addRegionAuthor()" >添加区域权限</button>
+     
+
+            <div   ng-if="user.is_super_user"  class=" text-center  "  >
+
+                <!--  修改 account.js 490 行左右的  :  itemsPerPage:   5  -->
+
+                 <pagination 
+                class="pagination-sm  " 
+
+                total-items="page.total" 
+                ng-model="page.currentPage"
+                 items-per-page=" 5 " 
+                 ng-change=" loadPageData( page.currentPage   ) " 
+                 num-pages=" page.numPages " max-size="10" 
+
+                 boundary-links="true" rotate="false" 
+
+                 first-text="&laquo;" 
+                 previous-text="&lsaquo;" 
+                 next-text="&rsaquo;" 
+                 last-text="&raquo;"
+
+                  >
+                </pagination>
+
+
+
+            </div> 
+ 
+  
+        </div>
+    </div>
+</div>
+
+
+<!--@if append -->
+ <!-- user = {{user}} -->
+<!--@endif -->

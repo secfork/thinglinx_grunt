@@ -1,0 +1,70 @@
+<div class="panel-body table-responsive  bg-light padding-5"  load-mask >
+    <!--jjw p改为h4-->
+    <h4 class="font-bold text-base">账户角色</h4>
+    <div    ng-repeat='r in accountRoles' ng-init=" op ={} ">
+        <!--jjw style-->
+        <div class='row  border temp-row  '
+            ng-class=" {'text-danger':  op.edit }" 
+            style="height: 40px;line-height: 2.5;border-radius: 2px;background-color: #F6F8F7;margin-top: 6px;box-shadow: 0 0 0 4px #f0f3f4;">
+            <div class=" float-left col-xs-10 " ng-click='op.show = !op.show '>
+                <!--jjw a-->
+                <!--<a class="fa" ng-class="{  'fa-plus-square-o': !op.show ,'fa-minus-square-o':op.show  }"></a>-->
+                <a style="display: inline-block;width: 10px" ng-class="{'fa':true ,'fa-angle-down': op.show, 'fa-angle-right': !op.show}"></a>
+                <span>{{r.name }}</span>
+            </div>
+
+            <div class="float-right text-center col-xs-2">
+                <a class=" text-info" ng-click="delRole(accountRoles , r , $index )" translate="del"> 删除</a>
+            </div>
+        </div>
+
+        <!--jjw bg-white m-b-->
+        <form ng-if=" op.show " class="well bg-white m-b-sm">
+            <!--  ng-disabled  =  "r.readOnly"  -->
+            <label class="checkbox i-checks  inline m-r w-sl m-l" ng-repeat=' a in promise[0]'>
+                <input type="checkbox"
+                       ng-checked=" r.privilege.indexOf(a)+1 " name={{a}}
+                       ng-click=" op.edit = true " class="ng-pristine ng-valid" >
+                <i></i> <span translate={{a}}></span>
+            </label>
+            <br/>
+            <!-- jjw btn-success m-b-sm m-l-sm -->
+            <button class="btn btn-sm w-46 btn-success m-b-sm m-l-sm" ng-click="updateRole( $event , r  , accountRoles , $index )" ng-show="op.edit">保存</button>
+        </form>
+
+
+    </div>
+
+
+
+    <!--jjw p改为h4-->
+    <h4 class="font-bold text-base">区域角色</h4>
+    <div ng-repeat='r in regionRoles ' ng-init=" op ={} ">
+        <div class='row  border temp-row ' ng-class=" {' text-danger':  op.edit }" style="height: 40px;line-height: 2.5;border-radius: 2px;background-color: #F6F8F7;margin-top: 6px;box-shadow: 0 0 0 4px #f0f3f4;">
+            <div class=" float-left col-xs-10 " ng-click=' op.showp = !op.showp '>
+                <!--jjw a-->
+                <!--<a class="fa" ng-class="{   'fa-plus-square-o': !op.showp ,'fa-minus-square-o':op.showp  }"></a>-->
+                <a style="display: inline-block;width: 10px" ng-class="{'fa':true ,'fa-angle-down': op.showp, 'fa-angle-right': !op.showp}"></a>
+                <span>{{r.name }}</span>
+            </div>
+            <div class="float-right text-center col-xs-2">
+                <a class=" text-info" ng-click="delRole(regionRoles , r , $index )" translate="del"> 删除</a>
+            </div>
+        </div>
+        <!--jjw bg m-b-->
+        <form ng-if=" op.showp " class="well bg-white m-b-sm">
+            <label class="checkbox i-checks  inline m-r w-sl m-l" ng-repeat=' a in promise[1]'>
+                <input type="checkbox" ng-checked=" r.privilege.indexOf(a) +1 " ng-click=" op.edit = true "
+                       name={{a}} class="ng-pristine ng-valid">
+                <i></i> <span translate={{a}}></span>
+            </label>
+            <br/>
+            <!-- jjw btn-success m-b-sm m-l-sm -->
+            <button class="btn btn-sm w-46 btn-success m-b-sm m-l-sm" ng-click="updateRole( $event ,  r  , regionRoles , $index )" ng-show="op.edit">保存</button>
+        </form>
+    </div>
+    <button class='btn m-b-xs m-t-xs  btn-sm  btn-primary w-70' ng-click='addRole( this  )'>添加角色</button>
+
+
+
+</div>

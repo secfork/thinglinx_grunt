@@ -1,0 +1,54 @@
+
+
+<div class="modal-header  text-center  "  >
+    <span ng-if="isAdd"> 编辑点</span>
+    <span ng-if="!isAdd" >添加点</span> 
+</div>
+
+
+<div class="modal-body ">
+
+    <form  name="form" class="  form-validation form-horizontal   " >
+ 
+        <input tl-wrap
+               label="点名称"
+               ng-model="point.name"
+               required>
+
+        <select tl-wrap label="轮询方式"
+            ng-model="point.poll"  
+            ng-options = " o.v as o.k  for  o in $sys.point.pointPoll  "
+        ></select>       
+ 
+        <select tl-wrap  label="独立分包"
+            ng-model="point.is_packet"
+            ng-options = "  o.v as o.k for o in  $sys.point.packet" 
+          > 
+        </select>  
+
+        <div class="m-t"></div>
+
+        <ng-include   src=" 'athena/_point/'+ dm.driver_id+'.html' "></ng-include>
+
+     
+        <!-- 以下的待开发 -->
+       <textarea tl-wrap  ng-model="point.desc" label="text.desc" ></textarea>
+
+
+    </form>
+
+</div>
+
+
+<ng-include src=" 'athena/debris/_modal_footer.html' "></ng-include>
+ 
+<!-- @if  append  -->
+        
+  dm.dirver_id = {{dm.driver_id}} <hr/>
+
+
+  point = {{point}}
+
+<!--@endif  -->
+
+ 

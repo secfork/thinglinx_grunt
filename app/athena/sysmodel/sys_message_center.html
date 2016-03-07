@@ -1,0 +1,59 @@
+ 
+<div class="panel-heading   w-full  " ng-if="isModelState">
+    <!--jjw 添加div-->
+    <div class="form-group m-t-sm m-b-sm m-l-xs">
+        <span style="margin-right: 30px">  配置项 </span>
+        <select ng-model="odp.puuid" class="input input-sm w form-control inline" ng-options="   p.uuid as p.name for p in profiles  " ng-change="loadMessages( odp.puuid  )">
+        </select>
+    </div>
+
+</div> 
+
+<div class="panel-body table-responsive no-padder  "
+ ng-class="{'b-t-none': !isModelState}">
+    <!--jjw j_table b-t-none-->
+    <table class="  table table-striped j_table b-t-none">
+
+ 
+        <thead class="flip-content">
+            <tr class="background ">
+                <th> Message名称 </th>
+                <th> 触发器 Id </th>
+                <th> 发送方式 </th>
+                <th> 发送对象</th> 
+                <th width="30%"> 消息体</th>
+ 
+                <th ng-if="isModelState"> 操作 </th>
+            </tr>
+        </thead>
+        <tbody class="text-center "> 
+            <tr ng-repeat="  m  in messages  ">
+ 
+                <td> {{m.name}}</td>
+                <td> {{m.trigger_id}}</td>
+                <td> {{m.user_category}}</td>
+                <td> {{m.user_id }}</td>
+                <td> {{m.message_params}}</td>
+                 <td ng-if="isModelState">
+                    <a class="text-info m-r-xs" ng-click="createMessage(  $index  , m   )">编辑</a>
+                    <a class="text-info m-r-xs" translate="bu.bu4" ng-click="deleteMessage(  $index  , m   )">移除</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+<div class="panel-footer b-t-none" ng-if="isModelState"> 
+    <button class="btn btn-primary btn-sm w-70 m-t-sm m-b-sm m-l-xs" ng-click=" createMessage( ) ">
+ 
+        添加通知 
+    </button>
+</div>
+ 
+
+
+
+
+  

@@ -1,0 +1,76 @@
+<!--jjw m-t-lg m-b-sm-->
+<div class=" text-center m-t-lg m-b-sm">
+    <!--  {{app.name}}   style="width: 150px;"   -->
+    <img src="img/logo_2.png" class="logo">
+</div>
+<div ng-show=" od.step == '1' "  load-mask class="m-b-lg container w-xxl w-auto-xs m-t-lg  ">
+    <form name="step1" class="form-validation">
+        <strong>请输入您要找回密码的账户名称</strong>
+        <input ng-model="account.account" class="form-control   m-t-xs" required>
+        <input name="password" ng-model="account.identify" class="form-control inline   m-t-xs" style="width:55%" ng-minlength="4" ng-maxlength="4" placeholder="请输入验证码" required>
+        <img ng-src="node/common/identify/admin?t={{t||123}}" class="inline  m-l " style="width: 100px;height: 35px;">
+        <a class="fa fa-refresh text-info  " ng-click=" t = t+1 ; od.identiok = false "></a>
+        <button type="submit" ng-disabled=" !step1.$valid" class="btn btn-lg btn-primary btn-block m-t" ng-click=" setp1( $event )"> 下一步 </button>
+        <a ui-sref="access.signin" class="btn btn-lg btn-default btn-block  ">返回登录</a>
+    </form>
+</div>
+ 
+
+<div ng-show=" od.step == '2' " class="m-g-lg  m-t-lg " >
+    <div class="wrapper text-center">
+        <h4 class="m-t-lg">邮件已经发送至管理员的邮箱</h4>
+        <h4>  请点击邮件中的连接完成管理员用户密码修改</h4>
+        <i class="fa fa-check-circle text-success fa-3x"></i>
+        <br/>
+        <a ui-sref="access.signin" class="btn btn-lg w btn-default  w-xxm">返回登录</a>
+    </div>
+</div>
+<div ng-show=" od.step == '3' "   load-mask class="m-b-lg  m-t-lg container w-xxl w-auto-xs   " >
+    <form name="form2" class="form-validation  m-t ">
+        <div class="wrapper text-center">
+            <strong>修改管理员用户密码</strong>
+        </div>
+        <div class="list-group list-group-sm">
+           
+            <div class="list-group-item ">
+                <input name="username" ng-model="admin.username" placeholder="管理员用户名,至少2个字符" ng-minlength="2" ng-maxlength='16' class="form-control no-border " required>
+               
+            </div>
+ 
+
+            <div class="list-group-item ">
+                <input name="password" ng-model="admin.password" placeholder="管理员密码,至少6个字符" ng-minlength="6" ng-maxlength='16' onfocus="this.type='password'" class="form-control no-border " required>
+                <!--ng-minlength="6"   ng-maxlength="20" -->
+            </div>
+            <div class="list-group-item">
+                <input type="password" class="form-control  no-border " name="confirm_password" required ng-model="confirm_password" placeholder=" 确认密码 " ui-validate=" '$value==admin.password' " ui-validate-watch=" 'admin.password' ">
+                <div ng-show='form2.confirm_password.$error.validator' class="text-danger">
+                    密码输入不一致
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="cc_done()">完成</button>
+        <a ui-sref="access.signin" class="btn btn-lg btn-default btn-block">返回登录</a>
+    </form>
+</div>
+
+
+
+<div ng-show=" od.step == '4' "class="m-b-lg  m-t-lg container w-xxl w-auto-xs "  >
+
+    <div class="m-g-lg text-center" >
+        <h4>页面失效!</h4>
+        <h5>5秒后返回登录页面!</h5>
+    </div>
+</div>
+
+
+
+<div class="pos-abt   w-full text-center" style="bottom:0">
+    <div class="  " ng-include="'athena/page_footer.html'"></div>
+</div>
+<!--&lt;!&ndash;@if append &ndash;&gt;-->
+<!--account = {{account}}-->
+<!--<br/> admin = {{admin}}-->
+<!--<br/> step ={{step}}-->
+<!--&lt;!&ndash;@endif &ndash;&gt;-->

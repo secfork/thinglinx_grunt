@@ -1,0 +1,12 @@
+<!-- 问题反馈 -->
+<div class="modal-header">
+    <h4>问题反馈</h4>
+</div>
+<div class="modal-body">
+    <form class=" bs-example  form-validation form-horizontal  padding-10 " name="form">
+        <input tl-wrap-l label="类型:" ng-model="point.name">
+        <!-- 以下的待开发  -->
+        <textarea tl-wrap-l ng-model="point.desc" label="描述:"></textarea>
+    </form>
+</div>
+<ng-include src=" 'athena/debris/_modal_footer.html' "></ng-include>

@@ -1,0 +1,89 @@
+
+
+<!-- navbar -->
+<!--jjw style        -->
+<div data-ng-include=" 'athena/header.html' " class="app-header navbar" style="box-shadow: 0 2px 2px rgba(0,0,0,0.05)">
+</div>
+<!-- / navbar -->
+<!-- menu -->
+<div data-ng-include=" 'athena/aside.html' " class="app-aside hidden-xs {{app.settings.asideColor}}">
+</div>
+<!-- / menu -->
+<!-- content -->
+<!--<div class="app-content    border bg-info  "  style="height: 200px ; " >-->
+<div class="app-content">
+    <div ui-butterbar ></div>
+    <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".app-aside"></a>
+
+    <!--<div class="app-content-body" style="overflow: auto" ui-view></div>-->
+    <!--jjw wrapper bg-normal-->
+ 
+    <div class="app-content-body  bg-normal"  ui-view></div>
+
+</div>
+<!-- ajax 加载 遮罩!   -->
+<!-- <div class="modal-backdrop " id="ajax_modal" style="z-index: 104000;  display:none; ">
+    <i class="fa fa-spin fa-4x fa-spinner w-auto h-auto  text-info  " style="margin-top: 25%; margin-left:50%; opacity:1"></i>
+</div>
+ -->
+
+
+
+<!-- /content -->
+<!-- footer -->
+<!--jjw bg-normal b-b-->
+<div class="app-footer wrapper b-t text-xs bg-normal">
+    <span class="pull-right" ng-controller="service">
+
+    <!--     <div class="btn-group dropdown dropup">
+
+          <button class="btn btn-default btn-sm dropdown-toggle"
+              aria-haspopup="true"
+              aria-expanded="false">
+              <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="">Action</a></li>
+        <li><a href="">Another action</a></li>
+        <li><a href="">Something else here</a></li>
+        <li class="divider"></li>
+        <li><a href="">Separated link</a></li>
+    </ul>
+</div>
+-->
+<a class=" m-r-xs"    href="//www.thinglinx.net" target="_blank">联系我们</a>
+<!--
+|
+<a class=" m-r-xs" ui-sref="app.tech">技术支持</a>|
+<a class=" m-r-xs" ng-click=" u()"> 使用条款 </a>|
+<a class=" m-r-xs" ng-click="feedback()">问题反馈</a>|
+<a class=" m-r-xs" ng-href="http://www.gravatar.com/avatar" target="_blank">帮助</a>
+ -->
+
+<a href="javascript:scroll(0,0)" ui-scroll="header" class="m-l-sm  m-r-sm ">
+<i class="fa fa-long-arrow-up"></i>
+    <!--  返回顶部 -->
+</a>
+</span>
+    <!--jjw span-->
+<span class="p-l">京ICP备14040729号-3</span>
+<!-- 联系我们”、“*技术支持（社区）”、“*帮助”、
+“问题反馈”和“使用条款”等链接
+<i class="fa fa-fw fa-twitter"></i>
+ <button class="btn btn-rounded btn-sm btn-info">联系我们 </button>
+-->
+</div>
+
+
+<!--@if append  -->
+<!-- 
+ <div data-ng-include=" 'athena/settings.html' " class="settings panel panel-default"></div> 
+  -->
+<!--@endif  -->
+
+
+
+<!-- <div data-ng-include=" 'athena/tips.html' "  ></div> -->
+
+
+ 

@@ -1,0 +1,29 @@
+<div class=" panel-body">
+    <!-- geate way   -->
+    <!--  dtu  -->
+    <!--   DTU   -->
+    <form name="form" class="form-horizontal form-validation  tl-center-form   ">
+        <input type="submit" class="hidden">
+        <!-- 手机-->
+        <!-- jjw 采集站->系统 -->
+        <input tl-wrap-l label="系统名称" required ng-model="station.name">
+        <span ng-if="false" tl-wrap-l label="激活码" ng-model="dastation.activeno"> </span>
+        <input tl-wrap-l label="项目" readonly ng-model="dastation.activeno">
+        <input tl-wrap-l label="联系人" ng-model=" project.linkman ">
+        <input tl-wrap-l label="电话号码" ng-model=" project.tel " placeholder="XXXX-XXXXXXX" ng-pattern="/^[0-9]{3,4}-[0-9]{7,8}$/">
+        <input tl-wrap-l label="手机" ng-model=" project.cellphone " ng-pattern="/^[0-9]{11}$/">
+        <input tl-wrap-l label="电子邮件" ng-model=" project.email " type="email">
+        <input tl-wrap-l label="地址" ng-model=" project.address ">
+        <textarea tl-wrap-l label="备注" ng-model=" project.msg " style="resize: none" placeholder=" 不应超过100字符"></textarea>
+        <div class="line   line-dashed b-b line-chart m-l-n-sm   "></div>
+        <div class="row m-t-xs">
+            <div class="col-xs-12">
+                <button class="btn btn-success  btn-sm w-46" ng-click="setNetWork()"> 保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--jjw-->
+<!--&lt;!&ndash;@if append &ndash;&gt;-->
+<!--station = {{station }}-->
+<!--&lt;!&ndash;@endif &ndash;&gt;-->
