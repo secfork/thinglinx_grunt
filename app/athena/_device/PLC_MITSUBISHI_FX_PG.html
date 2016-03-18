@@ -1,0 +1,13 @@
+<!--
+设备厂商：   
+驱动ID：    PX_PG
+驱动描述：    
+
+ -->  
+ <select tl-wrap
+        label="设备型号"
+        ng-model="D.params.type"  
+
+        ng-options = " o.v as o.k for  o in [ {k:'FX1S' , v:0} , {k:'FX2N' , v:1} ]"
+
+        required   ></select>

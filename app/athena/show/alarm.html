@@ -129,7 +129,7 @@
                     <tr class="background ">
                         <th> 报警ID </th>
                         <th width="10%"> 报警时间</th>
-                        <th>系统ID</th>
+                        <th>系统</th>
                         <th> 报警描述 </th>
                         <th> 重要性 </th>
                         <th> 类别 </th>
@@ -144,7 +144,9 @@
                         <td>
                             <a ui-sref='app.s_system_prop.basic({uuid: a.system_id })' class="text-info">  
 
-                            {{ :: a.system_id }}  </a>
+                              <!--  {{ :: a.system_id }}  -->
+                                {{ :: a.system_name }} 
+                             </a>
                         </td>
                         <td> {{ :: a.desc }}</td>
                         <td> {{ :: _config[a.severity] }} </td>

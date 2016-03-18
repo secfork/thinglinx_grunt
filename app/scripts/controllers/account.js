@@ -1,3 +1,8 @@
+
+// http://thinglinx-test.oss-cn-beijing.aliyuncs.com/10108.0/NyqTgJE-gi7=ffu630ns.jpeg
+
+// http://thinglinx-test.oss-cn-beijing.aliyuncs.com/10108/system/Vke2gdxrluZ_x4f2u9fz2527
+
 angular.module('app.account', [])
 
 .controller("account_info", function($scope, $state, $source, $show, $q) {
@@ -156,41 +161,13 @@ angular.module('app.account', [])
                     //     return ; 
                     // }
 
-                    $scope.user.username && $source.$user.get( { op:"getbyname" , name: $scope.user.username , account_id: S.user.account_id  } , function(resp){
-                            
+                    // $scope.user.username && $source.$user.get( 
+                    //     { op:"getbyname" , name: $scope.user.username , account_id: S.user.account_id  } ,
 
-                            // 用户存在 , 且有区域管理权限; 
-                            if( resp.ret   ){  // 名字被占用;    
-                                var exist_user = resp.ret ; 
-                                var title = $scope.$translate.instant('ER_USER_EXIST');
-
-                                if( S.user.is_super_user  || exist_user.is_super_user  || exist_user.id == S.user.id ){
-                                    angular.alert(   title   );
-                                    return ;
-                                } 
-
-                                // 有没有 区域管理权限;   
-                                // &&  S.user.accountRol.privilege.indexOf( 'REGION_MANAGE') > 0   'REGION_MANAGE' S.user.accountRol.privilege
-                                if( S.user.accountRol.privilege.indexOf( 'REGION_MANAGE') >= 0  ){
-                                    $scope.confirmInvoke( { title: title , note:  "是否将用户:" +  exist_user.username+ '加入您所管理的区域?' } , function( close ){
-
-                                        $source.$user.get( { op:"appendregionrole" , user_id: exist_user.id } , function(){
-                                            close();
-                                            $scope.cancel();
-
-                                            angular.alert("附加成功!") ;
-
-                                            $scope.page.data.unshift( exist_user )
-
-                                        } ,  function(){
-                                             close();
-                                             $scope.cancel();
-                                        }) 
-                                    })
-                                    return ;
-                                } 
-                            }; 
-                    })
+                    //     function(resp){ 
+                           
+                    //     }
+                    // )
                 }
 
                 $scope.done = function() {
@@ -203,6 +180,51 @@ angular.module('app.account', [])
                         $scope.page.data.unshift($scope.user)
                         $scope.cancel();
 
+                    } , function( resp ){ 
+                        // 用户已存在, 或其他错误; 
+                        // 用户存在 , 且有区域管理权限; 
+                        $scope.cancel();
+                        if( resp.err == "ER_USER_EXIST"){
+                            depuName2addUser( $scope ) ;
+                        }
+
+
+
+                        // return ;
+                        // if( resp.err =="ER_USER_EXIST"   ){  // 名字被占用; 
+
+                        //     var exist_user = resp.ret ; 
+                        //     var title = $scope.$translate.instant('ER_USER_EXIST');
+
+                        //     if( S.user.is_super_user  ||
+                        //      exist_user.is_super_user  ||
+                        //       exist_user.id == S.user.id ){
+                        //         angular.alert(   title   );
+                        //         return ;
+                        //     } 
+
+                        //     // 有没有 区域管理权限;   
+                        //     // &&  S.user.accountRol.privilege.indexOf( 'REGION_MANAGE') > 0   'REGION_MANAGE' S.user.accountRol.privilege
+                        //     if( S.user.accountRol.privilege.indexOf( 'REGION_MANAGE') >= 0  ){
+                        //         $scope.confirmInvoke( { title: title , note:  "是否将用户 " +  exist_user.username+ ' 加入您所管理的区域?' } , function( close ){
+
+                        //             $source.$user.get( { op:"appendregionrole" , user_id: exist_user.id } , function(){
+                        //                 close();
+                        //                 $scope.cancel();
+
+                        //                 // angular.alert("附加成功!") ;
+
+                        //                 $scope.page.data.unshift( exist_user )
+
+                        //             } ,  function(){
+                        //                  close();
+                        //                  $scope.cancel();
+                        //             }) 
+                        //         })
+                        //         return ;
+                        //     } 
+                        // }; 
+
                     });
                 }
 
@@ -210,7 +232,37 @@ angular.module('app.account', [])
         })
     };
 
-    
+    // 名字被占用时  , 且 区域用户管理 时, 添加user ; 
+    function  depuName2addUser ( scope ){
+
+        var title = $scope.$translate.instant('ER_USER_EXIST')  ,
+            username = scope.user.username ,
+            loadTheUser ;
+ 
+        if( S.user.is_super_user  ||   username == S.user.username ){
+            angular.alert(   title   );
+            return ;
+        }   
+
+        $scope.confirmInvoke( { title: title , note:  "是否将用户 " +  username+ '加入您所管理的区域?' } , 
+            function( close ){
+
+            // 返回 exist_user 对象; 
+            $source.$user.get( { op:"appendregionrole" , name: username } , function( resp ){
+                close(); 
+
+               // angular.alert("附加成功!") ;
+
+                $scope.page.data.unshift( resp.ret  )
+
+            } ,  function(){
+                 close(); 
+            }) 
+        })
+
+
+    }
+
 
 
 
@@ -488,7 +540,7 @@ angular.module('app.account', [])
     $scope.addAccountRole = function() {
 
         var n = $scope.user.accountRol.id,
-            note = n ? "将用户" + $scope.user.username + " 的账户角色修改为:" + role_KV[n].name + "?" : "删除账户角色!";
+            note = n ? "将用户" + $scope.user.username + " 的账户角色修改为 " + role_KV[n].name + "?" : "删除账户角色!";
         $scope.confirmInvoke({ title: "更改账户角色", note: note },
             function(next) {
                 if (n) {
@@ -759,8 +811,8 @@ angular.module('app.account', [])
     $scope.delRegionAuthor = function(rr, $index) {
 
         $scope.confirmInvoke({
-            title: "删除权限",
-            note: "您确定要删除用户" + $scope.user.username + "在区域" + rr.region_name + "的" + rr.role_name + "权限!"
+            title: "移除用户",
+            note: "您确定将用户" + $scope.user.username + "从区域" + rr.region_name + "中移除?"
 
         }, function(next) {
             $source.$user.delete({
@@ -783,7 +835,7 @@ angular.module('app.account', [])
         // 在创建一次; 覆盖原先的; 
         console.log(scope);
 
-        var note = "将用户" + $scope.user.username + " 在区域 " + (rr.region_name || rr.name) + "的角色修改为:" + role_KV[rr.role_id].name + "?";
+        var note = "将用户" + $scope.user.username + " 在区域 " + (rr.region_name || rr.name) + " 的角色修改为" + role_KV[rr.role_id].name + "?";
 
         $scope.confirmInvoke({ title: "更改区域角色", note: note },
             function(next) {
@@ -888,14 +940,14 @@ angular.module('app.account', [])
     textCond = {
         smsInterval: "发送验证码",
         emailInterval: "发送验证邮件"
-    };
-
-
+    }; 
     // 
     window.interval = window.interval || {
         smsInterval: undefined,
         emailInterval: undefined
     }
+    $scope.interval = window.interval ;
+
     window.intervalTimes = {
         smsInterval: $sessionStorage.smsInterval > 0 ? $sessionStorage.smsInterval : t_,
         emailInterval: $sessionStorage.emailInterval > 0 ? $sessionStorage.emailInterval : t_
@@ -1307,7 +1359,7 @@ angular.module('app.account', [])
 })
 
 
-.controller('account_weichat', function($scope, $sessionStorage, $source, $timeout) {
+.controller('account_weichat', function($scope, $sessionStorage, $source, $timeout , $localStorage ) {
 
     console.log(" account_weichat" , $scope.user );
 
@@ -1511,7 +1563,12 @@ angular.module('app.account', [])
 
     function configWei() {
         $scope.wei.menu = $scope.menu.join(',');
-        $source.$weChat.activeServer($scope.wei, function(resp) {
+        var accountname = $localStorage.account;
+        if( !accountname){
+            alert("no account name !");
+            return ; 
+        }
+        $source.$weChat.activeServer(  angular.extend( { accountname:  accountname } , $scope.wei), function(resp) {
             pictureFile = null;
             $scope.op.step = 3;
         })

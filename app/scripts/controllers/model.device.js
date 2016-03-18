@@ -99,6 +99,7 @@
                 }
             };
 
+            var  drivers;
             // 添加 || 编辑  模版; 弹出框 ;=================================================
             $scope.add_edit_t = function(scope, t) { //  temp-scope , 或者; super-scope ;
                 $modal.open({
@@ -115,13 +116,13 @@
 
                         if (!t) { // 新建;
                             //$scope.drivers =
+                            
+                            
                             $source.$driver.get({
                                 type: "device"
                             }, function(resp) {
 
-                                $scope.drivers = $filter('filter')(resp.ret, {
-                                    category: 'DEVICE'
-                                });
+                                $scope.drivers =  resp.ret ;
                                 $scope.T.driver_id = $scope.drivers[0].driver_id;
                             });
                         }

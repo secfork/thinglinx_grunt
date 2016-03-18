@@ -701,7 +701,7 @@ body {
   clear: both;
 }
 .app-content-body {
-  padding-bottom: 50px;
+  padding-bottom: 20px;
   float: left;
   width: 100%;
 }

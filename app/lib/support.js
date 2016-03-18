@@ -1,3 +1,5 @@
+// 
+
 Date.prototype.dateAfter = function(num, type) {
     num = (num == null ? 1 : num);
     if (typeof(num) != "number") throw new Error(-1, "dateAfterDays(num,type)的num参数为数值类型.");
@@ -17,7 +19,8 @@ Date.prototype.RtnMonByWeekNum = function(weekNum) {
         week = (week == 0 ? 7 : week);
         return date.dateAfter(weekNum * 7 - week - 7 + 7, 1);
     }
-    //根据当前日期所在年和周数返回周日的日期
+
+//根据当前日期所在年和周数返回周日的日期
 Date.prototype.RtnSunByWeekNum = function(weekNum) {
         if (typeof(weekNum) != "number")
             throw new Error(-1, "RtnByWeekNum(weekNum)的参数是数字类型.");
@@ -26,7 +29,8 @@ Date.prototype.RtnSunByWeekNum = function(weekNum) {
         week = (week == 0 ? 7 : week);
         return date.dateAfter(weekNum * 7 - week - 2 + 7, 1);
     }
-    //通过当前时间计算当前周数
+
+//通过当前时间计算当前周数
 Date.prototype.getWeekNumber = function() {
     var d = new Date(this.getFullYear(), this.getMonth(), this.getDate(), 0, 0, 0);
     var DoW = d.getDay();

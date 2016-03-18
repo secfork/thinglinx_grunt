@@ -30,7 +30,7 @@
 <!-- ============================================ -->
 <div class="form-group" ng-if="isAdd">
     <label class="col-sm-3  control-label text-base">
-        <mark/> 密码
+        <mark></mark> 密码
     </label>
     <div class="  col-sm-8">
         <input type="password" placeholder="密码(至少六位)" name="password" ng-maxlength="20" ng-minlength="6" class="form-control " ng-model=" user.password " required>
@@ -38,7 +38,7 @@
 </div>
 <div class="form-group" ng-if="isAdd">
     <label class="col-sm-3  control-label text-base">
-        <mark/> 确认密码
+        <mark></mark> 确认密码
     </label>
     <div class="  col-sm-8">
         <input type="password" class="form-control  " name="confirm_password" required ng-model="op.confirm_password" placeholder=" 确认密码 " ui-validate=" '$value==user.password' ">

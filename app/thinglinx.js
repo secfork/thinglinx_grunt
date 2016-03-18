@@ -116,7 +116,7 @@ angular.module('thinglinx', [
 
             $resourceProvider.defaults.actions = {
                 put:    {method:"PUT"},
-                get:    {method: "GET"},
+                get:    {method: "GET"   },
                 post: { method:"POST"},
                 "delete": {method: "DELETE"} ,
                 remove:   {method: "DELETE"},
@@ -126,7 +126,7 @@ angular.module('thinglinx', [
                 save:   {method: "POST"},
 
                 getArr: {method: "GET", isArray: !0},
-                query:  {method:"GET"} 
+                query:  {method:"GET"  } 
 
             }
 

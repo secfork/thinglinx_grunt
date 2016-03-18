@@ -7,7 +7,9 @@
     <form name="form" class=" form-validation form-horizontal   ">
         <!-- <input type="submit" class="hidden">  -->
         <input tl-wrap ng-model="sm.name" label="系统模型名称" required>
-        <select tl-wrap ng-model="sm.mode" ng-if="isAdd" ng-options=" k as v  for (k,v) in $sys.sysModelMode.values" ng-change=" sm.comm_type=sm.mode=='1'?'1':undefined " 
+        <select tl-wrap ng-model="sm.mode" ng-if="isAdd" 
+          ng-options=" k as v  for (k,v) in $sys.sysModelMode.values" 
+          ng-change=" sm.comm_type=sm.mode=='1'?'1':undefined " 
         label="模式" required>
         </select>
         <div class="form-group " ng-if=" sm.mode == 1">

@@ -19,7 +19,8 @@
             'ER_CONTACT_NOT_EXIST': true,
             'ER_SYSTEM_HAS_NOT_BOUND': true,
             'ACK_MESSAGE_NOT_EXIST': true,
-            "ER_USER_NOT_EXIST": true 
+            "ER_USER_NOT_EXIST": true ,
+            "ER_USER_EXIST":true
 
         };
 
@@ -309,11 +310,9 @@
                         angular.alert({
                             type: "resp_err",
                             title: resp.err
-                        });
-
-                        throw resp;
+                        }); 
                     }
-                    //throw resp ;
+                    throw resp ;
                 }
 
                 if (resp.total == 0 && resp.data.length == 0) {
@@ -391,7 +390,7 @@
             var map = new BMap.Map(Dom_id); // 创建Map实例
 
 
-            map.centerAndZoom(new BMap.Point(116.404, 39.915), 15);
+            map.centerAndZoom(new BMap.Point(116.404, 39.915), 8);
 
             // 初始化地图,设置中心点坐标和地图级别 
 
@@ -418,6 +417,16 @@
             map.addControl(top_left_control);
             map.addControl(top_left_navigation);
             // map.addControl(top_right_navigation);
+
+            
+            // var cr = new BMap.CopyrightControl({anchor: BMAP_ANCHOR_TOP_RIGHT});   //设置版权控件位置
+            // map.addControl(cr); //添加版权控件
+
+            // var bs = map.getBounds();   //返回地图可视区域
+            // cr.addCopyright({id: 1, content: "<a href='#' style='font-size:20px;background:yellow'>我是自定义版权控件呀</a>", bounds: bs}); 
+
+
+
             return map;
         }
 
@@ -492,7 +501,9 @@
 
             var $mapdom, marks, map;
 
-            $mapdom = $("#" + domid);
+            // $mapdom =  typeof domid =='string'? $("#" + domid) : $( domid );
+
+            $mapdom = $("#"+ domid );
 
             // return  initMap( domid ) 
             // 取消  resize 事件 ;

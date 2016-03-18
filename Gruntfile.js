@@ -29,7 +29,7 @@ module.exports = function(grunt) {
     // Configurable paths for the application
     var appConfig = {
         app: require('./bower.json').appPath || 'app',
-        dist: 'dist',
+        dist: 'public',
         thing: "thing/", // app.js , app.css 目录;
     };
 
@@ -246,7 +246,8 @@ module.exports = function(grunt) {
                 port: 9000,
                 // Change 'hostname' to '0.0.0.0' to access  the server from outside.
 
-                hostname: 'localhost',
+                // hostname: "localhost",
+                hostname: 'nzp9uf7kusus3nuxe3',
                 // hostname: '0.0.0.0',
                 livereload: 35729   // 默认是 35729 ， 但是 nodeconsole 战中了；
             }, 
@@ -263,10 +264,9 @@ module.exports = function(grunt) {
             
             proxies:[
                 {
-                    context:"/node",
- 
+                    context:"/node", 
                     host:"127.0.0.1",   // local ; 
-                    //host:'182.92.194.124' , // test_console ;  
+                    // host:'test.thinglinx.net' , // test_console ;  
                     port:"8080",
                     https: false,
                     changeOrigin: true

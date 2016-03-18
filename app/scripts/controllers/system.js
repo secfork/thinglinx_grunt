@@ -7,7 +7,7 @@
 
 
     .controller("dastation_ignore_active", function($scope, $state, $stateParams, $source,
-        $modal, $q, $map, $sys, $timeout, $interval, $utils, $http, $templateCache,
+        $modal, $q, $map, $sys, $timeout, $interval, $utils, $http, $templateCache, $templateRequest,
         $filter, $interpolate) {
 
         //是否为 show 模块;
@@ -50,6 +50,7 @@
 
         $scope.updataORdel = "del";
 
+        $scope.op = { lm:"list"};
 
         $scope.od = {
             state: $scope.isShowModul ? 1 : undefined,
@@ -93,7 +94,21 @@
 
         $scope.loadPageData = function(pageNo) {
 
-            $scope.showMask = true;
+            // $scope.showMask = true;
+
+            if( $scope.op.lm == "map"){
+
+                forMapPromise = $source.$system.get(  angular.extend( {options:"queryformap"} , $scope.od ), function(resp){
+                    map.clearOverlays(); 
+                      
+                    map.addOverlay(  ceratePointOverlay( resp.ret )     );
+
+                    $scope.showMask = false ;
+
+                }).$promise;  
+                return ; 
+            }
+ 
 
             $scope.page.currentPage = pageNo;
             // 分页加载 系统数据;
@@ -102,7 +117,7 @@
 
                 currentPage: pageNo,
                 itemsPerPage: $sys.itemsPerPage
-            }, $scope.od);
+            }, $scope.od );
 
             $source.$system.query(d).$promise.then(function(resp) {
 
@@ -199,46 +214,95 @@
 
         //  切换到 地图; 
         var map, points;
-        $scope.initMap = function(dom) {
-            map = $map.createMap($scope, "bdmap", 268);
 
-            $map.createDAPoint2Map(map, $scope.page.data, showMsgHandler);
+
+        // 得到我所有管理的 system  制作展示 ,必要字段, 避免 大流量数据; 
+        var forMapPromise  , pointCollection , marker ,
+            collenTionOptions = {
+                        size: 7,
+                        shape:  BMAP_POINT_SHAPE_WATERDROP,
+                        color: 'red'
+            } ,
+            markerOptions = {   offset: new BMap.Size( 0,5)     }  
+            ;
+
+        // 展示 system  属性; 
+        function  pointMouseOver (e){
+            var point = e.point ,
+                system =  point.system  ;
+
+                system.region_name = $scope.rg_k_v[system.region_id].name ;
+
+
+                $templateRequest("athena/dastation/prop_map_popup.html").then( function(html){
+                    
+                    marker =  point.marker ||  new BMap.Marker( point , markerOptions ); 
+                    point.marker  = marker ;
+
+                    map.addOverlay(marker );
+
+                    // s.proj_name = s.proj_name || projName; // ;
+                    system.create_time = $filter("date")(system.create_time, "yyyy-MM-dd hh:mm:ss");
+                    // system 类型;
+                    // system.type =  $sys.stationtype.values[s.type].k ; 
+                    var str = $interpolate(html)(system);
+                    var infoWindow = new BMap.InfoWindow(str);
+                    marker.openInfoWindow(infoWindow); 
+                })  
+        }
+
+        function  pointMouseOut (e){
+                var point = e.point ;  
+                    marker = point.marker  || marker ; 
+                    marker.closeInfoWindow();
+                    map.removeOverlay( marker );
+                    point.marker = null ; 
+        }
+
+        // 后台返回的poing 保证了有  经纬度; 
+        function ceratePointOverlay ( pointArray ){
+            var  collection = new BMap.PointCollection(
+                        pointArray.map( function( v, i ){  
+                            var p = new BMap.Point( v.longitude , v.latitude ) // long 经度 , lat 维度 ;
+                            p.system = v ; 
+
+                            return   p ;
+                        }),
+                        collenTionOptions 
+                    ); 
+ 
+            //mouseover 显示 system 名字;  详细属性;  
+            collection.addEventListener("mouseover" ,  pointMouseOver );
+
+            collection.addEventListener( "mouseout" ,  pointMouseOut ) ;
+
+            return collection ;
 
         }
 
-        function showMsgHandler(event) {
-            // this =  dbpoint ; 
-            var system = this.system,
-                that = this;
+           
 
-            //console.log( $templateCache.get("athena/dastation/prop_map_popup.html") )
-            $http({
-                url: "athena/dastation/prop_map_popup.html",
-                cache: $templateCache
-            }).success(function(html) {
-                // s.proj_name = s.proj_name || projName; // ;
-                system.create_time = $filter("date")(system.create_time, "yyyy-MM-dd hh:mm:ss");
-                // system 类型;
-                // system.type =  $sys.stationtype.values[s.type].k ; 
-                var str = $interpolate(html)(system);
-                var infoWindow = new BMap.InfoWindow(str);
-                that.openInfoWindow(infoWindow);
-                //  删除 手机 小图片;
+        $scope.initMap = function( ) { 
+
+            // map =   $map.createMap($scope, document.getElementsByClassName("sys_bdmap"), 268);   
+            map =   $map.createMap($scope,  "bdmap", 168);    
+
+            $scope.showMask = true ; 
+
+            forMapPromise = forMapPromise || $source.$system.get( 
+                angular.extend( {options:"queryformap"} , $scope.od )
+            ).$promise ;
+
+            forMapPromise.then( function(resp ){  
+
+                map.addOverlay(  ceratePointOverlay( resp.ret ) );
+
+                $scope.showMask = false ;
             })
+    
         }
-        // 创建定位;
-        function createPositionHandler() {
-
-
-        }
-
-        // 编辑定位; 
-        function editPositionHandler() {
-
-        }
-
-
-
+ 
+  
 
         $scope.createSystem = function() {
             $modal.open({

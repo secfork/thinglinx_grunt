@@ -125,9 +125,7 @@
                 // Turn the FileList object into an Array   form 中家 multiple  就是多文件上传;
                 $scope.files = [];
 
-                var file = element.files[0];
-
-
+                var file = element.files[0]; 
 
                 // 值上传 第一个; 单位 B ;  // 1G
                 // $scope.rightfile = (element.files[0].size < 10240000);
@@ -181,6 +179,8 @@
                 $scope.$apply(function() {
                     $scope.progressVisible = false;
                     $scope.station.pic_url = angular.fromJson(evt.target.response).ret;
+                    // 清空  file input ; 
+                    console.log("  empty file  input!! 一般情况下，不允许通过脚本来对文件上传框赋值 "); 
                 })
 
 
@@ -385,9 +385,10 @@
                     type: "dtu"
                 }, function(resp) {
 
-                    $scope.dtuList = $filter("filter")(resp.ret, {
-                        category: "CHANNEL"
-                    });
+                    $scope.dtuList =  resp.ret ;
+                    // $filter("filter")(resp.ret, {
+                    //     category: "CHANNEL"
+                    // });
 
                 });
             }
@@ -1069,6 +1070,7 @@
                 $scope.op.toNewLocation = false;
                 angular.extend($scope.station, d);
                 angular.alert("定位成功!")
+
             });
 
         }
@@ -1097,11 +1099,11 @@
                 var d = {
                     uuid: $scope.station.uuid,
                     longitude: "",
-                    latitude: ""
+                    latitude: ""   //  0 0 坐标既是 删除 坐标位置, 易出 bug ; 
                 };
                 $source.$system.put(d, function() {
-                    $scope.station.longitude = null;
-                    $scope.station.latitude = null;
+                    $scope.station.longitude = 0;
+                    $scope.station.latitude = 0;
                     map.clearOverlays();
                     angular.alert("成功移除定位!");
 

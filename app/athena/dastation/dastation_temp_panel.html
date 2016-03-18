@@ -6,7 +6,7 @@
         
     </div>
 
-    <div class="panel-body    no-padder  " ng-switch on="lm" load-mask  >
+    <div class="panel-body    no-padder  " ng-switch on="op.lm" load-mask  >
          
  
         <div class="row m-l-xs m-r-xs m-t">
@@ -45,21 +45,20 @@
                 <button class="btn btn-sm btn-info m-l float-right w-46" ng-click="  reset();  ">复位</button>
                 <div class="radio  pull-right m-r">
                     <label class="i-checks">
-                        <input type="radio" value="map" checked="" ng-model=" lm "> <i></i> 地图
+                        <input type="radio" value="map"  ng-model=" op.lm "> <i></i> 地图
                     </label>
                 </div>
                 <div class="radio   pull-right m-r m-t ">
                     <label class="i-checks">
-                        <input type="radio" value="list" ng-model="lm"> <i></i> 列表
+                        <input type="radio" value="list" ng-model="op.lm"> <i></i> 列表
                     </label>
                 </div>
             </div>
 
         </div>
 
-        <div class="table-responsive "> 
-      
-            <table ng-switch-when="list" class=" table table-striped table-hover b-t ">
+        <div  ng-switch-when="list" class="table-responsive " > 
+            <table  class=" table table-striped table-hover b-t ">
                 <thead class="flip-content">
                     <tr>
                         <th width="5%">状态</th>
@@ -160,15 +159,16 @@
                     </tr>
                 </tbody>
             </table>
+
         </div>
 
-        <div ng-switch-when="map" id="bdmap" ng-init=" initMap( ); " db-maxp=''   >
-            <div>12111</div>
+        <div ng-switch-when="map"  a=xxxxx class="b-t  sys_bdmap"  id='bdmap'   ng-init=" initMap( ); "   >
+            
         </div>
     </div>
 
     
-    <div class="panel-footer  " ng-if="lm=='list'">
+    <div class="panel-footer  " ng-if="op.lm=='list'">
         <button ng-if=" !isShowModul " class="btn btn-info    btn-sm    m-l-sm  pull-left " 
         ng-click=" createSystem() ">添加系统</button>
 

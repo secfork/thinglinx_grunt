@@ -10,7 +10,7 @@
     // popwin = "templateUrl"
     // 主键默认 为  id ;  为其他是 需要设置 pk = "uuid||xxx" 其他值 ; 
     //  { pk , prop }   fa fa-pencil    glyphicon  glyphicon-edit    text-muted
-    .directive("popwin", function($compile, $templateCache, $http) {
+    .directive("popwin", function($compile, $templateCache, $http ) {
 
         return {
             restrict: "E",
@@ -390,19 +390,7 @@
         return {
             restrict: "A",
             require: ["?^ngDisabled"],
-            link: function(scope, $ele, attrs, fn) {
-
-                // if( $ele.is("a") ){  // a 标签  没有 disabled 属性
-
-                //     $ele.on("click", function ( e ){
-                //         console.log("-------------------"); 
-                //         $timeout( function(){
-                //             scope._$preventDefault = false ;
-                //         }, attrs.token || 2000 )
-                //     } ) 
-                //     return ;
-                // }
-
+            link: function(scope, $ele, attrs, fn) { 
 
                 $ele.css({
                     opacity: 1
@@ -504,6 +492,7 @@
 
     .value("valid", function($scope, $ele, $attrs, $translate, $compile, modelCtrl) {
 
+        console.log( 'valid attrs' , $attrs );
 
         $scope.m = modelCtrl;
 
@@ -511,8 +500,7 @@
             var msg = $translate.instant("valid." + type);
             if (value) {
                 msg = msg.replace("X", value);
-            }
-
+            } 
             $ele.after(
                 $compile("<p class='text-danger m-n " + type + " '   ng-if=' m.$dirty &&  m.$error." + type + "' >" + msg + " </p>")($scope)
             );
@@ -536,7 +524,7 @@
             v($attrs.type)
         }
 
-        if ($attrs.max) {
+        if ($attrs.max) { 
             v("max", $attrs.max);
         }
 
@@ -550,6 +538,11 @@
         if ($attrs.ngMaxlength) {
             v("maxlength", $attrs.ngMaxlength);
         }
+
+        if( $attrs.pattern || $attrs.ngPattern ){
+            v( "pattern");
+        }
+
 
         // ui-validate , 自定义的验证; 带完成; ( require:"uiValidate"); 
     })
