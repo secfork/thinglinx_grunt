@@ -1,31 +1,4 @@
-
-/*table 滚动条 控制;*/
-/*.table-responsive {
-  width: 100%;
-  margin-bottom: 15px;
-  overflow-y: hidden;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-  border: 1px solid #ddd; 
-}*/
-
-/*
-.table-responsive > .table {
-  margin-bottom: 0;
-}
-.table-responsive > .table {
-  margin-bottom: 0;
-}
-.table-responsive > .table > thead > tr > th,
-.table-responsive > .table > tbody > tr > th,
-.table-responsive > .table > tfoot > tr > th,
-.table-responsive > .table > thead > tr > td,
-.table-responsive > .table > tbody > tr > td,
-.table-responsive > .table > tfoot > tr > td {
-  white-space: nowrap;
-   
-}
-*/
-
+ 
 
 /*.app-content-body > .wrapper-md {
   padding-bottom: 0px;
@@ -690,7 +663,7 @@ body {
   padding-bottom: 50px;
 }
 .app-content {
-  height: 100%;
+  /*height: 100%;*/
 }
 .app-content:before,
 .app-content:after {
@@ -701,7 +674,7 @@ body {
   clear: both;
 }
 .app-content-body {
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   float: left;
   width: 100%;
 }

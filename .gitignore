@@ -3,6 +3,7 @@ bower_connode_modules/
 bower_components/
 config
 src/l10n
+public
 
 coverage/
 .sass-cache/

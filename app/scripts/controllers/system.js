@@ -153,10 +153,7 @@
                         $source.$system.status(ids, function(resp_x) {
                             var sysStatus = resp_x.ret;
                             $.each(resp.data, function(i, n) {
-                                n.online = sysStatus && sysStatus[i] &&
-                                    (sysStatus[i].daserver ?
-                                        sysStatus[i].daserver.logon : sysStatus[i].online
-                                    )
+                                n.online = sysStatus &&  handlerOnlineData( sysStatus[i] ) ;
                             })
 
                         });
@@ -164,6 +161,7 @@
                     }, $sys.state_inter_time)
 
                 }
+
 
                 // 非激活的system; 或者 展示模块;
                 // 加载 state , needsysnc ,  拆分 region数据;  ,
@@ -177,10 +175,9 @@
                         //  不是这个 系统状态(0:未激活,1:活跃,2:挂起)
                         // 而是系统在线在线状态; 
 
-                        n.online = sysStatus && sysStatus[i] &&
-                            (sysStatus[i].daserver ?
-                                sysStatus[i].daserver.logon : sysStatus[i].online
-                            )
+                        n.online = sysStatus &&   handlerOnlineData( sysStatus[i]);
+
+
                         n.needsync = sta2sync && sta2sync[n.uuid];
 
                         n.region_name = $scope.rg_k_v[n.region_id].name;
@@ -189,15 +186,7 @@
 
                     angular.extend($scope.page, resp);
 
-                    //$scope.page = resp_A ;
-
-                    // 翻页 刷新  地图上的点;
-                    if ($scope.lm == "map") {
-                        // flush points ;
-                        // 在 地图中翻页;  
-                        $map.createDAPoint2Map(map, $scope.page.data, showMsgHandler)
-                    }
-
+                    
                     $scope.showMask = false;
 
                 }, function() {
@@ -209,6 +198,9 @@
             })
         }
 
+        function handlerOnlineData ( sysStatus ){
+            return  sysStatus &&  (sysStatus.daserver ?  sysStatus.daserver.logon : sysStatus.online   )
+        }
 
         $scope.loadPageData(1);
 
@@ -217,46 +209,74 @@
 
 
         // 得到我所有管理的 system  制作展示 ,必要字段, 避免 大流量数据; 
-        var forMapPromise  , pointCollection , marker ,
+        var forMapPromise  , pointCollection , 
             collenTionOptions = {
                         size: 7,
                         shape:  BMAP_POINT_SHAPE_WATERDROP,
                         color: 'red'
             } ,
-            markerOptions = {   offset: new BMap.Size( 0,5)     }  
+            markerOptions = {   offset: new BMap.Size( 0,5)     }  , 
+            infoWindowOptions = { enableCloseOnClick: false  , enableMessage :false }
             ;
 
+  
+
         // 展示 system  属性; 
+
+        var  timeOutGetSystemStatus ; 
         function  pointMouseOver (e){
             var point = e.point ,
                 system =  point.system  ;
 
+
+                $timeout.cancel( timeOutGetSystemStatus );
+
+                timeOutGetSystemStatus = $timeout( function(){
+                     $source.$system.status([ system.uuid ] , function( resp ){
+                        // 获取 单个 系统的在线 状态; 
+                        $("#one_system_status").addClass (  resp.ret[0]  ?'fa-circle  text-success' : 'fa-circle text-danger' );
+
+                     })
+                },500 )
+ 
                 system.region_name = $scope.rg_k_v[system.region_id].name ;
 
+                if( ! point.marker){
+                    var mk =  new  BMap.Marker( point , markerOptions);
+                    mk.addEventListener('click' , function(){
+                        $scope.goto( $scope._$stationState , system );
+                    }) 
+                    point.marker = mk ;  
+                }
+ 
 
                 $templateRequest("athena/dastation/prop_map_popup.html").then( function(html){
-                    
-                    marker =  point.marker ||  new BMap.Marker( point , markerOptions ); 
-                    point.marker  = marker ;
-
-                    map.addOverlay(marker );
-
+                     
                     // s.proj_name = s.proj_name || projName; // ;
                     system.create_time = $filter("date")(system.create_time, "yyyy-MM-dd hh:mm:ss");
                     // system 类型;
                     // system.type =  $sys.stationtype.values[s.type].k ; 
                     var str = $interpolate(html)(system);
-                    var infoWindow = new BMap.InfoWindow(str);
-                    marker.openInfoWindow(infoWindow); 
-                })  
+                    var infoWindow = new BMap.InfoWindow(str , infoWindowOptions );
+  
+                   
+                    point.marker.openInfoWindow(infoWindow); 
+                }) 
+  
+                map.addOverlay( point.marker );
+  
+              
         }
 
-        function  pointMouseOut (e){
-                var point = e.point ;  
-                    marker = point.marker  || marker ; 
-                    marker.closeInfoWindow();
-                    map.removeOverlay( marker );
-                    point.marker = null ; 
+        // mouse 移出时判断 是否 打开了 infowin , 若打开, 则不溢出 marker , closeWin时 才移除 marker ; 
+        //                  没有打开 infowin , 则直接溢出 marker ; 
+        function  pointMouseOut (e){ 
+                var point = e.point  ; 
+                    point.marker.closeInfoWindow(); 
+                     
+                    map.removeOverlay( point.marker); 
+                    
+ 
         }
 
         // 后台返回的poing 保证了有  经纬度; 
@@ -290,7 +310,7 @@
             $scope.showMask = true ; 
 
             forMapPromise = forMapPromise || $source.$system.get( 
-                angular.extend( {options:"queryformap"} , $scope.od )
+                angular.extend( { options:"queryformap" } , $scope.od )
             ).$promise ;
 
             forMapPromise.then( function(resp ){  

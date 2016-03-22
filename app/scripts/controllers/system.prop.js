@@ -121,16 +121,21 @@
                 //@if  append
 
                 console.log(element.files);
+
+
+
                 //@endif
                 // Turn the FileList object into an Array   form 中家 multiple  就是多文件上传;
                 $scope.files = [];
 
                 var file = element.files[0]; 
 
+              
+ 
                 // 值上传 第一个; 单位 B ;  // 1G
                 // $scope.rightfile = (element.files[0].size < 10240000);
                 //   /.[png,jpg]$/.test( file.name ) &&
-                $scope.op.rightfile = (file.size < 1024 * 500); //2M ;
+                $scope.op.rightfile = (file.size < 1024 * 500); //500k ;
 
 
 
@@ -144,7 +149,16 @@
 
         $scope.uploadFile = function() {
 
+
+              if( ! /^image/.test( $scope.files[0].type )  ){
+                    angular.alert( "请选择jpeg,png,jpg格式的图片文件!");
+                    return ; 
+                }
+
+
             $scope.progress = 1;
+
+
 
 
             var fd = new FormData();
@@ -1069,7 +1083,7 @@
                 marker.disableDragging();
                 $scope.op.toNewLocation = false;
                 angular.extend($scope.station, d);
-                angular.alert("定位成功!")
+                // angular.alert("定位成功!")
 
             });
 
@@ -1105,7 +1119,7 @@
                     $scope.station.longitude = 0;
                     $scope.station.latitude = 0;
                     map.clearOverlays();
-                    angular.alert("成功移除定位!");
+                    // angular.alert("成功移除定位!");
 
                 })
             } else {

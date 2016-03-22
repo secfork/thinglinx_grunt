@@ -262,10 +262,7 @@ angular.module('app.account', [])
 
 
     }
-
-
-
-
+ 
 
     $scope.delUser = function(arr, u, i) {
         $scope.confirmInvoke({
