@@ -380,7 +380,7 @@
 
 
 
-    .service("$map", function($http, $templateCache, $sys, $filter, $interpolate) {
+    .service("$map", function($http, $utils , $templateRequest ,$templateCache, $sys, $filter, $interpolate , $timeout , $source  ) {
 
         var $map = this;
         // dom_id 无需加 # 号 ;
@@ -595,6 +595,48 @@
 
             return mark;
         }
+
+        var timeOutGetSystemStatus ,  
+            markerOptions = {   offset: new BMap.Size( 0,5)     }  , 
+            infoWindowOptions = { enableCloseOnClick: false  , enableMessage :false }  ;
+       
+        this.showSystemProp = function( map , point  , system  , $scope  ){
+                 
+                $timeout.cancel( timeOutGetSystemStatus );
+                timeOutGetSystemStatus = $timeout( function(){
+                     $source.$system.status([ system.uuid ] , function( resp ){
+                        // 获取 单个 系统的在线 状态; 
+                        $("#one_system_status").addClass (  $utils.handlerOnlineData(resp.ret[0] )  ?'fa-circle  text-success' : 'fa-circle text-danger' );
+
+                     })
+                },500 )
+ 
+               
+
+                if( ! point.marker){
+                    var mk =  new  BMap.Marker( point , markerOptions);
+                    $scope &&  mk.addEventListener('click' , function(){
+                        $scope.goto( $scope._$stationState , system );
+                    }) 
+                    point.marker = mk ;  
+                }
+ 
+
+                $templateRequest("athena/dastation/prop_map_popup.html").then( function(html){
+                     
+                    // s.proj_name = s.proj_name || projName; // ;
+                    // system 类型;
+                    // system.type =  $sys.stationtype.values[s.type].k ; 
+                    var str = $interpolate(html)(system);
+                    var infoWindow = new BMap.InfoWindow(str , infoWindowOptions ); 
+                    point.marker.openInfoWindow(infoWindow); 
+                }) 
+  
+                map.addOverlay( point.marker );
+
+
+        }
+
 
         // 设置 map 中心点; 
         function centeredMap(map, markers) {

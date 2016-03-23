@@ -1,4 +1,3 @@
-
 // http://thinglinx-test.oss-cn-beijing.aliyuncs.com/10108.0/NyqTgJE-gi7=ffu630ns.jpeg
 
 // http://thinglinx-test.oss-cn-beijing.aliyuncs.com/10108/system/Vke2gdxrluZ_x4f2u9fz2527
@@ -75,7 +74,7 @@ angular.module('app.account', [])
 
 })
 
-.controller("account_users", function($scope, $state, $source, $sys, $q, $modal, $modal  ) {
+.controller("account_users", function($scope, $state, $source, $sys, $q, $modal, $modal) {
 
     //$scope.$moduleNav("用户pop", "_user");
     // $scope.$moduleNav("账户信息", $state);
@@ -101,7 +100,6 @@ angular.module('app.account', [])
 
 
 
-    // 添加用户时 所属的 组;  
     $scope.loadPageData = function(pageNo) {
 
 
@@ -136,7 +134,7 @@ angular.module('app.account', [])
     // 更改user ;
     var S = $scope;
 
-    console.log( 1111111 , $scope.user  )
+    console.log(1111111, $scope.user)
 
 
     $scope.updateUser = function(idObj) {
@@ -152,11 +150,11 @@ angular.module('app.account', [])
                 $scope.$modalInstance = $modalInstance;
                 $scope.user = {};
                 $scope.isAdd = true;
- 
+
 
                 // 验证 user.username 是否已经存在;  // 创建者是否有 区域管理权限; 
-                $scope.ccField = function( ){   
-                    console.log( S.user );
+                $scope.ccField = function() {
+                    console.log(S.user);
                     // if( S.user.is_super_user ){
                     //     return ; 
                     // }
@@ -165,7 +163,7 @@ angular.module('app.account', [])
                     //     { op:"getbyname" , name: $scope.user.username , account_id: S.user.account_id  } ,
 
                     //     function(resp){ 
-                           
+
                     //     }
                     // )
                 }
@@ -180,12 +178,12 @@ angular.module('app.account', [])
                         $scope.page.data.unshift($scope.user)
                         $scope.cancel();
 
-                    } , function( resp ){ 
+                    }, function(resp) {
                         // 用户已存在, 或其他错误; 
                         // 用户存在 , 且有区域管理权限; 
                         $scope.cancel();
-                        if( resp.err == "ER_USER_EXIST"){
-                            depuName2addUser( $scope ) ;
+                        if (resp.err == "ER_USER_EXIST") {
+                            depuName2addUser($scope);
                         }
 
 
@@ -233,36 +231,36 @@ angular.module('app.account', [])
     };
 
     // 名字被占用时  , 且 区域用户管理 时, 添加user ; 
-    function  depuName2addUser ( scope ){
+    function depuName2addUser(scope) {
 
-        var title = $scope.$translate.instant('ER_USER_EXIST')  ,
-            username = scope.user.username ,
-            loadTheUser ;
- 
-        if( S.user.is_super_user  ||   username == S.user.username ){
-            angular.alert(   title   );
-            return ;
-        }   
+        var title = $scope.$translate.instant('ER_USER_EXIST'),
+            username = scope.user.username,
+            loadTheUser;
 
-        $scope.confirmInvoke( { title: title , note:  "是否将用户 " +  username+ '加入您所管理的区域?' } , 
-            function( close ){
+        if (S.user.is_super_user || username == S.user.username) {
+            angular.alert(title);
+            return;
+        }
 
-            // 返回 exist_user 对象; 
-            $source.$user.get( { op:"appendregionrole" , name: username } , function( resp ){
-                close(); 
+        $scope.confirmInvoke({ title: title, note: "是否将用户 " + username + '加入您所管理的区域?' },
+            function(close) {
 
-               // angular.alert("附加成功!") ;
+                // 返回 exist_user 对象; 
+                $source.$user.get({ op: "appendregionrole", name: username }, function(resp) {
+                    close();
 
-                $scope.page.data.unshift( resp.ret  )
+                    // angular.alert("附加成功!") ;
 
-            } ,  function(){
-                 close(); 
-            }) 
-        })
+                    $scope.page.data.unshift(resp.ret)
+
+                }, function() {
+                    close();
+                })
+            })
 
 
     }
- 
+
 
     $scope.delUser = function(arr, u, i) {
         $scope.confirmInvoke({
@@ -635,7 +633,7 @@ angular.module('app.account', [])
                     $scope.page.total = resp.total;
                     $scope.page.data = resp.data;
                     $scope.page.currentPage = pageNo;
-                    
+
                     // $scope.userself &&  getIsSubAlarm($scope.page.data);
                     getIsSubAlarm($scope.page.data);
 
@@ -661,14 +659,14 @@ angular.module('app.account', [])
                 // 加载 所有的 订阅  subscritt ; 
                 $scope.userself && getIsSubAlarm($scope.page.data)
 
-                if( $scope.userself ){
-                    getIsSubAlarm( $scope.page.data )
-                }else{
-                     // obj_ref 用来 添加 region author 时过滤   region.id , promission.region_id ;
+                if ($scope.userself) {
+                    getIsSubAlarm($scope.page.data)
+                } else {
+                    // obj_ref 用来 添加 region author 时过滤   region.id , promission.region_id ;
                     $scope.page.data.forEach(function(v, i) {
                         obj_ref[v.id || v.region_id] = v;
-                    }); 
-                } 
+                    });
+                }
 
             });
         }
@@ -730,7 +728,7 @@ angular.module('app.account', [])
                                 // allregion = resp.data ;  
                                 resolve(
                                     resp.data.filter(function(v, i) {
-                                        console.log( obj_ref )
+                                        console.log(obj_ref)
                                         return !obj_ref[v.id]
                                     })
                                 );
@@ -775,7 +773,7 @@ angular.module('app.account', [])
                             }, {
                                 role_id: $scope.od.role.id
                             },
-                            function(resp) { 
+                            function(resp) {
 
                                 // page.data  ,  obj_ref 内 添加数据 ; 
                                 var d = {
@@ -786,10 +784,10 @@ angular.module('app.account', [])
 
                                     region_name: region_name,
                                     region_id: region_id
-                                } 
+                                }
 
-                                $scope.page.data.push( d );
-                                obj_ref[ region_id ] = d ;   // obj = promission ;
+                                $scope.page.data.push(d);
+                                obj_ref[region_id] = d; // obj = promission ;
 
                                 $scope.cancel();
 
@@ -818,7 +816,7 @@ angular.module('app.account', [])
                 region_id: rr.region_id
             }, function() {
                 $scope.page.data.splice($index, 1);
-                
+
                 delete obj_ref[rr.region_id];
                 next();
             })
@@ -868,7 +866,7 @@ angular.module('app.account', [])
 
                 $scope.ccField = function(k, v) {
                     $scope.od[k] = v;
-                } 
+                }
                 $scope.done = function() {
                     $scope.od.id = u.id;
 
@@ -937,13 +935,13 @@ angular.module('app.account', [])
     textCond = {
         smsInterval: "发送验证码",
         emailInterval: "发送验证邮件"
-    }; 
+    };
     // 
     window.interval = window.interval || {
         smsInterval: undefined,
         emailInterval: undefined
     }
-    $scope.interval = window.interval ;
+    $scope.interval = window.interval;
 
     window.intervalTimes = {
         smsInterval: $sessionStorage.smsInterval > 0 ? $sessionStorage.smsInterval : t_,
@@ -1356,9 +1354,9 @@ angular.module('app.account', [])
 })
 
 
-.controller('account_weichat', function($scope, $sessionStorage, $source, $timeout , $localStorage ) {
+.controller('account_weichat', function($scope, $sessionStorage, $source, $timeout, $localStorage) {
 
-    console.log(" account_weichat" , $scope.user );
+    console.log(" account_weichat", $scope.user);
 
     $scope.wei = {}; // weiChatNo , serverUrl  // 第一步; 
 
@@ -1367,7 +1365,7 @@ angular.module('app.account', [])
     $scope.menu = [];
     $scope.data = {}; // 第二部; 
 
-    $scope.showMask = true ;
+    $scope.showMask = true;
 
     // 注销 微信服务号; 
     $scope.unBindServer = function() {
@@ -1383,18 +1381,19 @@ angular.module('app.account', [])
 
     $source.$weChat.getServerInfo(function(resp) {
         console.log(resp.ret);
-        $scope.showMask = false ;
+        $scope.showMask = false;
 
         // resp.ret =  angular.fromJson( resp.ret );
+        $scope.op.step = 2;
+        return;
+
 
         $scope.wei = JSON.parse(resp.ret || '{}');
 
         $scope.menu = $scope.wei.menu && $scope.wei.menu.split(",") || [];
 
 
-        // $scope.op.step = 0 ;
-        // return ;
-
+      
         if (!!resp.ret && $scope.wei.status == 4) {
 
             $scope.op.step = -1;
@@ -1403,8 +1402,8 @@ angular.module('app.account', [])
             $scope.op.step = 0;
 
         }
-    } , function(){
-        $scope.showMask  = false ;
+    }, function() {
+        $scope.showMask = false;
     })
 
     // $scope.op.step  = $sessionStorage.weichat_step ; 
@@ -1561,11 +1560,11 @@ angular.module('app.account', [])
     function configWei() {
         $scope.wei.menu = $scope.menu.join(',');
         var accountname = $localStorage.account;
-        if( !accountname){
+        if (!accountname) {
             alert("no account name !");
-            return ; 
+            return;
         }
-        $source.$weChat.activeServer(  angular.extend( { accountname:  accountname } , $scope.wei), function(resp) {
+        $source.$weChat.activeServer(angular.extend({ accountname: accountname }, $scope.wei), function(resp) {
             pictureFile = null;
             $scope.op.step = 3;
         })

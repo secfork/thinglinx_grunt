@@ -3202,6 +3202,10 @@ a.text-black:hover {
 .text-xs {
   font-size: 12px;
 }
+.text-xss {
+  font-size: 10px;
+}
+
 .text-xxs {
   text-indent: -9999px;
 }

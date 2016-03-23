@@ -94,7 +94,7 @@
 
         $scope.loadPageData = function(pageNo) {
 
-            // $scope.showMask = true;
+            $scope.showMask = true;
 
             if( $scope.op.lm == "map"){
 
@@ -153,7 +153,7 @@
                         $source.$system.status(ids, function(resp_x) {
                             var sysStatus = resp_x.ret;
                             $.each(resp.data, function(i, n) {
-                                n.online = sysStatus &&  handlerOnlineData( sysStatus[i] ) ;
+                                n.online = sysStatus &&  $utils.handlerOnlineData( sysStatus[i] ) ;
                             })
 
                         });
@@ -175,7 +175,7 @@
                         //  不是这个 系统状态(0:未激活,1:活跃,2:挂起)
                         // 而是系统在线在线状态; 
 
-                        n.online = sysStatus &&   handlerOnlineData( sysStatus[i]);
+                        n.online = sysStatus &&   $utils.handlerOnlineData( sysStatus[i]);
 
 
                         n.needsync = sta2sync && sta2sync[n.uuid];
@@ -198,9 +198,7 @@
             })
         }
 
-        function handlerOnlineData ( sysStatus ){
-            return  sysStatus &&  (sysStatus.daserver ?  sysStatus.daserver.logon : sysStatus.online   )
-        }
+      
 
         $scope.loadPageData(1);
 
@@ -214,10 +212,7 @@
                         size: 7,
                         shape:  BMAP_POINT_SHAPE_WATERDROP,
                         color: 'red'
-            } ,
-            markerOptions = {   offset: new BMap.Size( 0,5)     }  , 
-            infoWindowOptions = { enableCloseOnClick: false  , enableMessage :false }
-            ;
+            }  ;
 
   
 
@@ -228,43 +223,12 @@
             var point = e.point ,
                 system =  point.system  ;
 
-
-                $timeout.cancel( timeOutGetSystemStatus );
-
-                timeOutGetSystemStatus = $timeout( function(){
-                     $source.$system.status([ system.uuid ] , function( resp ){
-                        // 获取 单个 系统的在线 状态; 
-                        $("#one_system_status").addClass (  resp.ret[0]  ?'fa-circle  text-success' : 'fa-circle text-danger' );
-
-                     })
-                },500 )
- 
-                system.region_name = $scope.rg_k_v[system.region_id].name ;
-
-                if( ! point.marker){
-                    var mk =  new  BMap.Marker( point , markerOptions);
-                    mk.addEventListener('click' , function(){
-                        $scope.goto( $scope._$stationState , system );
-                    }) 
-                    point.marker = mk ;  
-                }
- 
-
-                $templateRequest("athena/dastation/prop_map_popup.html").then( function(html){
+                system.regionName =  system.regionName ||  $scope.rg_k_v[system.region_id].name ;
+                system.createTime =  system.createTime || $filter("date")(system.create_time, "yyyy-MM-dd hh:mm:ss");
                      
-                    // s.proj_name = s.proj_name || projName; // ;
-                    system.create_time = $filter("date")(system.create_time, "yyyy-MM-dd hh:mm:ss");
-                    // system 类型;
-                    // system.type =  $sys.stationtype.values[s.type].k ; 
-                    var str = $interpolate(html)(system);
-                    var infoWindow = new BMap.InfoWindow(str , infoWindowOptions );
-  
-                   
-                    point.marker.openInfoWindow(infoWindow); 
-                }) 
-  
-                map.addOverlay( point.marker );
-  
+
+                $map.showSystemProp(  map , point ,  system   , $scope  )
+ 
               
         }
 
