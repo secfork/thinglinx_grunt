@@ -1362,7 +1362,7 @@ angular.module('app.account', [])
 
     $scope.op = { step: undefined };
 
-    $scope.menu = [];
+    $scope.menu = ["查看区域" , "报警查询" , "系统信息查询"];
     $scope.data = {}; // 第二部; 
 
     $scope.showMask = true;
@@ -1390,10 +1390,8 @@ angular.module('app.account', [])
 
         $scope.wei = JSON.parse(resp.ret || '{}');
 
-        $scope.menu = $scope.wei.menu && $scope.wei.menu.split(",") || [];
-
-
-      
+        $scope.menu = $scope.wei.menu && $scope.wei.menu.split(",") ||  $scope.menu ;
+ 
         if (!!resp.ret && $scope.wei.status == 4) {
 
             $scope.op.step = -1;
