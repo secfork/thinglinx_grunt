@@ -1384,22 +1384,22 @@ angular.module('app.account', [])
         $scope.showMask = false;
 
         // resp.ret =  angular.fromJson( resp.ret );
-        $scope.op.step = 2;
-        return;
+        
+        // $scope.op.step = 2;
+        // return;
 
 
         $scope.wei = JSON.parse(resp.ret || '{}');
 
         $scope.menu = $scope.wei.menu && $scope.wei.menu.split(",") ||  $scope.menu ;
  
-        if (!!resp.ret && $scope.wei.status == 4) {
-
+        if (!!resp.ret && ( $scope.wei.status == 4  || $scope.wei.status == "True"  )  ) {
             $scope.op.step = -1;
-
         } else {
-            $scope.op.step = 0;
-
+            $scope.op.step = 0 ;
         }
+
+
     }, function() {
         $scope.showMask = false;
     })

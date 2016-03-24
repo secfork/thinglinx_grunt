@@ -2,7 +2,7 @@ angular.module('app.show.system', [])
 
 
 
-.controller("show_alarm", function($scope, $state, $source, $show, $sys, $q, $filter, $modal) {
+.controller("show_alarm", function($scope, $state, $source, $show, $sys, $q, $filter, $modal ) {
 
     $scope.$moduleNav("报警", $state);
 
@@ -173,8 +173,7 @@ angular.module('app.show.system', [])
 
     $scope.from = $utils.backState('show_system_prop'); // from
 
-
-
+ 
     // 用缓存可以得到 online ;
     // $scope.system = $scope.$$cache[0];
 
@@ -225,9 +224,7 @@ angular.module('app.show.system', [])
     $scope.$on("$destroy", function() {
         $interval.cancel(state_interval);
     })
-
-
-
+ 
     $scope.tags = $scope.system.tags;
 
 
@@ -317,6 +314,17 @@ angular.module('app.show.system', [])
     // 自动刷新   ;
     $scope.auto_r = true;
 
+    //保留小数; 
+    $scope.decimal = false;
+
+    $scope.fractionSize = 4; // 保留四位小数; 
+
+
+    // 开始订阅数据; 进程条 
+    $scope.progValue = 0;
+
+
+
     var names = [],
         reg;
 
@@ -349,9 +357,6 @@ angular.module('app.show.system', [])
 
 
 
-    // 开始订阅数据;
-    $scope.progValue = 0;
-    $scope.fractionSize = 4; // 保留四位小数; 
     $scope.liveData = function() { // need = $last ;
         $interval.cancel(interval);
 
@@ -376,17 +381,15 @@ angular.module('app.show.system', [])
             src: null,
             pv: null
         },
-        t,
-        v,
+        t,  
+        v ,
         b;
 
     function getCurrent($event) {
 
         console.log(names);
 
-        var $dom;
-
-
+        var $dom; 
 
         if (names.length) {
             if ($event) {
@@ -399,17 +402,19 @@ angular.module('app.show.system', [])
                 uuid: $scope.system.uuid,
                 tag: names
             }, function(resp) {
-                b = $scope.fractionSize == undefined;
+
+                b = $scope.decimal; 
+
                 $.each(resp.ret, function(i, d) {
                     d = d || x;
                     t = $filter("date")(d.src, 'MM-dd HH:mm:ss'); 
-
-                    $("#_val_" + i).text(d.pv == null ?  "" : 
-                        (  b ? d.pv : $filter("number")(d.pv, $scope.fractionSize) ) 
-                    );
-
-
                     t && $("#_time_" + i).text(t);
+
+                    $("#_val_" + i).text(d.pv == null ?  "" 
+                        : 
+                        (  b ? d.pv.toFixed( $scope.fractionSize )  : d.pv ) 
+                    );
+ 
                 });
 
                 if ($dom) {
@@ -419,21 +424,20 @@ angular.module('app.show.system', [])
                         $dom.text("刷新").attr("disabled", false);
                     }, 3000);
 
-                }
-
-
-
-            }, function() {
-                if ($dom) {
-
-
-                }
-
+                } 
+            }, function() { 
                 $dom && $dom.text("刷新").attr("disabled", false);
             })
         }
 
     }
+
+    function handlerPv ( pv ){
+    // toFixed
+
+
+    }
+
 
     $scope.getCurrent = getCurrent;
 
@@ -451,29 +455,16 @@ angular.module('app.show.system', [])
         var d = {},
             $button = $(e.currentTarget);;
         d[t.name] = v;
-
-        //        jjw
-        //        $button.text("下置中...");
+ 
         s.showSpinner = true;
         $show.liveWrite.save({
             uuid: $scope.system.uuid
         }, d, function(resp) {
-            s.showSpinner = false;
-            //@if  append
-            console.log(resp);
-            //@endif
-            //            $button.text("下置成功");
-
-            //            $timeout(function() {
-            //                $button.text("下置");
-            //            }, 2000)
+            s.showSpinner = false; 
+            console.log(resp); 
 
         }, function() {
-            s.showSpinner = false;
-            //            $button.text("下置失败").toggleClass("btn-danger");
-            //            $timeout(function() {
-            //                $button.text("下置").toggleClass("btn-danger");
-            //            }, 2000)
+            s.showSpinner = false; 
         })
     }
 })
