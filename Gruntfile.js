@@ -405,9 +405,9 @@ module.exports = function(grunt) {
             options:{
                 compress: {
                     drop_console: false // true ;
-                }, 
-                sourceMap:  true ,//true ,
-                sourceMapIncludeSources:  true //true
+                } 
+               // , sourceMap:  true ,//true ,
+               // , sourceMapIncludeSources:  true //true
             }
         },
 
@@ -649,6 +649,10 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('build', function( arg ){
+
+
+
+
 
         var  tasks = [ 'clean:dist',
             'wiredep',
