@@ -50,7 +50,7 @@
              "REGION_USER_MANAGE": "为区域创建用户，以及管理用户权限",
              "SYN_CONFIG": "将系统工程同步到DAServer或网关",
              "SYSTEM_CONTROL": "系统数据下置及召唤，系统的激活及失效，切换系统配置项，保存网络参数等",
-
+             "PLC_PROGRAM":"PLC编程",
 
              "REGION_MANAGE": "创建、删除区域，修改区域基本信息",
              "MODEL_MANAGE": "创建、修改以及删除系统模型和设备模型",
@@ -81,7 +81,8 @@
              "TICKET_MANAGE", //ticket管理
              "REGION_USER_MANAGE", //区域用户管理
              "SYN_CONFIG", //系统配置 
-             "SYSTEM_CONTROL" //系统控制
+             "SYSTEM_CONTROL" //系统控制,
+             "PLC_PROGRAM"   // PLC 编程 ;
          ],
 
 
