@@ -169,8 +169,7 @@ angular.module('app.project', [])
 
     console.log("manage_proj_prop");
     //@endif 
-
-    $scope.$appendNav('项目属性', '_project');
+ 
 
     //是否为 show 模块;
     $scope.isShowModul = $state.$current.data && $state.$current.data.isShowModul;

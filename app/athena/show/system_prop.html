@@ -7,11 +7,9 @@
 
      <i class=" m-l fa fa-circle  {{ system.online==1  ?'text-success' : 'text-danger'  }} "></i>
       
-      <br/>
- 
-
+      <br/> 
     <a   href="{{from.url}}"   class="text-xs   " > 返回
-        <span class="text-info"> {{from.text}} </span> 
+        <span class="text-info"> {{from.text || "报警"}} </span> 
     </a>
 
     

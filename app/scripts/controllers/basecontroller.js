@@ -13,7 +13,7 @@ angular.module('app.basecontroller', [])
 
 
     $scope.$on('$stateChangeStart', function(event, a, b, c, d) {
-        // console.log( "stateChangeStart", event , a,b,c,d)
+        console.log( "stateChangeStart", event , a,b,c,d)
 
         angular.from = {
             text: c.text,

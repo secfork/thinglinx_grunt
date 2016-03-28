@@ -2306,6 +2306,10 @@ fieldset[disabled] .i-checks input + i:before {
   background-color: #edf1f2;
   color: #58666e;
 }
+.text {
+   color: #58666e;
+}
+
 .bg-light.lt,
 .bg-light .lt {
   background-color: #f3f5f6;
@@ -3202,6 +3206,10 @@ a.text-black:hover {
 .text-xs {
   font-size: 12px;
 }
+.text-xss {
+  font-size: 10px;
+}
+
 .text-xxs {
   text-indent: -9999px;
 }

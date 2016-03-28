@@ -830,6 +830,20 @@
 
     })
 
+    .directive("validInput" , function( valid  , $translate , $compile ){
+        return {
+            restrict:"A", 
+            require:"?^ngModel",
+            scope: {},
+            link: function( $scope , $ele ,$attrs , modelCtrl ){ 
+            
+               modelCtrl && valid($scope, $ele, $attrs, $translate, $compile, modelCtrl );
+
+            }
+        }
+
+    }) ;
+
 
     // tl-wrap  tl-warp-l  指令控制器;  
     //  {  width , label , label-width , left } ;
@@ -842,34 +856,37 @@
                 label: "@"
             },
             link: function($scope, $ele, $attrs, modelCtrl) {
-
-                console.log($attrs.label)
+ 
 
                 var width = $attrs.width || ($attrs.tlWrapL && 9) || ($attrs.tlWrap && 8) || 8,
                     offset = $attrs.offset || ($attrs.tlWrap && 1),
-                    labelWidth = $attrs.labelWidth || 3
+                    labelWidth  , 
                     left = $attrs.hasOwnProperty('left'),
 
-                    label_text = $translate.instant( $attrs.label );;
- 
-
-                var label = '<label class= " col-sm-' + labelWidth + (!!offset ? ('col-sm-offset-' + offset) : "")
-                    //  + ( $attrs.required ? '' : 'm-l-n-xs' )
-                    + ' control-label " ' + (left ? ' style= text-align:left ' : '') + '>' + ($attrs.required ? '<span class="text-danger font-bold">*</span>' : '')
-
-                // +($attrs.required ? '' : "&nbsp;") + $attrs.label + '</label>',
-                +($attrs.required ? '' : "&nbsp;") +  label_text + '</label>',
-
-                    wrap_input = '<div class="form-group" ><div class=" col-sm-' + width + '"></div></div>',
-
-                    cls;
-
+                    label_text = $translate.instant( $attrs.label ); 
 
                 cls = $ele.is("input , textarea , select") ? "form-control" : " no-border";
 
-                $ele.addClass(cls).wrap(wrap_input);
+                $ele.addClass(cls);
+ 
+                    labelWidth = $attrs.labelWidth || 3 
 
-                $ele.parent().before(label);
+                    var label = '<label class= " col-sm-' + labelWidth + (!!offset ? ('col-sm-offset-' + offset) : "")
+                        //  + ( $attrs.required ? '' : 'm-l-n-xs' )
+                        + ' control-label " ' + (left ? ' style= text-align:left ' : '') + '>' 
+                        + ($attrs.required ? '<span class="text-danger font-bold">*</span>' : '')
+
+                        // +($attrs.required ? '' : "&nbsp;") + $attrs.label + '</label>',
+                        +($attrs.required ? '' : "&nbsp;") +  label_text + '</label>' ; 
+
+                    var wrap_input = '<div class="form-group" ><div class=" col-sm-' + width + '"></div></div>' ;
+
+                   
+                    $ele.wrap(wrap_input);
+
+                    $ele.parent().before(label);
+
+                
 
                 modelCtrl && valid($scope, $ele, $attrs, $translate, $compile, modelCtrl);
 
