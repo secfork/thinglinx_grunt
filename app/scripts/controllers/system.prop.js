@@ -252,7 +252,7 @@
 
 
     .controller("das_config",
-        function($scope, $state, $stateParams, $source, $modal, $filter) {
+        function($scope, $state, $stateParams, $source, $modal, $filter , $sys ) {
             //@if  append
 
             console.log("das_config");
@@ -264,6 +264,8 @@
 
             var S = $scope,
                 needUpdate, hasSave;
+
+            $scope.op = { plcstate: false };
 
             S.needUpdate = needUpdate = {},
                 S.hasSave = hasSave = {};
@@ -301,6 +303,72 @@
                     $scope.t.sn = undefined;
                 })
             }
+
+
+
+            try {
+                $scope.network = angular.fromJson($scope.station.network || {});
+            } catch (e) {
+                console.error(" system . network 字段 不是 json 格式", $scope.station.network);
+            }
+
+            try {
+                $scope.gateway = angular.fromJson($scope.station.gateway || {});
+            } catch (e) {
+                console.error(" system . gateway  字段 不是 json 格式", $scope.station.gateway);
+            }
+
+
+            $scope.daserver = angular.copy(S.network.daserver || (S.network.daserver = {}));
+
+ 
+            // driver_id 是否 属于 可 编程 的 plc 时; 
+            //  system.network = {"daserver":{"type":"DTU","params":{"driverid":"DTU_HONGDIAN","simid":"15011576172"}}}
+            
+
+            // 得到  plc 状态; 
+
+
+            if(  $sys.plcProg.indexOf( $scope.daserver.params && $scope.daserver.params.driverid ) >=0 ){
+
+                $source.$system.getPLC( { system_id: $scope.station.uuid } , function(resp){
+                    $scope.op.plcstate = resp.ret ; 
+                }) 
+            } 
+
+            $scope.setPLC = function( plcstate ){ // plcstate = true | false ;
+
+                $scope.op.plcstate = !$scope.op.plcstate ;
+
+                // 属于可编程 的 ; 
+                if( $sys.plcProg.indexOf( $scope.daserver.params && $scope.daserver.params.driverid ) >=0 ) {
+                    //  1 : 编程 , 2: 运行状态 ;
+                    // plc_programming
+                    $scope.confirmInvoke({
+                        title: plcstate?"开启编程模式":"关闭编程模式",
+                        note: plcstate?"开启编程模式当前系统将停止采集相关功能, 是否确定开启编程模式?":
+                                        "关闭编程模式当前系统将不再允许通过工具同步PLC工程, 同时恢复采集相关功能, 是否确定关闭编程模式?"
+                    } , function( close ){
+                         $source.$system.setPLC( { system_id: $scope.station.uuid , 
+                                                plc_programming: plcstate? 1:2 } , function(resp ){
+                                                    $scope.op.plcstate = plcstate ;
+                                                    close();
+                                                } , function(){ 
+                                                    close(); 
+                                                })
+
+                    })  
+                }else{
+                   // angular.alert("当前系统不支持PLC编程")
+                }  
+
+            };
+
+
+
+
+
+
 
 
             //  就 托管的 daServer 不用  box ticket
@@ -347,18 +415,7 @@
 
             // var  network , gateway ;
 
-            try {
-                $scope.network = angular.fromJson($scope.station.network || {});
-            } catch (e) {
-                console.error(" system . network 字段 不是 json 格式", $scope.station.network);
-            }
-
-            try {
-                $scope.gateway = angular.fromJson($scope.station.gateway || {});
-            } catch (e) {
-                console.error(" system . gateway  字段 不是 json 格式", $scope.station.gateway);
-            }
-
+        
 
 
             //========================================================================================
@@ -368,10 +425,9 @@
             //========================================================================================
 
 
-            // 托管 Daserver 类型; Dtu模式;
-
+            // 托管 Daserver 类型; Dtu模式; 
             $scope.initDaServer = function() {
-                $scope.daserver = angular.copy(S.network.daserver || (S.network.daserver = {}));
+                // $scope.daserver = angular.copy(S.network.daserver || (S.network.daserver = {}));
 
                 // 加载  assign 的   dtu server  信息;
                 $scope.l_m_P.then(function() { // 还要是激活的;

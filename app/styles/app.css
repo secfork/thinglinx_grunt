@@ -1974,7 +1974,9 @@ fieldset[disabled] .btn-black.active {
   bottom: -1px;
   left: -1px;
   right: -1px;
-  background-color: #fff;
+  background-color: #bbb;
+  /*background-color: #fff;
+  */
   border: 1px solid #f0f0f0;
   border-radius: 30px;
   -webkit-transition: all 0.2s;

@@ -4,25 +4,55 @@
 <div class="wrapper-md   ">
     <div class="row">
         <div class="col-md-4  col-sm-12  ">
-            <div class="panel panel-default">
+            <div class="panel panel-default  no-padder  col-xs-12">
                 <div class="panel-heading">
                     账户信息
                 </div>
-                <div class="list-group no-radius alt" style="color: #1f2427">
+                <div class="list-group    " >
                     <span class="list-group-item">
-                                <span class="pull-right " style="color: #333333">{{account.create_time | date:"yyyy-MM-dd HH:mm Z" }}</span> 创建时间
+                        创建时间
+                         <span class="pull-right "   >{{account.create_time | date:"yyyy-MM-dd HH:mm Z" }}</span> 
+
                     </span>
                     <span class="list-group-item">
-                                <span class="badge bg-info"> {{regionNum}}</span> 区域数量
+                         区域数量       <span class="badge bg-info"> {{regionNum}}</span> 
                     </span>
                     <span class="list-group-item">
-                                <span class="badge bg-info"> {{userNum }}</span> 用户数量
+                         用户数量       <span class="badge bg-info"> {{userNum }}</span> 
                     </span>
                     <span class="list-group-item">
-					    <span class="pull-right " style="color: #333333"> {{user.username}}</span> 管理员
+					   管理员 <span class="pull-right " > {{user.username}}</span> 
                     </span>
                 </div>
             </div>
+
+
+            <div class="panel panel-default  no-padder  col-xs-12">
+                <div class="panel-heading">
+                    使用限制 ( 每日 )
+                </div>
+
+                <div class="panel-body">
+
+                    <div>触发报警 <span class="pull-right">111/222</span></div>    
+                    <progressbar value="55" class="progress-sm m-t m-b" type="info"></progressbar>
+
+
+                    <div>短信通知 <span class="pull-right">111/222</span></div>    
+                    <progressbar value="55" class="progress-sm m-t m-b" type="info"></progressbar>
+
+
+                    <div> 邮件通知 <span class="pull-right">111/222</span></div>    
+                    <progressbar value="55" class="progress-sm m-t m-b" type="info"></progressbar>
+
+
+                    <div> 微信通知 <span class="pull-right">111/222</span></div>    
+                    <progressbar value="55" class="progress-sm m-t m-b" type="info"></progressbar>
+ 
+
+                </div> 
+            </div>
+
         </div>
         <div class="col-md-4  col-sm-6  col-xs-12">
             <div class="panel panel-default" ng-if=" initChart_sys "  >
