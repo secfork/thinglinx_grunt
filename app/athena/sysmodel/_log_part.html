@@ -1,6 +1,3 @@
- 
- 
-
 <!-- tag -->
 <!-- 
         <input tl-wrap  ng-model="T.name"    label="text.name"  required >  
@@ -12,40 +9,17 @@
         </select>
         <textarea tl-wrap  ng-model="T.desc" label="备注" >  </textarea>
  -->
- 
-
-
-<!-- profile  tag  --> 
-            
-         
-
-     <!--    <input tl-wrap ng-model="profile.name"  disabled  label="text.profile"> -->
-        
-
-        <input tl-wrap  ng-if=" !isAdd "   disabled   ng-model="L.name"  
-            label="text.name"      >
-
-
-        <select tl-wrap    ng-init="L.log_type = L.save_log? L.log_type : undefined "
-                ng-options='  k as v for (k,v) in $sys.log_type.values'
-               
-                ng-model="L.log_type"
-                label="保存日志"
-                ng-change=" L.save_log =  L.log_type ? 1: 0 "
-                >
-               <option value=""> --不保存日志-- </option>
-        </select>
-
-
-        <div ng-if=" L.save_log && L.log_type=='RAW'"    >
-            <select ng-options="  o.v as o.k  for o in  $sys.log_period.values"
-                    tl-wrap
-                    ng-model="L.log_cycle"
-                    label="日志记录间隔"
-                   > 
-            </select>
-        </div>
-       <!--  <select tl-wrap 
+<!-- profile  tag  -->
+<!--    <input tl-wrap ng-model="profile.name"  disabled  label="text.profile"> -->
+<input tl-wrap ng-if=" !isAdd " disabled ng-model="L.name" label="text.name">
+<select tl-wrap ng-init="L.log_type = L.save_log? L.log_type : undefined " ng-options='  k as v for (k,v) in $sys.log_type.values' ng-model="L.log_type" label="保存日志" ng-change=" L.save_log =  L.log_type ? 1: 0 ">
+    <option value=""> --不保存日志-- </option>
+</select>
+<div ng-if=" L.save_log && L.log_type=='RAW'">
+    <select ng-options="  o.v as o.k  for o in  $sys.log_period.values" tl-wrap ng-model="L.log_cycle" label="日志记录间隔">
+    </select>
+</div>
+<!--  <select tl-wrap 
             ng-model="L.profile"    
             ng-options=" p.uuid as p.name  for p in profiles" 
             label="text.profile"  
@@ -55,28 +29,15 @@
                     ></select> 
             type="number"
     -->
-        <!--jjw 添加div控制隐藏或者显示-->
-        <div ng-if=" T.type =='Analog' ">
-            <input ng-model="L.deviation" label="偏差 "  
-                   type="number" tl-wrap
-                  
-                   required/>
-
-            <input ng-model="L.scale"  label="text.scale"  type="number"  
-                    tl-wrap 
-              
-              required/>
-        </div>
-
-
-        <input tl-wrap  ng-model="L.unit"   label="text.unit" >
-
-        
- <!-- 
+<!--jjw 添加div控制隐藏或者显示-->
+<div ng-if=" T.type =='Analog' ">
+    <input ng-model="L.deviation" label="偏差 " type="number" tl-wrap required/>
+    <input ng-model="L.scale" label="text.scale" type="number" tl-wrap required/>
+</div>
+<input tl-wrap ng-model="L.unit" label="text.unit">
+<!-- 
         <textarea tl-wrap  ng-model="L.tp_desc" label="备注" >  </textarea> 
  -->
-
-
 <!--@if append-->
-L  = {{L}}
+L = {{L}}
 <!--@endif-->

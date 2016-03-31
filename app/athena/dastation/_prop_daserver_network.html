@@ -36,6 +36,8 @@
                 <i class="fa  fa-warning   text-warning pos-rlt"></i> DSC地址和端口需要设置到指定的DTU设备中
             </div>
         </div>
+
+
         <!-- 手机-->
         <div ng-if="daserver.type =='TcpClient' ">
             <input tl-wrap-l label="SIM卡手机" required ng-model="a" type="number">
@@ -44,6 +46,8 @@
             <input tl-wrap-l label="APN密码" ng-model="a">
         </div>
         <!-- dtu -->
+
+
         <!--vpn-->
         <div ng-if="daserver.type =='TcpServer' ">
             <div class=" col-sm-12    m-t-xs  m-b-sm   text-left" style="padding-left: 0px">
@@ -62,6 +66,8 @@
         <!--  <div class="line   line-dashed b-b line-chart m-l-n-sm   "></div>
             ng-show=" needUpdate.daserver "
      -->
+
+
         <div class="row">
             <!--jjw col col-offset padding m-t m-t-lg-->
             <div class="col-md-9 col-md-offset-3 padding m-t">
@@ -87,5 +93,10 @@
                 </span>
             </div>
         </div>
+
+
+        
     </form>
+
+
 </div>
