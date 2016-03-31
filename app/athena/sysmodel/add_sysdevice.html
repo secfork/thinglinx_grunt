@@ -12,7 +12,8 @@
         <form name="step0" class=" form-validation form-horizontal   ">
             <input tl-wrap required ng-model="D.name" label="设备名称">
             <input tl-wrap ng-model="D.dev_cycle" type="number" label="采样周期" min='1' max="59" required>
-            <select tl-wrap ng-model="D.cycle_unit" label="采样周期单位" ng-options="o.v as o.k for o in $sys.device.timeUnit ">
+            <select tl-wrap ng-model="D.cycle_unit" label="采样周期单位" 
+            ng-options="o.v as o.k for o in $sys.device.timeUnit ">
             </select>
             <input tl-wrap ng-model="D.slow_cycle" type="number" label="慢速周期" min='1' max="59" required>
             <select tl-wrap ng-model="D.slow_cycle_unit" label="慢速周期单位" ng-options="o.v as o.k for o in $sys.device.timeUnit ">

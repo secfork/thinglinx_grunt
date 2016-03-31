@@ -198,9 +198,8 @@ angular.module("app.model.system", [])
 
         $scope.loadProfilePromise.then(function(resp) {
             $scope.profiles = resp.ret,
-                $scope.hasProfile = !!resp.ret.length;
-
-
+            $scope.hasProfile = !!resp.ret.length;
+             
             $scope.odp.puuid = resp.ret[0] && resp.ret[0].uuid;
         })
 

@@ -1,0 +1,113 @@
+<!-- 
+设备厂商：   
+驱动ID：    PX_PG
+驱动描述：   
+ 
+-->
+
+  
+<!--  areaCC 中 定义了  _dataType 对象; _accessType 对象;   -->
+
+<div class="hidden" 
+     ng-init=" _config = $sys.point[ dm.driver_id] ; 
+              _config.areaCC( point , this  , true ) "  >
+ 
+</div>
+  
+
+<select tl-wrap
+        label="数据区"
+        ng-model="point.params.area" 
+
+        ng-change ="   _config.areaCC( point , this ) "
+        ng-options="  o.v as o.k for  o in  _config.area  "
+           
+        ></select>
+
+   
+ 
+<div  ng-if=" point.params.area  <= 1 " >
+	 <input  tl-wrap   
+        label="偏移地址"
+        required  
+        type="Number"  
+        max="377"
+        min="0" 
+        pattern="^[0-7]*$" 
+        ng-model= "point.params.offset"    /> 
+</div>
+ 
+  
+
+<div ng-if=" point.params.area >= 2 ">
+    <input  tl-wrap   
+        label="偏移地址"
+        required  
+        type="Number"  
+        max="9999"
+        min="0"  
+        ng-model= "point.params.offset"    />  
+</div>
+
+  
+  
+  <select tl-wrap
+        label="数据类型"
+         
+        ng-model="point.params.type"
+
+        ng-change ="  _config.typeCC( point  , this ) "
+        
+        ng-options=" o.v as o.k for o  in   _dataType "
+        > 
+  </select>
+ 
+ 
+
+<div ng-if="  point.params.area >= 7  ">
+
+	<div  ng-if=" point.params.type == 0    ">
+      <input  tl-wrap
+              required
+              label="位偏移"
+              type="number"
+              max="15" min="0" 
+              placeholder=" 0 - 15 "
+              tl-default="0"
+              ng-model="point.params.type_ex"  />
+  	</div>
+
+
+	<div  ng-if=" point.params.type == 11   ">
+      <input  tl-wrap
+              required
+              label="字符串长度"
+              type="number"
+              max="64" min="1" 
+              placeholder=" 1 - 64 "
+              tl-default="1"
+              ng-model="point.params.type_ex" 	/>
+  	</div>
+
+  	<div ng-if=" point.params.type  == 1 ||  point.params.type  == 2   " >
+  		 <select  tl-wrap
+                     
+                    label="高低字节" 
+                    ng-model="point.params.type_ex"
+                    ng-options=" o.v as o.k for o  in  _config.hlbyte "
+             >
+        </select>
+  	</div>
+ 
+</div>
+
+ 
+<select tl-wrap
+        label="访问方式"
+         
+        ng-model = "point.params.access" 
+        ng-options=" o.v as o.k for o in  _accessType "
+
+        > 
+</select>
+  

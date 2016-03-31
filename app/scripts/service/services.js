@@ -106,6 +106,11 @@
         this.$ticket = $createSource("ticket/:system_id");
 
         this.$system = $createSource("system/:pk/:options/:proj_id", {}, {
+
+            setPLC:{ method:"PUT" , params:{ options:"set_plc_prog"}  },
+            
+            getPLC:{ params:{ options:"get_plc_prog"} },
+
             sync: {
                 method: "GET",
                 params: {

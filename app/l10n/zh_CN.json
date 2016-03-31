@@ -137,6 +137,8 @@
     "ER_DEV_NET_CFG_ERR":"设备网络参数错误",
     "ER_DEV_SIMID_USED":"设备SIMID号被占用",
 
+    "ER_STATUS_NOT_EXIST":"状态服务器不存在",
+
     "ER_PARSE_ERROR":"未知错误",
     "ER_CODE_EXCEPTION":"未知错误", 
     "ER_JSON_PARSE_ERR":"未知错误",
@@ -183,6 +185,7 @@
     "REGION_USER_MANAGE": "区域用户管理",
     "SYSTEM_CONTROL": "系统控制",
     "SYN_CONFIG": "系统配置",
+    "PLC_PROGRAMMING":"PLC编程",
 
 
 

@@ -10,9 +10,9 @@
                   <select ng-model="profile" class=" form-control    " ng-options="   p as p.name for p in profiles  " ng-change="toUpdate('profile')" required>
                   </select>
                   <span class="help-block m-b-none  m-b-xs" ng-show=" profile.desc">
-                <i class="fa  fa-warning  text-success pos-rlt"></i>
-                {{profile.desc}}
-              </span>
+                    <i class="fa  fa-warning  text-success pos-rlt"></i>
+                    {{profile.desc}}
+                  </span>
               </div>
               <div class="col-md-9 col-md-offset-3 m-t-xs m-b">
                   <span class="text-danger " ng-show=" needUpdate.profile ">
@@ -30,6 +30,24 @@
                   <i class="fa  fa-thumbs-o-up "></i> <span>保存成功!</span> </strong>
                   </span>
               </div>
+
+              <!--  PLC 编程模式 -->
+              <label class="col-md-3   control-label m-t-xs color-4 ">PLC编程模式</label>
+              <div class="col-md-9">
+                  <label class="i-switch i-switch-md bg-info m-t-xs m-r">
+                    <input type="checkbox" checked=""   ng-model="op.plcstate"  ng-change="setPLC( op.plcstate )" >
+                    <i></i>
+                  </label>      
+
+              </div>
+
+
+              op.plcstate ={{ op.plcstate}}
+
+
+
+
+
               <!--  就 托管的 daServer 不用  box ticket-->
               <div ng-if="  nT ">
                   <label class="col-md-3   control-label m-t-xs color-4">SN</label>
