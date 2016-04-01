@@ -265,10 +265,13 @@ module.exports = function(grunt) {
             proxies:[
                 {
                     context:"/node", 
+                    
                     host:"127.0.0.1",   // local ; 
-                    // host:'test.thinglinx.net' , // test_console ;  
                     port:"8080",
-                    https: false,
+
+                    // host:'https://test.thinglinx.net' , // test_console ;  
+                    // https: true,
+                    
                     changeOrigin: true
                 }
             ],

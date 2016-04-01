@@ -4,9 +4,9 @@
     <div class="   panel-body  no-padder  ">
  
           
-          <div class="col-md-8 col-xs-12   text-left   m-b-sm m-t padder-md">
-              <label class="col-md-3   control-label m-t-xs color-4 ">配置项</label>
-              <div class="col-md-9">
+          <div class="col-md-8    text-left   m-b-sm m-t padder-md">
+              <label class="col-md-3   control-label m-t-xs  text-right ">配置项</label>
+              <div class="col-md-8">
                   <select ng-model="profile" class=" form-control    " ng-options="   p as p.name for p in profiles  " ng-change="toUpdate('profile')" required>
                   </select>
                   <span class="help-block m-b-none  m-b-xs" ng-show=" profile.desc">
@@ -32,18 +32,32 @@
               </div>
 
               <!--  PLC 编程模式 -->
-              <label class="col-md-3   control-label m-t-xs color-4 ">PLC编程模式</label>
-              <div class="col-md-9">
+              <label class="col-md-3   control-label m-t-xs  text-right ">PLC编程模式</label>
+              <div class="col-md-8">
                   <label class="i-switch i-switch-md bg-info m-t-xs m-r">
-                    <input type="checkbox" checked=""   ng-model="op.plcstate"  ng-change="setPLC( op.plcstate )" >
+                    <input type="checkbox" checked="" 
+                        ng-disabled=" !op.enAblePlcProg " 
+                        ng-model="op.plcstate"  ng-change="setPLC( op.plcstate )" >
                     <i></i>
-                  </label>      
+                     &nbsp;
+                  </label>  
+
+                  <span class="text-muted " ng-show=" ! op.enAblePlcProg ">
+                      当前网络参数设置不支持PLC编程模式
+                  </span>
+
+                  <div class="text-info"  ng-if = " op.enAblePlcProg  "  >
+                    <span  ng-show="op.plcstate"  >  当前系统处于编程模式, 您可以使用工具向PLC同步工程, 如您想恢复采集, 请关闭编程模式;  </span>
+                    <span  ng-show="!op.plcstate" > 当前处于采集模式, 如您希望向PLC同步工程 , 请切换到编程模式 </span>
+                  </div>
+
+                  
 
               </div>
 
-
-              op.plcstate ={{ op.plcstate}}
-
+              <!-- @if append -->
+             
+              <!-- @endif -->
 
 
 
@@ -81,12 +95,10 @@
 
           <!--   托管  daserver  模式   sysmodel.mode ==1 &&  sysmodel.comm_type == 1  -->
         
-
-  
+ 
  
         <ng-include  ng-if=" !nT " 
-                src="  'athena/dastation/_prop_daserver_network.html'  "
-            ></ng-include>
+                src="  'athena/dastation/_prop_daserver_network.html'  "  ></ng-include>
  
 
         <!--

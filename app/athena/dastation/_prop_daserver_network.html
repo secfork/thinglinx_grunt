@@ -5,19 +5,15 @@
  -->
 <div class="  panel-heading  b-t  b-b m-b-lg"> 设备网络参数 </div>
 <div>
-    <form   name="form_daserver" class="form-horizontal form-validation m-b-md col-md-8 padder-md "
-            ng-init="  initDaServer() ; loadSupportDtus();">
+    <form name="form_daserver" class="form-horizontal form-validation m-b-md col-md-8 padder-md " ng-init="  initDaServer() ; loadSupportDtus();">
         <!-- 只有  指定assign 过了 不可  不可编辑
 
         激活的必定已经指定了 daserver ; 
 
      -->
-     
-     <!--@if append-->
-       daserver =  {{daserver}}
-     <!--@endif -->
-
-
+        <!--@if append-->
+        daserver = {{daserver}}
+        <!--@endif -->
         <!--jjw padder-->
         <div ng-if=" daserver.type =='DTU' " class="wrap-text-l padder">
             <select tl-wrap-l label="DTU驱动" required ng-disabled="  cmway_port  " ng-model="daserver.params.driverid" ng-change=" applyDtuData(daserver.params ) ;

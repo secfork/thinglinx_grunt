@@ -252,7 +252,7 @@
 
 
     .controller("das_config",
-        function($scope, $state, $stateParams, $source, $modal, $filter , $sys ) {
+        function($scope, $state, $stateParams, $source, $modal, $filter , $sys  , $utils ) {
             //@if  append
 
             console.log("das_config");
@@ -265,7 +265,7 @@
             var S = $scope,
                 needUpdate, hasSave;
 
-            $scope.op = { plcstate: false };
+            $scope.op = { plcstate: false , enAblePlcProg:false };
 
             S.needUpdate = needUpdate = {},
                 S.hasSave = hasSave = {};
@@ -326,19 +326,22 @@
             //  system.network = {"daserver":{"type":"DTU","params":{"driverid":"DTU_HONGDIAN","simid":"15011576172"}}}
             
 
-            // 得到  plc 状态; 
+            // 得到  plc 状态;    
+            if(  $utils.isEnablePlcProg(  $scope.daserver.params && $scope.daserver.params.driverid )  ){
 
-
-            if(  $sys.plcProg.indexOf( $scope.daserver.params && $scope.daserver.params.driverid ) >=0 ){
+                $scope.op.enAblePlcProg = true ;
 
                 $source.$system.getPLC( { system_id: $scope.station.uuid } , function(resp){
                     $scope.op.plcstate = resp.ret ; 
-                }) 
-            } 
+                }) ;
 
+            }  
             $scope.setPLC = function( plcstate ){ // plcstate = true | false ;
 
+                //  拒绝显示 实时显示开关状态; 
                 $scope.op.plcstate = !$scope.op.plcstate ;
+
+                if(!$scope.op.enAblePlcProg) return ;
 
                 // 属于可编程 的 ; 
                 if( $sys.plcProg.indexOf( $scope.daserver.params && $scope.daserver.params.driverid ) >=0 ) {
@@ -364,13 +367,7 @@
 
             };
 
-
-
-
-
-
-
-
+  
             //  就 托管的 daServer 不用  box ticket
             // <div ng-if=" !(sysmodel.mode ==1  && sysmodel.comm_type ==1 ) ">
 
@@ -740,6 +737,7 @@
                             )
 
                         })
+                    
                     } else if ($scope.station.state == 1 && (!$scope.cmway_port)) {
                         // 激活的话 , 但是没有指定 daserver( 没assign过的) ;
                         assignSystem().then(function() {
@@ -753,14 +751,20 @@
 
 
                     // 激活 , 指定 dtu system 的daserver ;
-                    function assignSystem() {
-                        var d = {
-                            pk: $scope.station.uuid,
-                            driver_id: $scope.daserver.params.driverid
-                        };
+                    function assignSystem() { 
+
+                        var driver_id = $scope.daserver.params.driverid,
+                            d = {
+                                pk: $scope.station.uuid,
+                                driver_id: driver_id
+                            };
                         var b = $source.$system.assign(d).$promise;
                         b.then(function(resp) {
                             $scope.cmway_port = resp.ret; // 数据中心 , 端口数据 ;
+
+                            // 分配了dut  server ;  看 driver 是否支持 plc 编程;  
+                            $scope.op.enAblePlcProg  =  $utils.isEnablePlcProg( driver_id ) ;
+
                         })
                         return b;
                     }
@@ -775,6 +779,7 @@
                             $scope.station.network = d.network;
                         })
                     }
+
                 }
 
                 if (field == 'gateway') {
@@ -822,8 +827,6 @@
         var station = $scope.station;
 
         $scope.$popNav($scope.station.name + "(变量)", $state);
-
-
 
         $scope.getDevName = function(tag, scope) {
             var d_id = tag.connect.replace(/(\d+).(\d+)/, "$1");
@@ -1040,9 +1043,12 @@
             // 有定位时 ,  markLocation 无用; 
             if ($scope.station.latitude) {
                 marker = $map.mapMarker($scope.station.latitude, $scope.station.longitude, $scope.station.name)
+                    
+                //marker.addEventListener("click" , openWinInfo );
+
                 map.addOverlay(marker);
                 map.centerAndZoom(marker.point, 12);
-                openWinInfo();
+                 openWinInfo();
             }
 
             // 无定位时 , ; 
@@ -1092,7 +1098,7 @@
                 }).success(function(html) {
                     infoWindow = new BMap.InfoWindow($compile(html.replace(/(\n)+|(\r)+/g, ""))($scope).get(0), {
                         enableCloseOnClick: false,
-                        enableAutoPan: false
+                        // enableAutoPan: true
                     });
 
                     marker.addEventListener("click", function() {
