@@ -372,7 +372,7 @@ angular.module('app.basecontroller', [])
     $scope.effStation = function(dastations, station, index, todel) {
         $scope.confirmInvoke({
             title: "失效系统 " + station.name,
-            note: "失效将释放当前系统持有的采集资源, 如您的 系统处于编程模式,将恢复到采集模式,失效后历史数据不会丢失,确认要失效该系统吗?"
+            note: "失效将释放当前系统持有的采集资源, 如您的系统处于编程模式,将恢复到采集模式,失效后历史数据不会丢失,确认要失效该系统吗?"
         }, function(next) {
             var d = {
                 uuid: station.uuid,

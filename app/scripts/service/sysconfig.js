@@ -343,6 +343,7 @@ angular.module('app.sysconfig', [], function() {})
             "PLC_MITSUBISHI_FX_COM":{
                 entity:{
                     params:{
+                        address:1,
                         type:2 ,
                         format:1 ,
                         sum: 1 

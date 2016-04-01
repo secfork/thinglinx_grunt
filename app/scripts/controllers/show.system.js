@@ -383,7 +383,7 @@ angular.module('app.show.system', [])
         },
         t,  
         v ,
-        b;
+        b,  regExp  , formatter;
 
     function getCurrent($event) {
 
@@ -402,17 +402,31 @@ angular.module('app.show.system', [])
                 uuid: $scope.system.uuid,
                 tag: names
             }, function(resp) {
-
+  
                 b = $scope.decimal; 
+
+                if(b){
+                    if( $scope.fractionSize == 0){
+                        regExp = new RegExp( "(\\d+).(\\d+)" );
+                        formatter = "$1";
+
+                    }else{
+                        regExp = new RegExp(  "(\\d+).(\\d{" +$scope.fractionSize+  "})(\\d*)" );
+                        formatter = "$1.$2";
+                    } 
+                }
+
 
                 $.each(resp.ret, function(i, d) {
                     d = d || x;
                     t = $filter("date")(d.src, 'MM-dd HH:mm:ss'); 
                     t && $("#_time_" + i).text(t);
 
+
+                    // '1232.1233455666'.replace(/(\d+).(\d{3})(\d*)/, "$1"+'xxx'+"$2");
+
                     $("#_val_" + i).text(d.pv == null ?  "" 
-                        : 
-                        (  b ? d.pv.toFixed( $scope.fractionSize )  : d.pv ) 
+                        : (  b ? ( (d.pv+'').replace( regExp , formatter)  )  : d.pv ) 
                     );
  
                 });
@@ -1011,9 +1025,7 @@ angular.module('app.show.system', [])
 })
 
 .controller('show_system_map', function($scope, $map, $state, $filter) {
-
-
-
+ 
     var map;
     $scope.initMap = function() {
         //@if  append

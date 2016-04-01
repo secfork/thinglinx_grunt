@@ -2,15 +2,11 @@
 
     angular.module('app.utils', [], function() {})
 
-    .service("$utils", function($sessionStorage) {
+    .service("$utils", function($sessionStorage , $sys ) {
 
 
         var a, b, c, d, e, f;
-
-
-
-
-
+ 
 
         function getCookie(name) {
             var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
@@ -33,6 +29,9 @@
             delCookie: delCookie,
             getCookie: getCookie,
 
+            isEnablePlcProg: function(  driver_id ){
+                return  $sys.plcProg.indexOf( driver_id ) >=0
+            } ,
 
             handlerOnlineData:  function  ( sysStatus ){
                 return  sysStatus &&  (sysStatus.daserver ?  sysStatus.daserver.logon : sysStatus.online   )

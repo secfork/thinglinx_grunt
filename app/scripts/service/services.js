@@ -603,7 +603,7 @@
 
         var timeOutGetSystemStatus ,  
             markerOptions = {   offset: new BMap.Size( 0,5)     }  , 
-            infoWindowOptions = { enableCloseOnClick: false  , enableMessage :false }  ;
+            infoWindowOptions = { enableCloseOnClick: false  , enableMessage :false , enableAutoPan: false }  ;
        
         this.showSystemProp = function( map , point  , system  , $scope  ){
                  
