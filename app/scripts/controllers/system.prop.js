@@ -268,7 +268,7 @@
             $scope.op = { plcstate: false , enAblePlcProg:false };
 
             S.needUpdate = needUpdate = {},
-                S.hasSave = hasSave = {};
+            S.hasSave = hasSave = {};
 
 
             // 生成 ticket ; //createTicket

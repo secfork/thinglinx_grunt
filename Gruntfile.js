@@ -251,16 +251,17 @@ module.exports = function(grunt) {
                 // hostname: '0.0.0.0',
                 livereload: 35729   // 默认是 35729 ， 但是 nodeconsole 战中了；
             }, 
-            server: {    
-                options: {
-                    protocol:"https",
-                    port:8443,
-                    key: grunt.file.read('server.key').toString(),
-                    cert: grunt.file.read('server.crt').toString(),
-                    ca: grunt.file.read('ca.crt').toString()
-                }
+            
+            // server: {    
+            //     options: {
+            //         protocol:"https",
+            //         port:8443,
+            //         key: grunt.file.read('server.key').toString(),
+            //         cert: grunt.file.read('server.crt').toString(),
+            //         ca: grunt.file.read('ca.crt').toString()
+            //     }
 
-            },
+            // },
             
             proxies:[
                 {
