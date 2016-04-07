@@ -58,7 +58,9 @@
         this.$region = $createSource("region/:pk/:op");
 
         // account/admin?uuid 来判断 uuid is Exist
-        this.$account = $createSource("account/:pk");
+        this.$account = $createSource("account/:pk" , {},{
+            daliyStatistic:{  url: angular.rootUrl+  "account/daily_statistic"}
+        });
 
         this.$role = $createSource("role/:pk");
         this.$driver = $createSource("driver/:type");

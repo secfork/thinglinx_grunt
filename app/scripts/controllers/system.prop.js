@@ -336,9 +336,10 @@
                 }) ;
 
             }  
+
             $scope.setPLC = function( plcstate ){ // plcstate = true | false ;
 
-                //  拒绝显示 实时显示开关状态; 
+                //  拒绝 实时 反应 开关状态; 
                 $scope.op.plcstate = !$scope.op.plcstate ;
 
                 if(!$scope.op.enAblePlcProg) return ;

@@ -70,7 +70,24 @@ angular.module('app.account', [])
         $scope.totalAlarm = resp[0].ret || 0;
         $scope.totalAlarm_act = resp[1].ret || 0;
         $scope.initChart_alarm = true;
-    })
+    });
+
+
+
+
+
+    // 得到日 用量; 
+    $scope.daliyStat = { daily_alarms: 0 ,  daily_emails: 0 ,  daily_sms: 0 , daily_wechats: 0};
+    $source.$account.daliyStatistic(function(resp){ 
+        var ret =  resp.ret ;   
+        $scope.daliyStat =  ret ; 
+ 
+
+    });
+
+
+
+
 
 })
 
