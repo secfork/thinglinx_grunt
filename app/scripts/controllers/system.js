@@ -92,6 +92,7 @@
             $interval.cancel(state_interval);
         })
 
+        var sys_ref ;
         $scope.loadPageData = function(pageNo) {
 
             $scope.showMask = true;
@@ -121,8 +122,7 @@
 
             $source.$system.query(d).$promise.then(function(resp) {
 
-                var sys_ref,
-                    promise_A, promise_B, sysState, sta2sync;
+                var  promise_A, promise_B, sysState, sta2sync;
 
                 sys_ref = {};
 
@@ -150,6 +150,9 @@
                     $interval.cancel(state_interval);
 
                     state_interval = $interval(function() {
+                        
+                        // ids 删除 添加  system 时 ids 会变 ; 
+
                         $source.$system.status(ids, function(resp_x) {
                             var sysStatus = resp_x.ret;
                             $.each(resp.data, function(i, n) {
@@ -354,6 +357,10 @@
                             sys.state = 0;
 
                             $scope.page.data.unshift(sys);
+                            // kv 维护; 
+
+                            sys_ref[  sys.uuid  ] = sys ; 
+
                             $scope.cancel();
 
                             $scope.confirmInvoke({

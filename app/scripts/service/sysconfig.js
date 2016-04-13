@@ -86,7 +86,7 @@ angular.module('app.sysconfig', [], function() {})
         ],
 
         // 可编程的 dtu 驱动 id ;  
-        plcProg: ['DTU_ETUNG'],
+        plcProg: ['DTU_ETung_PLC'],
 
 
 

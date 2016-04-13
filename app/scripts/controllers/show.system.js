@@ -1039,12 +1039,11 @@ angular.module('app.show.system', [])
         system.regionName = system.region_name //||  $scope.rg_k_v[system.region_id].name ;
         system.createTime = system.createTime || $filter("date")(system.create_time, "yyyy-MM-dd hh:mm:ss");
 
+        var p =  new BMap.Point(system.longitude, system.latitude) ;
 
-        $map.showSystemProp(map,
-            new BMap.Point(system.longitude, system.latitude),
-            $scope.system)
-
-
+        $map.showSystemProp(map, p , $scope.system );
+        
+        map.panTo( p  ) ;
     }
 
 })

@@ -29,24 +29,23 @@
                     使用限制 ( 每日 )
                 </div>
                 <div class="panel-body">
-                    <div>触发报警 <span class="pull-right">  
-
+                    <div>触发报警 <span class="pull-right">   
                         {{    daliyStat.daily_alarms  }}/{{   daliyStat.daily_alarms_limit }} 
                     </span></div>
-                    <progressbar value=' daliyStat.daily_alarms  ' max='daliyStat.daily_alarms_limit' class="progress-sm m-t m-b" type="info"></progressbar>
+                    <progressbar value=' daliyStat.daily_alarms  ' max='daliyStat.daily_alarms_limit' class="progress-sm m-t m-b" type="{{::  daliyStat.alarm_color  }}"></progressbar>
                     <div>短信通知 <span class="pull-right">
                      {{  daliyStat.daily_sms  }}/{{ daliyStat.daily_sms_limit }} 
                     </span></div>
-                    <progressbar class="progress-sm m-t m-b" value=' daliyStat.daily_sms  ' max='daliyStat.daily_sms_limit' type="info"></progressbar>
+                    <progressbar class="progress-sm m-t m-b" value=' daliyStat.daily_sms  ' max='daliyStat.daily_sms_limit' type="{{::  daliyStat.sms_color  }}"></progressbar>
                     <div> 邮件通知 <span class="pull-right">
                         
                          {{ daliyStat.daily_emails  }}/{{ daliyStat.daily_emails_limit }} 
                     </span></div>
-                    <progressbar class="progress-sm m-t m-b" type="info" value='daliyStat.daily_emails' max='daliyStat.daily_emails_limit'></progressbar>
+                    <progressbar class="progress-sm m-t m-b" type="info" value='daliyStat.daily_emails' max='daliyStat.daily_emails_limit' type="{{::  daliyStat.emails_color  }}"></progressbar>
                     <div> 微信通知 <span class="pull-right">
                          {{ daliyStat.daily_wechats  }}/{{ daliyStat.daily_wechats_limit }} 
                     </span></div>
-                    <progressbar class="progress-sm m-t m-b" type="info" value='daliyStat.daily_wechats' max='daliyStat.daily_wechats_limit'></progressbar>
+                    <progressbar class="progress-sm m-t m-b" type="info" value='daliyStat.daily_wechats' max='daliyStat.daily_wechats_limit' type="{{::  daliyStat.wechats_color  }}"></progressbar>
                 </div>
             </div>
         </div>

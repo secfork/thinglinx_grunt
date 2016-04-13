@@ -26,9 +26,9 @@
 
         
     <div class="panel-body  no-padder  ">
-        <div class="row m-l-xs m-r-xs  ">
+       <!--  <div class="row m-l-xs m-r-xs  "> -->
             <div class="form-group m-b-none">
-                <label class="col-md-1 m-t">搜索</label>
+                <label class="col-md-1 m-t-md text-right">搜索</label>
                 <div class="col-md-4 m-t">
                     <input class="form-control input-sm" id="suggestId">
                     <div id="searchResultPanel" style="border:1px solid #C0C0C0 ;height:auto; display:none;">
@@ -36,15 +36,15 @@
                 </div>
             </div> 
 
-            <div class="form-group m-l m-b">
+            <div class="form-group   m-b">
                 <button class="btn btn-sm btn-info m-t  " ng-click="markLocation()"  
                     ng-disabled=" station.latitude   "
                     >标记位置</button> 
                 <button class="btn btn-sm btn-info m-t  " ng-click="delMarker()"
-                    ng-disabled=" station.latitude == 0 || staation.latitude != null "
+                    ng-disabled=" station.latitude == 0 || station.latitude != null "
                     >删除位置</button>
             </div>
-        </div>
+       <!--  </div> -->
         <div id="station_map" class="m-t-xs" ng-init="createMap()"></div>
     </div>
 </div>

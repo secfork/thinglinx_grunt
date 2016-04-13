@@ -297,8 +297,7 @@ angular.module('app.basecontroller', [])
         $state.go(n.state.name, n.state.params);
         //$state.go();
     };
-
-
+ 
     // 关闭弹出 window
     $scope.cancel = function() {
         this.$modalInstance && this.$modalInstance.dismiss('cancel');
@@ -367,8 +366,7 @@ angular.module('app.basecontroller', [])
         });
     };
 
-    //  采集占失效   失败; effactive ;
-
+    //  采集占失效   失败; effactive ; 
     $scope.effStation = function(dastations, station, index, todel) {
         $scope.confirmInvoke({
             title: "失效系统 " + station.name,
@@ -396,7 +394,7 @@ angular.module('app.basecontroller', [])
 
 
     // 移除;
-    $scope.delStation = function(dastations, station, index) {
+    $scope.delStation = function(dastations, station, index  , cb) {
         $scope.confirmInvoke({
             title: "您是否要删除系统:" + station.name,
             warn: "删除系统将会丢失此系统的全部历史数据"
@@ -406,6 +404,8 @@ angular.module('app.basecontroller', [])
             }, function(resp) {
 
                 dastations.splice(index, 1);
+                
+                cb && cb();
 
                 next();
             }, function() {

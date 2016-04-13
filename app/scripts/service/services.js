@@ -607,9 +607,10 @@
             markerOptions = {   offset: new BMap.Size( 0,5)     }  , 
             infoWindowOptions = { enableCloseOnClick: false  , enableMessage :false , enableAutoPan: false }  ;
        
-        this.showSystemProp = function( map , point  , system  , $scope  ){
+        this.showSystemProp = function( map , point  , system  , $scope  , autoPan ){
                  
                 $timeout.cancel( timeOutGetSystemStatus );
+
                 timeOutGetSystemStatus = $timeout( function(){
                      $source.$system.status([ system.uuid ] , function( resp ){
                         // 获取 单个 系统的在线 状态; 
@@ -617,9 +618,7 @@
 
                      })
                 },500 )
- 
-               
-
+   
                 if( ! point.marker){
                     var mk =  new  BMap.Marker( point , markerOptions);
                     $scope &&  mk.addEventListener('click' , function(){
@@ -631,6 +630,7 @@
 
                 $templateRequest("athena/dastation/prop_map_popup.html").then( function(html){
                      
+                    infoWindowOptions.enableAutoPan = !!autoPan ;
                     // s.proj_name = s.proj_name || projName; // ;
                     // system 类型;
                     // system.type =  $sys.stationtype.values[s.type].k ; 

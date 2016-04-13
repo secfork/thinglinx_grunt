@@ -79,12 +79,23 @@ angular.module('app.account', [])
     // 得到日 用量; 
     $scope.daliyStat = { daily_alarms: 0 ,  daily_emails: 0 ,  daily_sms: 0 , daily_wechats: 0};
     $source.$account.daliyStatistic(function(resp){ 
-        var ret =  resp.ret ;   
-        $scope.daliyStat =  ret ; 
- 
+        
+        var ret =  resp.ret ;  
+
+        // 计算   alarm , emeail ..  使用百分比 ,  显示不同颜色;
+        ret.alarm_color =  caclColor( ret.daily_alarms_limit , ret.daily_alarms  );
+        ret.email_color =  caclColor( ret.daily_emails_limit ,  ret.daily_emails );
+        ret.sms_color =  caclColor( ret.daily_sms_limit ,  ret.daily_sms );
+        ret.wechat_color =  caclColor( ret.daily_wechats_limit ,  ret.daily_emails );
+
+        $scope.daliyStat =  ret ;  
 
     });
 
+    function caclColor( total , use ){
+            var  percent =   use/total ;
+        return   percent < 0.5 ? "success": ( percent < 0.8? 'warning':"danger" )    
+    }
 
 
 
