@@ -2,22 +2,22 @@
     <h2 class="m-n font-thin h4"> 微信绑定</h2>
 </div>
 <div load-mask></div>
-<div class="panel panel-body " ng-if='op.step == -1 '>
+<div class=" panel panel-body   " ng-if='op.step == -1 '>
     <div class="col-md-8 col-md-offset-3 col-xs-12">
         <h4 class="m-t-xxl">以下是您的微信服务号信息</h4>
-        <div class="hbox">
+        <div class="hbox m-t-md">
             <div class="col w-sm">微信号</div>
             <div class=" col text-muted">
                 {{:: wei.wechat_id || '......'}}
             </div>
         </div>
-        <div class="hbox">
+        <div class="hbox m-t">
             <div class="col w-sm">URL (服务器地址)</div>
             <div class=" col text-muted   ">
                 {{:: wei.server_url || '......'}}
             </div>
         </div>
-        <div class=" text-muted"> 如果您想取消绑定, 或者更改微信服务号账号信息, 您可以 &nbsp;
+        <div class=" text-muted" style="margin-top: 200px;"> 如果您想取消绑定, 或者更改微信服务号账号信息, 您可以 &nbsp;
             <a class="text-info" ng-click="unBindServer()"> 注销服务号 </a>
         </div>
     </div>

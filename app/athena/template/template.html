@@ -7,7 +7,7 @@
     <h2 class="m-n font-thin h4">设备模型</h2>
 </div>
 <div class="wrapper-md  ">
-     
+    
             <div class="input-group col-sm-4 m-b-xs  ">
                  
                 <input class="form-control  " type="text" ng-model="op.f_n">
@@ -17,19 +17,10 @@
                   </span>
 
             </div>
-        
+         
  
         <div class=" panel-body  no-padder   " id="temp_context" load-mask>
-            
-            <div class="input-group  col-sm-6    col-md-4  " ng-show="deviceModels.length > 15">
-                <span class="input-group-btn">
-                 <span class="btn btn-default height-30 w-46  "
-                       translate="common.search"  >搜索</span>
-                </span>
-                <input class="form-control input-sm" type="text" ng-model="op.f_n">
-            </div>
-
-            
+             
             <div ng-repeat='dm in deviceModels | filter:{ name:op.f_n} ' class="panel panel-default m-b-xs">
                 <div class="panel-heading">
                     

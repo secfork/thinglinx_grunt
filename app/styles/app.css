@@ -1,9 +1,17 @@
+
+
+.col333 {
+  color: #333;
+}
  
 
 /*.app-content-body > .wrapper-md {
   padding-bottom: 0px;
 }
 */
+
+
+
 
 .w-b-80{
   width: 80%;
@@ -150,7 +158,8 @@ a:focus {
   text-decoration: none;
 }
 label {
-  font-weight: normal;
+  /*font-weight: normal;*/
+  font-weight: 300;
 }
 small,
 .small {
@@ -158,7 +167,8 @@ small,
 }
 .badge,
 .label {
-  font-weight: bold;
+  /*font-weight: bold; */
+  font-weight: 300;
   text-shadow: 0 1px 0 rgba(0,0,0,0.2);
 }
 .badge.bg-light,

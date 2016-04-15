@@ -15,13 +15,12 @@
             <div class="form-group m-l m-r-xs  m-r-l "  style="min-width: 200px;" >
                 <label class="i-checks    ">
                     <input type="checkbox" ng-model="decimal"><i></i>
-                    <span class=" text " style="margin-left: 0px;">保留</span> 
+                    <span class=" text " style="margin-left: 1px;" >保留</span> 
                 </label>
 
-                 <input   class="form-control w-xxs " type="number" 
+                 <input   class="form-control w-xxs m-l-xs m-r-xs inline " type="number" 
                     ng-disabled="!decimal"
-                    ng-model="fractionSize" max=10 min='0'>
-                  
+                    ng-model="fractionSize" max=10 min='0'> 
                   <label class=" text "> 位小数</label> 
             </div>
 
@@ -29,9 +28,9 @@
             <div class="checkbox m-l m-r-xs  " style="min-width: 250px;" >
                 <label class="i-checks    ">
                     <input type="checkbox" ng-model="auto_r"><i></i>
-                    <span class=" text " style="margin-left: 0px;">自动刷新</span>
+                    <span class=" text " style="margin-left: 1px;">自动刷新</span>
                 </label>
-                <progressbar class="progress-striped   m-b-n-xs  w-sm  inline" animate="false" value=" progValue / 100  " type="success">
+                <progressbar class="progress-striped   m-b-n-xs  w-sm m-l-xs inline" animate="false" value=" progValue / 100  " type="success">
                 </progressbar>
             </div>
 

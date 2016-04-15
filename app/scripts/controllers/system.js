@@ -153,7 +153,7 @@
                         
                         // ids 删除 添加  system 时 ids 会变 ; 
 
-                        $source.$system.status(ids, function(resp_x) {
+                        $source.$system.status( Object.keys(sys_ref) , function(resp_x) {
                             var sysStatus = resp_x.ret;
                             $.each(resp.data, function(i, n) {
                                 n.online = sysStatus &&  $utils.handlerOnlineData( sysStatus[i] ) ;
@@ -289,7 +289,12 @@
     
         }
  
-  
+        $scope.deleteStation = function( data  ,das , $index  ) {
+            $scope.delStation( data , das , $index , function(){
+                delete  sys_ref[ das.uuid ] ;
+            })
+        }
+
 
         $scope.createSystem = function() {
             $modal.open({
@@ -308,8 +313,7 @@
                     $scope.od = {
                         systemModel: undefined,
                         selectRegion: !!region_id
-                    };
-
+                    }; 
 
                     $scope.$watch("od.systemModel", function(n, o) {
                         if (!n) return;
@@ -320,7 +324,7 @@
 
 
                         // 加载  profile;
-                        if (n.mode == 2) {
+                        if (n.mode == 2) {  // 非托管 ; 无 network 参数; 
                             delete $scope.system.network;
                         }
 
@@ -354,11 +358,10 @@
                         $source.$system.save(sys, function(resp) {
                             // alert("创建成功!");  
                             sys.uuid = resp.ret;
-                            sys.state = 0;
-
+                            sys.state = 0; 
                             $scope.page.data.unshift(sys);
-                            // kv 维护; 
 
+                            // kv 维护;  
                             sys_ref[  sys.uuid  ] = sys ; 
 
                             $scope.cancel();

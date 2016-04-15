@@ -24,7 +24,7 @@ angular.module('app.sysconfig', [], function() {})
         itemsPerPage: 20,
 
 
-        state_inter_time: 60000, // system 在线状态更新 周期; 
+        state_inter_time: 5000, // system 在线状态更新 周期; 
 
 
         yesOrNo: [{

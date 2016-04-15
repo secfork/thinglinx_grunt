@@ -153,7 +153,8 @@
                             <a class="text-info-dk m-r-xs" ng-if="das.state ==2 " ng-click=" startSystem( das , page.data , $index ) ">启动</a>
                             <a class="text-info-dk m-r-xs" ranslate="bu.bu3" ng-click=" editStation( this , das , $index  ) ">编辑</a>
                              -->
-                            <a class="text-info " ng-if="das.state != 1 " ng-click=" delStation( page.data  ,das , $index  ) ">删除</a>
+                            <a class="text-info " ng-if="das.state != 1 " 
+                                    ng-click=" deleteStation( page.data  ,das , $index  ) ">删除</a>
                             <span ng-if="das.state == 1" class="text-muted ">删除</span>
                         </td>
                     </tr>

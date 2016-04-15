@@ -1,22 +1,24 @@
 <div class="w-md">
-    <h5 class="text-left text-muted">定位 </h5> 
-    <div class="hbox">
-        <div class="col w-50">经度</div>
+    <h5 class="text-left btn-link ">定位 </h5> 
+    <div class="hbox m-t-sm">
+        <div class="col w-50 col333 ">经度</div>
         <div class="col text-muted " > {{msg.lng}}</div>
     </div>
-    <div class="hbox ">
-        <div class="col w-50">纬度</div>
+    <div class="hbox m-t-sm ">
+        <div class="col w-50 col333 ">纬度</div>
         <div class="col text-muted " >{{msg.lat}} </div>
     </div>
-    <div class="hbox ">
-        <div class="col w-50">地址</div>
+    <div class="hbox  m-t-sm">   
+        <div class="col w-50 col333 ">地址</div>
         <div class="col text-muted " style="height:50px;" >{{msg.address}}</div>
     </div>
     <div class="text-center">
-        <button class="btn  btn-sm"  ng-click="locatedSation()"  ng-if="op.toNewLocation"  >确定位置</button>
+
+        <button class="btn btn-default btn-sm"  ng-click="locatedSation()"  ng-if="op.toNewLocation"  >确定位置</button>
         
-        <button class="btn  btn-sm"  ng-click="letMarkerMove()"  ng-if="!op.toNewLocation" >移动</button>
+        <button class="btn btn-default btn-sm"  ng-click="letMarkerMove()"  ng-if="!op.toNewLocation" >移动</button>
 
         <button class="btn  btn-sm btn-danger"  ng-click="delMarker()"  ng-if="station.longitude !== undefined " >移除</button>
+        
     </div>
 </div>

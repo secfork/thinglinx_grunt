@@ -97,9 +97,6 @@ angular.module('app.account', [])
         return   percent < 0.5 ? "success": ( percent < 0.8? 'warning':"danger" )    
     }
 
-
-
-
 })
 
 .controller("account_users", function($scope, $state, $source, $sys, $q, $modal, $modal) {
@@ -507,10 +504,7 @@ angular.module('app.account', [])
                 subScribKV[rr.id || rr.region_id] = true;
 
             }, function() {
-                rr.acceptAlarm = !rr.acceptAlarm;
-
-
-
+                rr.acceptAlarm = !rr.acceptAlarm;  
             })
 
         } else {
@@ -654,7 +648,7 @@ angular.module('app.account', [])
                 // 得到  分页 区域; 
                 loadRegionPromise = $source.$region.query({
                     currentPage: pageNo,
-                    itemsPerPage: 5
+                    itemsPerPage: 7
                 }).$promise;
 
                 loadRegionPromise.then(function(resp) {
@@ -1207,8 +1201,6 @@ angular.module('app.account', [])
         })
     }
 
-
-
 })
 
 .controller('acco_role', function($scope, $state, $stateParams, $sys, $source, $modal) {
@@ -1381,7 +1373,6 @@ angular.module('app.account', [])
 
 })
 
-
 .controller('account_weichat', function($scope, $sessionStorage, $source, $timeout, $localStorage) {
 
     console.log(" account_weichat", $scope.user);
@@ -1404,17 +1395,18 @@ angular.module('app.account', [])
         })
     }
 
+    // $scope.op.step = -1;
+    // $scope.showMask = false ;
+    // return;
 
-    // 得到  weChatServer  信息; 
-
+    // 得到  weChatServer  信息;  
     $source.$weChat.getServerInfo(function(resp) {
         console.log(resp.ret);
         $scope.showMask = false;
 
         // resp.ret =  angular.fromJson( resp.ret );
         
-        // $scope.op.step = 2;
-        // return;
+       
 
 
         $scope.wei = JSON.parse(resp.ret || '{}');
@@ -1595,6 +1587,5 @@ angular.module('app.account', [])
             $scope.op.step = 3;
         })
     }
-
 
 })
