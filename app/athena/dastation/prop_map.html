@@ -41,8 +41,8 @@
                     ng-disabled=" station.latitude   "
                     >标记位置</button> 
                 <button class="btn btn-sm btn-info m-t m-l " ng-click="delMarker()"
-                    ng-disabled=" station.latitude == 0 || station.latitude != null "
-                    >删除位置</button>
+                    ng-disabled=" station.latitude == 0 || station.latitude == null "
+                    > 删除位置 </button>
             </div>
        <!--  </div> -->
         <div id="station_map" class="m-t-xs" ng-init="createMap()"></div>

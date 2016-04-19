@@ -180,6 +180,8 @@ angular.module('app.show.system', [])
     // 用 请求数据 无法获取 onlin ;
     $scope.system = _$system.ret;
 
+    $scope.tags = $scope.system.tags;
+
 
     // 加载 region 信息; 
     $source.$region.get({
@@ -225,7 +227,6 @@ angular.module('app.show.system', [])
         $interval.cancel(state_interval);
     })
  
-    $scope.tags = $scope.system.tags;
 
 
     var sysModel = $scope.system.model,
@@ -483,7 +484,7 @@ angular.module('app.show.system', [])
     }
 })
 
-.controller('show_system_history', function($scope, $show, $sys, $state) {
+.controller('show_system_history', function($scope, $show, $sys, $state ) {
 
     // $scope.od = {
     //  showS: false,

@@ -24,7 +24,7 @@ angular.module('app.sysconfig', [], function() {})
         itemsPerPage: 20,
 
 
-        state_inter_time: 5000, // system 在线状态更新 周期; 
+        state_inter_time: 60000, // system 在线状态更新 周期; 
 
 
         yesOrNo: [{
@@ -45,11 +45,11 @@ angular.module('app.sysconfig', [], function() {})
             "WRITE_DATA": "将数据写入系统变量中",
             "ALARM_VIEW": "查看系统产生的报警",
             "ACK_ALARM": "确认系统产生的报警",
-            "SYSTEM_MANAGE": "创建、删除系统，修改系统基本信息",
+            "SYSTEM_MANAGE": "创建、删除, 修改以及激活和失效系统",
             "TICKET_MANAGE": "创建及删除系统的ticket",
             "REGION_USER_MANAGE": "为区域创建用户，以及管理用户权限",
             "SYN_CONFIG": "将系统工程同步到DAServer或网关",
-            "SYSTEM_CONTROL": "系统数据下置及召唤，系统的激活及失效，切换系统配置项，保存网络参数等",
+            "SYSTEM_CONTROL": "系统数据下置及召唤",
             "PLC_PROGRAMMING": "PLC编程",
 
             "REGION_MANAGE": "创建、删除区域，修改区域基本信息",
@@ -313,10 +313,12 @@ angular.module('app.sysconfig', [], function() {})
             },
 
             // 时间单位; 
-            timeUnit: [{
-                k: "Second",
-                v: 0
-            }, {
+            timeUnit: [
+            // {
+            //     k: "Second",
+            //     v: 0
+            // },
+            {
                 k: "Minute",
                 v: 1
             }, {

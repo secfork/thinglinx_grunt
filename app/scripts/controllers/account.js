@@ -5,8 +5,7 @@
 angular.module('app.account', [])
 
 .controller("account_info", function($scope, $state, $source, $show, $q ) {
-
-
+ 
     //@if  append
 
     console.log($scope);
@@ -886,12 +885,18 @@ angular.module('app.account', [])
             controller: function($scope, $modalInstance) {
                 $scope.__proto__ = thatScope;
 
+                var  toupdate = false ;
                 $scope.ccField = function(k, v) {
+                    toupdate = true ; 
                     $scope.od[k] = v;
                 }
                 $scope.done = function() {
-                    $scope.od.id = u.id;
+                    if(!toupdate){
+                        $scope.cancel();
+                        return ;
+                    }
 
+                    $scope.od.id = u.id;
                     $scope.updateUser($scope.od).then(function() {
                         angular.extend(u, $scope.user);
                         $scope.cancel();

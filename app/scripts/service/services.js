@@ -383,10 +383,7 @@
         return brower;
     })
 
-
-
-
-
+  
     .service("$map", function($http, $utils , $templateRequest ,$templateCache, $sys, $filter, $interpolate , $timeout , $source  ) {
 
         var $map = this;
@@ -397,7 +394,7 @@
             var map = new BMap.Map(Dom_id); // 创建Map实例
 
 
-            map.centerAndZoom(new BMap.Point(116.404, 39.915), 8);
+            map.centerAndZoom(new BMap.Point(116.404, 39.915), 12 );
 
             // 初始化地图,设置中心点坐标和地图级别 
 
