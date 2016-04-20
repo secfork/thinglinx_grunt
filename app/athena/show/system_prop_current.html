@@ -4,7 +4,10 @@
         <form class="form-inline " role="form">
             <div class="form-group   m-l" style="min-width: 250px;" >
                 <div class="input-group">
-                    <input type="text" class="form-control" ng-model="f_name" ng-change="filterTags(f_name)">
+                    <input type="text" class="form-control" 
+                        ng-model="f_name" 
+                        ng-model-options='{debounce:500}'
+                        ng-change="filterTags(f_name)">
                     <span class="input-group-btn">
                     <button class="btn btn-default" type="button">搜索</button>
                   </span>

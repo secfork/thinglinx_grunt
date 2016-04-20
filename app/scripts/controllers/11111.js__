@@ -1,6 +1,6 @@
   
 
---source-maps --out-file $FileNameWithoutExtension$-compiled.js $FilePath$
+ //  --source-maps --out-file $FileNameWithoutExtension$-compiled.js $FilePath$
 
 
 

@@ -25,12 +25,12 @@ angular.module('app.show.system', [])
 
     // 按需加载  system ;
     $scope.loadSys = function() {
-        $scope.showMask = true;
         if (!$scope.od.region_id) {
             $scope.systems = [];
             $scope.od.system_id = undefined;
             return;
         };
+        $scope.showMask = true;
         $source.$system.query({
             currentPage: 1,
             options: "query",
@@ -332,10 +332,10 @@ angular.module('app.show.system', [])
     $scope.filtTags = [];
     $scope.filterTags = function(name) {
         names = [];
-        reg = new RegExp(name);
-
+        reg = new RegExp(name.toLowerCase());
+  
         $scope.filtTags = $scope.tags.filter(function(v) {
-            if (reg.test(v.name)) {
+            if (reg.test(v.name.toLowerCase())) {
                 names.push(v.name);
                 return true;
             }
@@ -416,7 +416,7 @@ angular.module('app.show.system', [])
                         formatter = "$1.$2";
                     } 
                 }
-
+ 
 
                 $.each(resp.ret, function(i, d) {
                     d = d || x;
