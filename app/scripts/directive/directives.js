@@ -18,7 +18,7 @@
             replace:true,
             scope: {},
             // template: ' <a class=" text-muted  {{:: __$$icon || \'glyphicon  glyphicon-edit\' }} m-l-xs  "  popover-placement="bottom"  popover-template =" pop.templateUrl "  popover-title=" {{ pop.title }}" />',
-            template: ' <a class=" text-muted   fa fa-pencil  m-l-xs  {{::__$classfor}} "  popover-is-open="isOpen" popover-placement="bottom"  popover-template =" pop.templateUrl "  popover-title=" {{ pop.title }}" />',
+            template: ' <a    class=" text-muted   fa fa-pencil  noshow m-l-xs  {{::__$classfor}} "  popover-is-open="isOpen" popover-placement="bottom"  popover-template =" pop.templateUrl "  popover-title=" {{ pop.title }}" />',
             link: function($scope, $ele, $attrs, $model) {
 
                 $scope.__$classfor = $attrs.classfor ; 

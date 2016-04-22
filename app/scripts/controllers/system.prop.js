@@ -165,7 +165,8 @@ angular.module('app.system.prop', [])
         // } ;
         // 添加参数;
         // fd.append("filename", $scope.files[0].name );
-        fd.append("system_id", $scope.station.uuid);
+        fd.append("system_id", $scope.station.uuid );
+        fd.append("region_id" , $scope.station.region_id );
 
         var xhr = new XMLHttpRequest();
 
@@ -189,7 +190,16 @@ angular.module('app.system.prop', [])
         try {
             $scope.$apply(function() {
                 $scope.progressVisible = false;
-                $scope.station.pic_url = angular.fromJson(evt.target.response).ret;
+                var resp =  angular.fromJson(evt.target.response);
+                if( resp.err){ 
+                    angular.alert({
+                        type: "resp_err",
+                        title: resp.err
+                    }); 
+                }else{ 
+                    $scope.station.pic_url = resp.ret;
+                }
+
                 // 清空  file input ; 
                 console.log("  empty file  input!! 一般情况下，不允许通过脚本来对文件上传框赋值 ");
             })

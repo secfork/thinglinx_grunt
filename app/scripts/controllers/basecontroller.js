@@ -708,11 +708,11 @@ angular.module('app.basecontroller', [])
                 $scope.alarm = alarm;
                 $scope.conformMsg = conformMsg.ret;
 
-                conformMsg.ret.user_id && $source.$user.get({
-                    pk: conformMsg.ret.user_id
-                }, function(resp) {
-                    $scope.conformMsg.username = resp.ret.username;
-                })
+                // conformMsg.ret.user_id && $source.$user.get({
+                //     pk: conformMsg.ret.user_id
+                // }, function(resp) {
+                //     $scope.conformMsg.username = resp.ret.username;
+                // })
 
             }
         });

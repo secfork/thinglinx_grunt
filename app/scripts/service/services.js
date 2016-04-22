@@ -307,6 +307,7 @@
             'response': function(response , a , b, c ) {
 
                 var resp = response.data ; 
+                // console.log( "http response" , response );
 
                 if (resp.err) {
                     //alert( $err[response.data.err+'']|| response.data.err ); 
@@ -393,8 +394,12 @@
 
             var map = new BMap.Map(Dom_id); // 创建Map实例
 
+            //北京 为 地图 中心;
+            // map.centerAndZoom(new BMap.Point(116.404, 39.915), 5 );
 
-            map.centerAndZoom(new BMap.Point(116.404, 39.915), 12 );
+            // 西安
+             map.centerAndZoom(new BMap.Point(109, 37), 5 );
+
 
             // 初始化地图,设置中心点坐标和地图级别 
 
@@ -608,6 +613,8 @@
                  
                 $timeout.cancel( timeOutGetSystemStatus );
 
+                if( !point) return ;
+
                 timeOutGetSystemStatus = $timeout( function(){
                      $source.$system.status([ system.uuid ] , function( resp ){
                         // 获取 单个 系统的在线 状态; 
@@ -615,15 +622,15 @@
 
                      })
                 },500 )
-   
-                if( ! point.marker){
+                
+
+                if( ! point.marker ){
                     var mk =  new  BMap.Marker( point , markerOptions);
                     $scope &&  mk.addEventListener('click' , function(){
                         $scope.goto( $scope._$stationState , system );
                     }) 
                     point.marker = mk ;  
-                }
- 
+                } 
 
                 $templateRequest("athena/dastation/prop_map_popup.html").then( function(html){
                      
@@ -634,6 +641,12 @@
                     var str = $interpolate(html)(system);
                     var infoWindow = new BMap.InfoWindow(str , infoWindowOptions ); 
                     point.marker.openInfoWindow(infoWindow); 
+                    
+                    point.marker.addEventListener("click" , function(){
+                         point.marker.openInfoWindow(infoWindow); 
+                    })
+
+
                 }) 
   
                 map.addOverlay( point.marker );

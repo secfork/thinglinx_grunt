@@ -25,11 +25,19 @@
             活跃状态:{{ alarm.active==1?"活跃":"关闭"  }}<br/>
 
             关闭时间: {{ alarm.close_time | date:"yyyy-MM-dd  HH:mm:ss"     }}<br>
+                         
 
-            确认信息: {{ conformMsg.message }}<br>
-           
-            
+            <div ng-repeat = " msg in conformMsg">
+                确认人: {{ msg.username }}<br> 
+                确认信息: {{ msg.message }}<br> 
+               <!--  ack_time : {{ msg.ack_time }} -->
+            </div>            
+<!-- 
+            确认信息: {{ conformMsg.message }}<br> 
             确认人: {{ conformMsg.username }}<br> 
+ -->
+
+
           </div>
         </div>
     

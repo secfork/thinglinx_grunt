@@ -57,8 +57,8 @@ angular.module('thinglinx', [
 
 
 
-//        $rootScope.ossRoot = "@@oss";
-        $rootScope.ossRoot = "http://thinglinx-test.oss-cn-beijing.aliyuncs.com/";
+        $rootScope.ossRoot = "@@oss";
+       // $rootScope.ossRoot = "http://thinglinx-test.oss-cn-beijing.aliyuncs.com/";
 
 
 

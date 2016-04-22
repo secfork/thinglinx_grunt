@@ -137,7 +137,7 @@
                         <th class="w-xs" style="padding-right: 20px"> 操作 </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody  ng-init = "  _$alarmState = {'-1':'关闭' , '0':'清除' , 1:'活跃'   } "  >
                     <tr ng-repeat="  a  in page.data  ">
                         <td> {{ :: a.id }} </td>
                         <td> {{ :: a.timestamp | date:"yyyy-MM-dd HH:mm:ss" }}</td>
@@ -151,7 +151,12 @@
                         <td> {{ :: a.desc }}</td>
                         <td> {{ :: _config[a.severity] }} </td>
                         <td> {{ :: a.class_id }} </td>
-                        <td>{{ a.active? "活跃":"关闭" }} </td>
+                        
+                        <!-- 0：cleared,—1:closed,1:occured -->
+                        <td>
+                              <!--   {{ _$alarmState[ a.active ]  }}      -->                       
+                            {{ a.active == 1 ? "活跃":"关闭" }}   
+                        </td>
                         <td style="padding-right: 20px">
                             <a class="text-info" ng-if=" a.active!=1 " ng-click="showAlarmMsg(a , od.system_id )">详细信息</a>
                             <a ng-if=" a.active == 1 " class="text-info" ng-click="conformAlarm( page, a , $index , od.system_id , op.active )">

@@ -8,6 +8,10 @@ angular.module('app.show.system', [])
 
     var S = $scope;
 
+    window.$filter = $filter ;
+
+    // new Date ( $filter('date')( new Date() , 'yyyy-MM-dd HH:mm') )
+
     $scope.openCalendar = function(e, exp) {
         e.preventDefault();
         e.stopPropagation();
@@ -72,13 +76,14 @@ angular.module('app.show.system', [])
 
     })
 
-
+    var  currentDate = new Date ( $filter('date')( new Date() , 'yyyy-MM-dd HH:mm') );
 
     $scope.od = {
         class_id: null, //0,
         severity: null, //'0',
-        end: new Date(),
-        start: new Date(new Date() - 86400000),
+        end:  currentDate ,
+        // start: new Date(new Date() - 86400000),
+        start:  new Date( new Date ( $filter('date')( new Date() , 'yyyy-MM-dd HH:mm') )  - 86400000),
         region_id: undefined,
         system_id: undefined
     };
@@ -109,8 +114,8 @@ angular.module('app.show.system', [])
             return;
         }
 
-        od.start = od.start.getTime(),
-            od.end = od.end.getTime();
+        od.start = od.start.getTime()  ,
+            od.end = od.end.getTime()  ;
 
 
 
@@ -151,17 +156,19 @@ angular.module('app.show.system', [])
 
     // alarm 详细信息;
 
-    $scope.alarmMsg = function(a) {
-        $modal.open({
-            templateUrl: "athena/show/alarm_msg.html",
-            controller: function($scope, $modalInstance) {
-                $scope.__proto__ = S;
-                $scope.$modalInstance = $modalInstance;
-                // $scope.done = $scope.cancel;
-                $scope.alarm = a;
-            }
-        })
-    }
+    // $scope.alarmMsg = function(a) {
+    //     $modal.open({
+    //         templateUrl: "athena/show/alarm_msg.html",
+    //         controller: function($scope, $modalInstance) {
+    //             $scope.__proto__ = S;
+    //             $scope.$modalInstance = $modalInstance;
+    //             // $scope.done = $scope.cancel;
+    //             $scope.alarm = a;
+    //         }
+    //     })
+    // }
+
+    
 })
 
 
@@ -973,8 +980,7 @@ angular.module('app.show.system', [])
             $dom.toggleClass("show");
 
         }
-
-
+ 
         if ($scope.op.ala == "a") { // 活跃报警
             $scope.getActiveAlarm(pageNo, $dom);
         } else { //  全部活跃;
@@ -1040,11 +1046,15 @@ angular.module('app.show.system', [])
         system.regionName = system.region_name //||  $scope.rg_k_v[system.region_id].name ;
         system.createTime = system.createTime || $filter("date")(system.create_time, "yyyy-MM-dd hh:mm:ss");
 
-        var p =  new BMap.Point(system.longitude, system.latitude) ;
+        var  p ; 
+        if(  system.longitude != 0   && system.longitude != null      ){
+            p =  new BMap.Point(system.longitude, system.latitude) ; 
+            
+            $map.showSystemProp(map, p , $scope.system );
 
-        $map.showSystemProp(map, p , $scope.system );
+            map.centerAndZoom( new BMap.Point ( system.longitude , system.latitude ) ,     12);
+        } 
         
-        map.panTo( p  ) ;
     }
 
 })

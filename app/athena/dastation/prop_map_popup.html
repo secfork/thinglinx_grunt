@@ -1,25 +1,21 @@
-<div style="    padding-top : 10px; width:300px ">
-    <div class="row  m-n  b-b line-dashed ">
-       
-        <div class=" col-sm-5 ">系统:</div>
-        <div class=" col-sm-7  ">
-            <!-- <a href="#/app/s_system_prop/{{uuid}}/_basic" class="text-link">{{name}}</a> -->
-            <a >{{name}}</a>
-            <i  id="one_system_status" class="fa   "></i>
-        </div>
-    </div>
-    <div class="row  m-n  b-b line-dashed " ng-if="false">
-        <div class=" col-sm-5  ">id:</div>
-        <div class=" col-sm-7  ">{{uuid}}</div>
-    </div>
   
-    <div class="row  m-n  b-b line-dashed ">
-        <div class=" col-sm-5 ">所属区域:</div>
-        <div class=" col-sm-7 "> {{regionName}} </div>
+
+<div class="w-lg"> 
+    <div class="hbox m-t-sm">
+        <div class="col w-100 col333 ">系统:</div>
+        <div class="col text-muted " > {{name}}</div>
     </div>
-    <div class="row  m-n  b-b line-dashed ">
-        <div class="col-sm-5  ">创建时间:</div>
-        <div class=" col-sm-7 "> {{createTime}}</div>
+    <div class="hbox m-t-sm ">
+        <div class="col w-100 col333 ">ID</div>
+        <div class="col text-muted " >{{ uuid }} </div>
     </div>
-     
+    <div class="hbox m-t-sm ">
+        <div class="col w-100 col333 ">所属区域</div>
+        <div class="col text-muted " >{{ regionName }} </div>
+    </div>
+    <div class="hbox  m-t-sm">   
+        <div class="col w-100 col333 ">创建时间:</div>
+        <div class="col text-muted "   >{{ createTime }}</div>
+    </div> 
 </div>
+

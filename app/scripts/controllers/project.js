@@ -8,7 +8,7 @@ angular.module('app.project', [])
 
     $filter, $timeout, $sys, $localStorage, $modal) {
 
-    var thatScope = $scope;
+    var thatScope = $scope ;
 
     //@if  append
 
@@ -18,7 +18,7 @@ angular.module('app.project', [])
 
     $scope.pop = {
         templateUrl: "athena/debris/_edit_field.html",
-    }
+    };
 
 
 

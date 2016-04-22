@@ -8,9 +8,20 @@
 /*.app-content-body > .wrapper-md {
   padding-bottom: 0px;
 }
-*/
+*/ 
+ 
+/*.table-hover  td {
+  min-width: 100px;
+}
 
-
+.table-hover  tr:hover  .fa-pencil  {
+  display: inline-block; 
+} 
+ 
+.noshow {
+  display: none ;
+}
+ */
 
 
 .w-b-80{

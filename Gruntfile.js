@@ -32,8 +32,7 @@ module.exports = function(grunt) {
         dist: 'public',
         thing: "thing/", // app.js , app.css 目录;
     };
-
-
+ 
     // Define the configuration for all the tasks
 
     var  replace_js_test_nginx_console  = [
@@ -44,7 +43,7 @@ module.exports = function(grunt) {
 
     var  replace_js_build = [
         // 用于显示图片;
-        { match:"oss" , replacement: "http://thinglinx-net.oss-cn-beijing.aliyuncs.com/"}
+        { match:"oss" , replacement: "http://thinglinx-net.oss-cn-beijing.aliyuncs.com/"},
 
     ];
 
